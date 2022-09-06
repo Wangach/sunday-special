@@ -3,10 +3,66 @@ const looserForm = document.getElementById('looser-form');
 const fairForm = document.getElementById('fair-form');
 const payForm = document.getElementById('pay-form');
 
+let wholeDay = '';
+let currentTime = '';
+let rNum = '';
+let rid = '';
+
+//Get the time and Date
+let dte = new Date();
+let now = dte.getTime();
+let padTo2Digits = (num) => {
+    return num.toString().padStart(2, '0');
+  }
+let convertMsToTime = (milliseconds) => {
+    let seconds = Math.floor(milliseconds / 1000);
+    let minutes = Math.floor(seconds / 60);
+    let hours = Math.floor(minutes / 60);
+  
+    seconds = seconds % 60;
+    minutes = minutes % 60;
+  
+    //  If you don't want to roll hours over, e.g. 24 to 00
+    //  comment (or remove) the line below
+    // commenting next line gets you `24:00:00` instead of `00:00:00`
+    // or `36:15:31` instead of `12:15:31`, etc.
+    hours = (hours % 24)+ 3;
+    currentTime = `${padTo2Digits(hours)}:${padTo2Digits(minutes)}:${padTo2Digits(
+        seconds,
+      )}`
+    return currentTime;
+  }
+
+let todaysDte = () => {
+    let dte = new Date();
+    let dateOfMonth = dte.getUTCDate();
+    let currentMonth = dte.getUTCMonth();
+    let CurrentYear = dte.getUTCFullYear();
+
+    wholeDay = `${dateOfMonth}/${currentMonth}/${CurrentYear}`;
+    return wholeDay;
+}
+//generate A unique Id
+let genMatchId = () => {
+    let myLetters = ["A", "R", "S", "E", "N", "A", "L", "1", "9", "6", "0"];
+    for(let i = 0; i < 5; i++){
+        rNum = Math.floor(Math.random() * (myLetters.length - 1));
+        rid += myLetters[rNum];
+        console.log(rid);
+        return rid;
+    }
+    
+}
 
 //Looser Form 
 looserForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    
+    
+    todaysDte();
+    convertMsToTime(now);
+    genMatchId();
+    
     let formValues = {
         fpl: document.getElementById('hp').value,
         spl: document.getElementById('ap').value,
@@ -18,10 +74,8 @@ looserForm.addEventListener('submit', (e) => {
         coupon: document.getElementById('coup').value
     }
 
-    let payableAmt;
-    let couponVal;
-    let netPay;
-    let gamesNumber;
+    let payableAmt, couponVal, netPay, gamesNumber, looser, winner;
+    
     //Check The Type of match
     switch(formValues.mty){
         case 'hut':
@@ -59,26 +113,36 @@ looserForm.addEventListener('submit', (e) => {
             netPay = payableAmt - couponVal;
             break;
     }
-    alert(`Payable amount is ${netPay}`)
+    //check for the winner and looser
+    if(formValues.fsc > formValues.ssc){
+        //home player has won
+        winner = formValues.fpl;
+        looser = formValues.spl;
+    }else if(formValues.ssc > formValues.fsc){
+        //away player has won
+        winner = formValues.spl;
+        looser = formValues.fpl;
+    }else{
+        winner = 'N/A';
+        looser = 'N/A';
+    }
+    // alert(`Payable amount is ${netPay}`)
 
-    let newFormData = {...formValues, debt: netPay};
-    //console.log(newFormData)
-//    let nVals = JSON.stringify(newFormData);
-//     console.log(nVals)
+    let newFormData = {...formValues, debt: netPay, winner: winner, looser: looser, subDte: wholeDay, subTme: currentTime, 
+    matchId: rid};
     //Send data to db
     let url = looserForm.getAttribute('action');
     let formOptions = {
-        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        method: 'POST',
         headers: {
         'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify(newFormData)
     }
     fetch(url, formOptions)
-    .then(response => response.json())
+    .then(response => response.text())
     .then((data) => {
-        JSON.parse(data);
-        console.log(`Success: ${data}`)
+        // JSON.parse(data);
+        console.log(`${data}`)
     })
 })
