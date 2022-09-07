@@ -44,7 +44,7 @@ let todaysDte = () => {
 }
 //generate A unique Id
 let genMatchId = () => {
-    let myLetters = ["A", "R", "S", "E", "N", "A", "L", "1", "9", "6", "0"];
+    let myLetters = ["F", "A", "V", "O", "R", "E", "D", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
     for(let i = 0; i < 5; i++){
         rNum = Math.floor(Math.random() * (myLetters.length - 1));
         rid += myLetters[rNum];
@@ -132,6 +132,40 @@ looserForm.addEventListener('submit', (e) => {
     matchId: rid};
     //Send data to db
     let url = looserForm.getAttribute('action');
+    let formOptions = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newFormData)
+    }
+    fetch(url, formOptions)
+    .then(response => response.text())
+    .then((data) => {
+        // JSON.parse(data);
+        console.log(`${data}`)
+    })
+})
+
+//Fair Form 
+fairForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    
+    todaysDte();
+    convertMsToTime(now);
+    genMatchId();
+    
+    let formValues = {
+        fft: document.getElementById('fht').value,
+        fst:document.getElementById('fat').value,
+        ffsc: document.getElementById('fhsc').value,
+        fssc: document.getElementById('fasc').value
+    }
+
+    let newFormData = {...formValues,  subDte: wholeDay, subTme: currentTime, matchId: rid};
+    //Send data to db
+    let url = fairForm.getAttribute('action');
     let formOptions = {
         method: 'POST',
         headers: {

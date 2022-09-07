@@ -317,6 +317,22 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-lg-8 mb-4">
+                                    <div class="card bg-danger text-white shadow" data-toggle="modal" data-target="#gameweek">
+                                        <div class="card-body">
+                                            New GW
+                                            <div class="text-white-50 small">#e74a3b</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card bg-light text-black shadow">
+                                        <div class="card-body">
+                                            Indebt
+                                            <div class="text-black-50 small">#f8f9fc</div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!-- 
                                 <div class="col-lg-6 mb-4">
                                     <div class="card bg-warning text-white shadow">
@@ -326,14 +342,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-danger text-white shadow">
-                                        <div class="card-body">
-                                            Danger
-                                            <div class="text-white-50 small">#e74a3b</div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <div class="col-lg-6 mb-4">
                                     <div class="card bg-secondary text-white shadow">
                                         <div class="card-body">
@@ -568,7 +577,7 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Looser Pay</h5>
+              <h5 class="modal-title" id="exampleModalLabel">FIFA 23 Looser Pay</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -627,30 +636,30 @@
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Fair Play</h5>
+              <h5 class="modal-title" id="exampleModalLabel">FIFA 23 Fair Play</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <form action="scripts/gamechanger.php" id="fair-form" method="POST">
+              <form action="api/fairformHndler.php" id="fair-form" method="POST">
                   <div class="form-group">
                       <label for="homet">Team 1:</label>
-                      <input type="text" class="form-control" placeholder="Enter Home Team..." id="ht" name="ht">
+                      <input type="text" class="form-control" placeholder="Enter Home Team..." id="fht" name="ht">
                   </div><!--/.form-group/-->
                   <div class="form-group">
                       <label for="awat">Team 2:</label>
-                      <input type="text" class="form-control" placeholder="Enter Away Team..." id="at" name="at">
+                      <input type="text" class="form-control" placeholder="Enter Away Team..." id="fat" name="at">
                   </div><!--/.form-group/-->
                   <div class="form-group">
                       <label for="homsc">Home Score:</label>
-                      <input type="number" class="form-control" placeholder="Home Player Score..." id="hsc" name="hsc">
+                      <input type="number" class="form-control" placeholder="Home Player Score..." id="fhsc" name="fhsc">
                   </div><!--/.form-group/-->
                   <div class="form-group">
                       <label for="awasc">Away Score:</label>
-                      <input type="number" class="form-control" placeholder="Away Player Score..." id="asc" name="asc">
+                      <input type="number" class="form-control" placeholder="Away Player Score..." id="fasc" name="Fasc">
                   </div><!--/.form-group/-->
-                  <button type="submit" id="f2-fair-btn" class="btn" name="fairrec">Record</button>
+                  <button type="submit" id="fair-btn" class="btn btn-secondary" name="fairrec">Record</button>
                   <button type="button" id="fairclear" class="btn btn-warning" disabled="true">Clear</button>
               </form>
             </div>
