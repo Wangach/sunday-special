@@ -5,8 +5,7 @@ const payForm = document.getElementById('pay-form');
 
 let wholeDay = '';
 let currentTime = '';
-let rNum = '';
-let rid = '';
+
 
 //Get the time and Date
 let dte = new Date();
@@ -45,15 +44,49 @@ let todaysDte = () => {
 //generate A unique Id
 let genMatchId = () => {
     let myLetters = ["F", "A", "V", "O", "R", "E", "D", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+    let rNum = '';
+    let rid = '';
     for(let i = 0; i < 5; i++){
         rNum = Math.floor(Math.random() * (myLetters.length - 1));
         rid += myLetters[rNum];
-        console.log(rid);
-        return rid;
+        
     }
-    
+    console.log(rid);
+    return rid;
 }
-
+//Recent Looser Games
+let recentLooser = () => {
+    let display = document.getElementById('latest-lost');
+    let url = './api/master.php?a=recentLost';
+    fetch(url)
+    .then(res => res.text())
+    .then((data) => {
+        display.innerHTML = data;
+        // console.log(data)
+    })
+}
+//Recent Fair Games
+let recentFair = () => {
+    let display = document.getElementById('latest-fair');
+    let url = './api/master.php?a=recentFair';
+    fetch(url)
+    .then(res => res.text())
+    .then((data) => {
+        display.innerHTML = data;
+        // console.log(data)
+    })
+}
+//count Looser Games 
+let countLooser = () => {
+    let display = document.getElementById('t-looser');
+    let url = './api/master.php?a=totLooser';
+    fetch(url)
+    .then(res => res.text())
+    .then((data) => {
+        display.innerHTML = data;
+        // console.log(data)
+    })
+}
 //Looser Form 
 looserForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -61,7 +94,7 @@ looserForm.addEventListener('submit', (e) => {
     
     todaysDte();
     convertMsToTime(now);
-    genMatchId();
+    let rid = genMatchId();
     
     let formValues = {
         fpl: document.getElementById('hp').value,
@@ -131,7 +164,7 @@ looserForm.addEventListener('submit', (e) => {
     let newFormData = {...formValues, debt: netPay, winner: winner, looser: looser, subDte: wholeDay, subTme: currentTime, 
     matchId: rid};
     //Send data to db
-    let url = looserForm.getAttribute('action');
+    let url = `${looserForm.getAttribute('action')}?a=recordLooser`;
     let formOptions = {
         method: 'POST',
         headers: {
@@ -154,7 +187,7 @@ fairForm.addEventListener('submit', (e) => {
     
     todaysDte();
     convertMsToTime(now);
-    genMatchId();
+   let rid = genMatchId();
     
     let formValues = {
         fft: document.getElementById('fht').value,
@@ -165,7 +198,7 @@ fairForm.addEventListener('submit', (e) => {
 
     let newFormData = {...formValues,  subDte: wholeDay, subTme: currentTime, matchId: rid};
     //Send data to db
-    let url = fairForm.getAttribute('action');
+    let url = `${fairForm.getAttribute('action')}?a=recordFair`;
     let formOptions = {
         method: 'POST',
         headers: {
@@ -179,4 +212,10 @@ fairForm.addEventListener('submit', (e) => {
         // JSON.parse(data);
         console.log(`${data}`)
     })
+})
+//Load Recent Looser Games
+window.addEventListener('load', () => {
+    recentLooser();
+    recentFair();
+    countLooser();
 })

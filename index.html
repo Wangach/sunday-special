@@ -225,7 +225,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 Games Played (Looser)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">400</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="t-looser">400</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -320,30 +320,30 @@
                                 <div class="col-lg-8 mb-4">
                                     <div class="card bg-danger text-white shadow" data-toggle="modal" data-target="#gameweek">
                                         <div class="card-body">
-                                            New GW
+                                            Create User
                                             <div class="text-white-50 small">#e74a3b</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 mb-4">
-                                    <div class="card bg-light text-black shadow">
+                                    <div class="card bg-light text-black shadow" data-toggle="modal" data-target="#debtor">
                                         <div class="card-body">
                                             Indebt
                                             <div class="text-black-50 small">#f8f9fc</div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- 
+                                
                                 <div class="col-lg-6 mb-4">
-                                    <div class="card bg-warning text-white shadow">
+                                    <div class="card bg-warning text-white shadow" data-toggle="modal" data-target="#gw">
                                         <div class="card-body">
-                                            Warning
+                                            Create GW
                                             <div class="text-white-50 small">#f6c23e</div>
                                         </div>
                                     </div>
                                 </div>
                                 
-                                <div class="col-lg-6 mb-4">
+                                <!-- <div class="col-lg-6 mb-4">
                                     <div class="card bg-secondary text-white shadow">
                                         <div class="card-body">
                                             Secondary
@@ -422,36 +422,22 @@
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Recent Looser Games</h6>
                                 </div>
-                                <table class="table table-striped">
-                                    <thead>
-                                      <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                      </tr>
-                                      <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Players</th>
+                                            <th scope="col">Teams</th>
+                                            <th scope="col">Score Line</th>
+                                            <th scope="col">Outcome</th>
+                                            <th scope="col">Match ID</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody id="latest-lost">
+                                          
+                                        </tbody>
+                                      </table>
+                                </div><!--table responsive-->
                             </div>
 
                         </div>
@@ -464,36 +450,21 @@
                                     <h6 class="m-0 font-weight-bold text-primary">Recent Fair Games</h6>
                                 </div>
                                 <div class="card-body">
-                                    <table class="table table-striped">
-                                        <thead>
-                                          <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">First</th>
-                                            <th scope="col">Last</th>
-                                            <th scope="col">Handle</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">3</th>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                              <tr>
+                                                <th scope="col">Teams</th>
+                                                <th scope="col">Score Line</th>
+                                                <th scope="col">Payment Status</th>
+                                                <th scope="col">Match ID</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody id="latest-fair">
+                                              
+                                            </tbody>
+                                          </table>
+                                    </div><!--responsive-->
                                 </div>
                             </div>
 
@@ -583,7 +554,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="api/looserformHndler.php" id="looser-form" method="POST">
+              <form action="api/master.php" id="looser-form" method="POST">
                   <div class="form-group">
                       <label for="homp">Home Player:</label>
                       <input type="text" class="form-control" placeholder="Enter Home Player Name..." id="hp" name="hp" required>
@@ -642,7 +613,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="api/fairformHndler.php" id="fair-form" method="POST">
+              <form action="api/master.php" id="fair-form" method="POST">
                   <div class="form-group">
                       <label for="homet">Team 1:</label>
                       <input type="text" class="form-control" placeholder="Enter Home Team..." id="fht" name="ht">
@@ -667,6 +638,47 @@
         </div>
       </div>
 
+
+      <!--Create User Modal-->
+      <div class="modal fade" id="gameweek" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Customer</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form action="api/master.php" id="f2-user-form" method="POST">
+                    <div class="form-group">
+                        <label for="name">UserName: </label>
+                        <input type="text" placeholder="User's Name..." class="form-control" id="jina" name="jina">
+                    </div><!--form-group-->
+                    <div class="form-group">
+                        <label for="alias">Alias: </label>
+                        <input type="text" placeholder="System Name..." class="form-control" id="alias" name="alias">
+                    </div><!--form-group-->
+                    <div class="form-group">
+                        <label for="phone">Phone Number: </label>
+                        <input type="number" placeholder="Phone..." class="form-control" id="ph" name="ph">
+                    </div><!--form-group-->
+                    <div class="form-group">
+                        <label for="fav">Fav Team:</label>
+                        <input type="text" placeholder="Eg Arsenal..." class="form-control" id="ftm" name="ftm">
+                    </div><!--form-group-->
+                    <div class="form-group">
+                        <label for="uno">Limit: </label>
+                        <input type="number" placeholder="100..." class="form-control" id="un" name="un">
+                    </div><!--form-group-->
+
+                    <button type="submit" class="btn btn-info" id="f2-user"><i class="fas fa-user-plus"></i></button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!--Transactions Modal-->
       <div class="modal fade" id="pay" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm" role="document">
@@ -678,16 +690,96 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="scripts/22searchtr.php" id="pay-form" method="POST">
-                  <div class="form-group">
-                      <label for="trname">Enter Name:</label>
-                      <input type="text" class="form-control" placeholder="Transactor Name..." id="tn" name="tn">
-                  </div><!--/.form-group/-->
-                  <button type="submit" id="f2-txn-btn" class="btn f2-btn" name="searchtr"><i class="fas fa-search"></i></button>
-              </form>
+                <form action="api/master.php" id="f2-payments-form" method="POST">
+                    <div class="form-group">
+                        <select name="txnType" id="txntyp" class="form-control">
+                            <option value=""></option>
+                            <option value="cr">Credit</option>
+                            <option value="db">Debit</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Transactor: </label>
+                        <input type="text" class="form-control" id="trname" placeholder="Transactor..." name="cusjina">
+                    </div>
+                    <div class="form-group">
+                        <label for="mode">Payment Method</label>
+                        <select name="txnMode" id="txnmode" class="form-control">
+                            <option value=""></option>
+                            <option value="cs">Cash</option>
+                            <option value="mp">Mobile Money (Mpesa, Airtel Money, Tkash)</option>
+                            <option value="bnk">Bank</option>
+                            <option value="ot">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Amount: </label>
+                        <input type="number" class="form-control" id="tramt" placeholder="Amount..." name="kiwango">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Description: </label>
+                        <input type="text" class="form-control" id="trds" placeholder="Description..." name="maelezo">
+                    </div>
+                    <button type="submit" class="btn btn-info" id="f2-pay">Submit</button>
+                </form>
             </div>
             <div id="results">
                
+            </div>
+          </div>
+        </div>
+      </div>
+
+       <!--Debt Search Modal-->
+       <div class="modal fade" id="debtor" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Indebt</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form action="api/master.php" id="debt-search" method="POST">
+                    <div class="form-group">
+                        <label for="trname">Enter Name:</label>
+                        <input type="text" class="form-control" placeholder="Name..." id="dn" name="dn">
+                    </div><!--/.form-group/-->
+                    <div class="form-group">
+                        <label for="trname">Reason:</label>
+                        <input type="text" class="form-control" placeholder="Eg Coffee, AOB..." id="drxn" name="drxn">
+                    </div><!--/.form-group/-->
+                    <button type="submit" id="f2-txn-btn" class="btn btn-primary" name="indebt"><i class="fas fa-dollar-sign"></i></button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!--GameWeek Modal-->
+      <div class="modal fade" id="gw" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add GW</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <form action="api/master.php" id="debt-search" method="POST">
+                    <div class="form-group">
+                        <label for="start">Start Date:</label>
+                        <input type="date" class="form-control" id="strt" name="strt" placeholder="Start Date">
+                    </div><!--/.form-group/-->
+                    <div class="form-group">
+                        <label for="start">End Date:</label>
+                        <input type="date" class="form-control" id="ende" name="ende" placeholder="End Date">
+                    </div><!--/.form-group/-->
+                    <button type="submit" id="f2-txn-btn" class="btn btn-primary" name="initgw"><i class="fas fa-dollar-sign"></i></button>
+                </form>
             </div>
           </div>
         </div>
