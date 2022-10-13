@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
 
     <!--Own JS-->
     <script src="js/process.js" defer></script>
@@ -26,7 +27,12 @@
 </head>
 
 <body id="page-top">
-
+    <!--Custom Loaders-->
+    <div class="loader">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -54,16 +60,32 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
-            </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
+                <a class="nav-link collapsed" href="search.html" >
+                    <i class="fas fa-fw fa-eye"></i>
+                    <span>Search</span>
+                </a>
+                
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" >
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Transactions</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="charts.html" >
+                    <i class="fas fa-fw fa-eye"></i>
+                    <span>Charts</span>
                 </a>
                 
             </li>
@@ -75,31 +97,6 @@
                     <span>Utilities</span>
                 </a>
             </li>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-            </li>
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Charts</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -342,72 +339,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <!-- <div class="col-lg-6 mb-4">
-                                    <div class="card bg-secondary text-white shadow">
-                                        <div class="card-body">
-                                            Secondary
-                                            <div class="text-white-50 small">#858796</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-light text-black shadow">
-                                        <div class="card-body">
-                                            Light
-                                            <div class="text-black-50 small">#f8f9fc</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-dark text-white shadow">
-                                        <div class="card-body">
-                                            Dark
-                                            <div class="text-white-50 small">#5a5c69</div>
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
-
-
-                            <!-- <div class="card shadow mb-4">
-                                
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Play Games</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                 
-                                <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="myPieChart"></canvas>
-                                    </div>
-                                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Direct
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Social
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Referral
-                                        </span>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                     </div>
 
@@ -650,7 +582,7 @@
               </button>
             </div>
             <div class="modal-body">
-                <form action="api/master.php" id="f2-user-form" method="POST">
+                <form action="api/master.php" id="user-form" method="POST">
                     <div class="form-group">
                         <label for="name">UserName: </label>
                         <input type="text" placeholder="User's Name..." class="form-control" id="jina" name="jina">
@@ -690,7 +622,7 @@
               </button>
             </div>
             <div class="modal-body">
-                <form action="api/master.php" id="f2-payments-form" method="POST">
+                <form action="api/master.php" id="payments-form" method="POST">
                     <div class="form-group">
                         <select name="txnType" id="txntyp" class="form-control">
                             <option value=""></option>
@@ -720,7 +652,7 @@
                         <label for="name">Description: </label>
                         <input type="text" class="form-control" id="trds" placeholder="Description..." name="maelezo">
                     </div>
-                    <button type="submit" class="btn btn-info" id="f2-pay">Submit</button>
+                    <button type="submit" class="btn btn-info" id="pay">Submit</button>
                 </form>
             </div>
             <div id="results">
@@ -741,7 +673,7 @@
               </button>
             </div>
             <div class="modal-body">
-                <form action="api/master.php" id="debt-search" method="POST">
+                <form action="api/master.php" id="indebt" method="POST">
                     <div class="form-group">
                         <label for="trname">Enter Name:</label>
                         <input type="text" class="form-control" placeholder="Name..." id="dn" name="dn">
@@ -750,7 +682,11 @@
                         <label for="trname">Reason:</label>
                         <input type="text" class="form-control" placeholder="Eg Coffee, AOB..." id="drxn" name="drxn">
                     </div><!--/.form-group/-->
-                    <button type="submit" id="f2-txn-btn" class="btn btn-primary" name="indebt"><i class="fas fa-dollar-sign"></i></button>
+                    <div class="form-group">
+                        <label for="trname">Amount:</label>
+                        <input type="number" class="form-control" placeholder="Eg 10, 50, 100...." id="damt" name="damt">
+                    </div><!--/.form-group/-->
+                    <button type="submit" id="txn-btn" class="btn btn-primary" name="indebt"><i class="fas fa-dollar-sign"></i></button>
                 </form>
             </div>
           </div>
@@ -798,10 +734,6 @@
 
     <!-- Page level plugins -->
     <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
 

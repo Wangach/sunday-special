@@ -2,6 +2,28 @@
 const looserForm = document.getElementById('looser-form');
 const fairForm = document.getElementById('fair-form');
 const payForm = document.getElementById('pay-form');
+const transactForm = document.getElementById('payments-form');
+const createUserForm = document.getElementById('user-form');
+const indebtForm = document.getElementById('indebt');
+
+//Custom Loaders
+//On Load
+window.addEventListener('load', () => {
+    const loader = document.querySelector('.loader');
+    const circle = document.querySelector('.circle');
+
+    // function changeOpacity(elem) {
+    //     elem.style.opacity = '0';
+      let changeOpacity = (elem) => {
+        elem.style.opacity = "0";
+        elem.style.display = "none";
+    }
+
+    setInterval(changeOpacity(loader), 5000);
+    setInterval(changeOpacity(circle), 3000);
+    // }
+   
+})
 
 let wholeDay = '';
 let currentTime = '';
@@ -41,12 +63,38 @@ let todaysDte = () => {
     wholeDay = `${dateOfMonth}/${currentMonth}/${CurrentYear}`;
     return wholeDay;
 }
-//generate A unique Id
+//generate A unique Id For Matches played
 let genMatchId = () => {
     let myLetters = ["F", "A", "V", "O", "R", "E", "D", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
     let rNum = '';
     let rid = '';
     for(let i = 0; i < 5; i++){
+        rNum = Math.floor(Math.random() * (myLetters.length - 1));
+        rid += myLetters[rNum];
+        
+    }
+    console.log(rid);
+    return rid;
+}
+//generate A unique Id for transactions
+let trMatchId = () => {
+    let myLetters = ["O", "P", "Q", "T", "U", "Z", "I", "2", "4", "6", "8", "9", "0"];
+    let rNum = '';
+    let rid = '';
+    for(let i = 0; i < 5; i++){
+        rNum = Math.floor(Math.random() * (myLetters.length - 1));
+        rid += myLetters[rNum];
+        
+    }
+    console.log(rid);
+    return rid;
+}
+//generate A Registration number for users
+let genId = () => {
+    let myLetters = ["1", "3", "5", "7", "2", "4", "6", "8", "9", "0"];
+    let rNum = '';
+    let rid = '';
+    for(let i = 0; i < 6; i++){
         rNum = Math.floor(Math.random() * (myLetters.length - 1));
         rid += myLetters[rNum];
         
@@ -199,6 +247,97 @@ fairForm.addEventListener('submit', (e) => {
     let newFormData = {...formValues,  subDte: wholeDay, subTme: currentTime, matchId: rid};
     //Send data to db
     let url = `${fairForm.getAttribute('action')}?a=recordFair`;
+    let formOptions = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newFormData)
+    }
+    fetch(url, formOptions)
+    .then(response => response.text())
+    .then((data) => {
+        // JSON.parse(data);
+        console.log(`${data}`)
+    })
+})
+//Make Payments
+transactForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    let rid = trMatchId();
+
+    let formValues = {
+        transType: document.getElementById('txntyp').value,
+        transName:document.getElementById('trname').value,
+        paymentMeth: document.getElementById('txnmode').value,
+        transAmt: document.getElementById('tramt').value,
+        transDesc: document.getElementById('trds').value
+    }
+
+    let newFormData = {...formValues, transId: rid};
+    //Send data to db
+    let url = `${transactForm.getAttribute('action')}?a=pay`;
+    let formOptions = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newFormData)
+    }
+    fetch(url, formOptions)
+    .then(response => response.text())
+    .then((data) => {
+        // JSON.parse(data);
+        console.log(`${data}`)
+    })
+})
+//Register users
+createUserForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    let regDte = todaysDte();
+    let userId = genId();
+    let formValues = {
+        custName: document.getElementById('jina').value,
+        systemName:document.getElementById('alias').value,
+        phoneNum: document.getElementById('ph').value,
+        favTeam: document.getElementById('ftm').value,
+        gameLimit: document.getElementById('un').value
+    }
+
+    let newFormData = {...formValues, dateRegistered: regDte, regnum: userId};
+    //Send data to db
+    let url = `${createUserForm.getAttribute('action')}?a=regUser`;
+    let formOptions = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newFormData)
+    }
+    fetch(url, formOptions)
+    .then(response => response.text())
+    .then((data) => {
+        // JSON.parse(data);
+        console.log(`${data}`)
+    })
+
+})
+
+//Indebt
+indebtForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let debtId = trMatchId();
+    let dOfIssue = todaysDte();
+    let formValues = {
+        debtee: document.getElementById('dn').value,
+        debtReason:document.getElementById('drxn').value,
+        debtAmount: document.getElementById('damt').value
+    }
+
+    let newFormData = {...formValues, whenIndebt: dOfIssue, debtNum: debtId};
+    //Send data to db
+    let url = `${indebtForm.getAttribute('action')}?a=indebt`;
     let formOptions = {
         method: 'POST',
         headers: {

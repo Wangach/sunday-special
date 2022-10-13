@@ -1,0 +1,106 @@
+.summary-holder > div{
+	display: inline-block;
+	line-height: 1rem;
+	margin-right: 5rem;
+	padding: .5rem;
+}
+.summary-holder > div > span {
+	font-weight: bold;
+	font-size: 1.9rem;
+	text-align: center;
+	padding: 10px;
+}
+.debt-holder > div{
+	display: inline-block;
+	line-height: 1rem;
+	margin-right: 5rem;
+	padding: .5rem;
+}
+.debt-holder > div > span {
+	font-weight: bold;
+	font-size: 1.5rem;
+	text-align: center;
+	padding: 1rem;
+}
+
+/*Custom Loaders*/
+.loader {
+  position: fixed;
+  background-color: rgba(243, 243, 243, 1.0);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+}
+.circle {
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  background: #F17233;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  margin: auto;
+  animation-name: bounce;
+  animation-duration: 1.0s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.circle:nth-child(2) {
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  background: #33E5F1;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 50px;
+  margin: auto;
+  animation-name: bouncee;
+  animation-duration: 1.0s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.circle:nth-child(3) {
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+  background: #C313D1;
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  right: 50px;
+  left: 0px;
+  margin: auto;
+  animation-name: bouncer;
+  animation-duration: 1.0s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/*Custom Animations*/
+@keyframes bounce{
+  0%   { transform: translateY(25px); }
+  25%  { transform: translateY(50px);}
+  50%  { transform: translateY(25px); }
+  75%  { transform: translateY(0px);}
+  100% { transform: translateY(25px); }
+}
+@keyframes bouncee{
+  0%   { transform: translateY(0); }
+  25%  { transform: translateY(25px);}
+  50%  { transform: translateY(50px); }
+  75%  { transform: translateY(25px);}
+  100% { transform: translateY(0); }
+}
+@keyframes bouncer{
+  0%   { transform: translateY(50px); }
+  25%  { transform: translateY(25px);}
+  50%  { transform: translateY(0px); }
+  75%  { transform: translateY(25px);}
+  100% { transform: translateY(50px); }
+}

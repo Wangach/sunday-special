@@ -9,5 +9,13 @@ CREATE TABLE `sundb`.`fairdata` ( `id` INT NOT NULL AUTO_INCREMENT , `Hteam` VAR
 /*Gameweek Table*/
 CREATE TABLE `sundb`.`gameweek` ( `id` INT NOT NULL AUTO_INCREMENT , `GW` VARCHAR(100) NOT NULL , `start_dte` VARCHAR(100) NOT NULL , `end_dte` VARCHAR(100) NOT NULL , `tlooser` INT NOT NULL , `tfair` INT NOT NULL , `total` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
-/*DEbts Table*/
+/*Indebt Table*/
 CREATE TABLE `sundb`.`debts` ( `id` INT NOT NULL AUTO_INCREMENT , `debtor` VARCHAR(100) NOT NULL , `reason` VARCHAR(1000) NOT NULL , `date_of_issue` VARCHAR(100) NOT NULL , `debt_id` VARCHAR(100) NOT NULL , `is_paid` INT NOT NULL DEFAULT '0' , `when_paid` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+
+/*Transactions table*/
+CREATE TABLE `transactions` ( `id` INT NOT NULL AUTO_INCREMENT , `trName` VARCHAR(100) NOT NULL , `trId` VARCHAR(100) NOT NULL , `credit` INT NOT NULL , `debit` INT NOT NULL , `amount` INT NOT NULL , `pmeth` VARCHAR(100) NOT NULL , `trDesc` VARCHAR(100) NOT NULL , `trDte` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+/*Users Table*/
+CREATE TABLE `users` ( `id` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(100) NOT NULL , `password` VARCHAR(100) NOT NULL , `phone` INT NOT NULL , `alias` VARCHAR(100) NOT NULL , `favteam` VARCHAR(100) NOT NULL , `uno` INT NOT NULL , `dte_registered` VARCHAR(100) NOT NULL , `last_login` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `is_logged` INT NOT NULL DEFAULT '0' , `is_deleted` INT NOT NULL DEFAULT '0' , `reg_no` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
