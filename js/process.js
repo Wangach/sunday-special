@@ -131,9 +131,24 @@ let countLooser = () => {
     fetch(url)
     .then(res => res.text())
     .then((data) => {
-        display.innerHTML = data;
-        // console.log(data)
+        animateValue(display, 0, data, 5000);
     })
+    let animateValue = (obj, start, end, duration) => {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+          if (!startTimestamp) startTimestamp = timestamp;
+          const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+          obj.innerHTML = Math.floor(progress * (end - start) + start);
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          }
+        };
+        window.requestAnimationFrame(step);
+      }
+     
+      
+      
+      Resources
 }
 //Looser Form 
 looserForm.addEventListener('submit', (e) => {

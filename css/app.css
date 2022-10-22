@@ -1,7 +1,7 @@
 /*Custom Loaders*/
 .loader {
     position: fixed;
-    background-color: rgba(243, 243, 243, 1.0);
+    background-color: rgb(224, 225, 242, 1.0);
     left: 0;
     top: 0;
     right: 0;

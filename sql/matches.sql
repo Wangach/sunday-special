@@ -19,3 +19,11 @@ CREATE TABLE `transactions` ( `id` INT NOT NULL AUTO_INCREMENT , `trName` VARCHA
 /*Users Table*/
 CREATE TABLE `users` ( `id` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(100) NOT NULL , `password` VARCHAR(100) NOT NULL , `phone` INT NOT NULL , `alias` VARCHAR(100) NOT NULL , `favteam` VARCHAR(100) NOT NULL , `uno` INT NOT NULL , `dte_registered` VARCHAR(100) NOT NULL , `last_login` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `is_logged` INT NOT NULL DEFAULT '0' , `is_deleted` INT NOT NULL DEFAULT '0' , `reg_no` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
+/*Roles Table*/
+CREATE TABLE `sundb`.`roles` ( `id` INT NOT NULL AUTO_INCREMENT , `rolename` VARCHAR(100) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+/*Admin Table*/
+CREATE TABLE `sundb`.`admin` ( `id` INT NOT NULL AUTO_INCREMENT , `userName` VARCHAR(1000) NOT NULL , `userPass` VARCHAR(1000) NOT NULL , `role` INT NOT NULL , `islogged` INT NOT NULL DEFAULT '0' , `lastlogin` TIMESTAMP NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+/*Foreign Key*/
+ALTER TABLE `admin` ADD CONSTRAINT `fk_user_category` FOREIGN KEY (`role`) REFERENCES `roles`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

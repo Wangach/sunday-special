@@ -40,10 +40,43 @@ if(isset($_GET['a'])) {
 		//call the fair function
 		searchUser();
 	}
+	if ($direction == 'loginAdmin'){
+		//login function
+		checkAdmin();
+	}
 }
 
 //function definitions
+//Login function
+function checkAdmin(){
+	include 'db.php';
+	session_start();
+	$res = '';
 
+	$plaer = file_get_contents('php://input');
+
+	$decdata = json_decode($plaer);
+
+	//Get form content individually
+	$formData = array(
+	    "username" => $decdata->uname,
+	    "password" => $decdata->pass
+	);
+	//Check The Records
+	$chk = "SELECT * FROM admin WHERE userName = '" .$formData["username"]. "' AND userPass = '" .$formData["password"]. "'";
+	$fnd = mysqli_query($conn, $chk);
+
+	//If There is such a user
+	if(mysqli_num_rows($fnd) > 0){
+		$_SESSION['bhentadmin'] = $formData["username"];
+		$res = "Login Successful";
+		echo $res;
+	}else{
+		$res = "Wrong username/password combinations. Try Again!";
+		echo $res;
+	}
+
+}
 //looser Games Total
 function looserGames() {
 	include 'db.php';
