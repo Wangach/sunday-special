@@ -18,6 +18,7 @@ window.addEventListener('load', () => {
 })
 const loginForm = document.getElementById('login-form');
 
+
 loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     let fromdb = document.getElementById('feedback');
@@ -34,6 +35,12 @@ loginForm.addEventListener('submit', (e) => {
         },
         body: JSON.stringify(formValues)
     }
+    //clear the feedback
+        let clearFeed = (clr) => {
+            fromdb.classList.remove('alert');
+            fromdb.classList.remove(`alert-${clr}`);
+            fromdb.innerHTML = '';
+        }
     fetch(url, formOptions)
     .then(response => response.text())
     .then((data) => {
@@ -41,12 +48,23 @@ loginForm.addEventListener('submit', (e) => {
             fromdb.innerHTML = data;
             fromdb.classList.add('alert');
             fromdb.classList.add('alert-success');
+
+            //clear after 5 secs
+            setTimeout(() => {
+                clearFeed('success');
+                // Redirect To Logged Page
+                window.location.href = "logged.php";
+            }, 5000);
         }
-        if(data.indexOf('Wrong') > 0){
+        if(data.indexOf('Try') > 0){
             fromdb.innerHTML = data;
             fromdb.classList.add('alert');
             fromdb.classList.add('alert-danger');
+
+            //clear after 5 secs
+            setTimeout(() => {clearFeed('danger')}, 5000);
         }
         
     })
 })
+

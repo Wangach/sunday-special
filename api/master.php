@@ -1,5 +1,6 @@
 <?php
 include 'db.php';
+// $_SESSION['bhentadmin'] = '';
 
 if(isset($_GET['a'])) {
 	$direction = $_GET['a'];
@@ -44,6 +45,10 @@ if(isset($_GET['a'])) {
 		//login function
 		checkAdmin();
 	}
+	if ($direction == 'logoutAdmin'){
+		//login function
+		destAdmin();
+	}
 }
 
 //function definitions
@@ -69,13 +74,36 @@ function checkAdmin(){
 	//If There is such a user
 	if(mysqli_num_rows($fnd) > 0){
 		$_SESSION['bhentadmin'] = $formData["username"];
-		$res = "Login Successful";
+		$changeStat = "UPDATE admin SET islogged = '1' WHERE userName = '" .$_SESSION['bhentadmin']. "'";
+		$ens = mysqli_query($conn, $changeStat);
+		$res = "Login Successful! Redirectiong In A Jiff.";
 		echo $res;
 	}else{
 		$res = "Wrong username/password combinations. Try Again!";
 		echo $res;
 	}
 
+}
+//Logout Admin
+function destAdmin() {
+	include 'db.php';
+	session_start();
+	$ad = $_SESSION["bhentadmin"];
+	$res = '';
+
+	//Get The Admin dets from DB
+	$gtAdmin = "UPDATE admin SET islogged = '0' WHERE userName = '$ad'";
+	$hak = mysqli_query($conn, $gtAdmin);
+
+	if ($hak) {
+		unset($_SESSION['bhentadmin']);
+		$res = "Logged Out!";
+		echo $res;
+	}else{
+		$res = "Error ".mysqli_error($conn);
+		echo $res;
+	}
+	
 }
 //looser Games Total
 function looserGames() {

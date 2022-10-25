@@ -5,6 +5,7 @@ const payForm = document.getElementById('pay-form');
 const transactForm = document.getElementById('payments-form');
 const createUserForm = document.getElementById('user-form');
 const indebtForm = document.getElementById('indebt');
+const logoutButton = document.getElementById('logout-btn');
 
 //Custom Loaders
 //On Load
@@ -23,6 +24,24 @@ window.addEventListener('load', () => {
     setInterval(changeOpacity(circle), 3000);
     // }
    
+})
+//logout function
+logoutButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    let url = `${logoutButton.getAttribute('href')}?a=logoutAdmin`;
+    fetch(url)
+    .then(response => response.text())
+    .then((data) => {
+        if (data == 'Logged Out!') {
+            alert(data);
+            setTimeout( ()=> {
+                location.reload();
+            }, 3000)
+        }else{
+            alert('There Has Been An error!');
+        }
+        
+    })
 })
 
 let wholeDay = '';
@@ -145,10 +164,6 @@ let countLooser = () => {
         };
         window.requestAnimationFrame(step);
       }
-     
-      
-      
-      Resources
 }
 //Looser Form 
 looserForm.addEventListener('submit', (e) => {
