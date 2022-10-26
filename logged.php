@@ -23,7 +23,8 @@ include 'api/session_checker.php';
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet">
-
+    <!--Imported JS-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <!--Own JS-->
     <script src="js/process.js" defer></script>
 
@@ -43,7 +44,7 @@ include 'api/session_checker.php';
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="logged.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -55,7 +56,7 @@ include 'api/session_checker.php';
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="logged.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -66,7 +67,7 @@ include 'api/session_checker.php';
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="search.html" >
+                <a class="nav-link collapsed" href="search.php" >
                     <i class="fas fa-fw fa-eye"></i>
                     <span>Search</span>
                 </a>
@@ -86,7 +87,7 @@ include 'api/session_checker.php';
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="charts.html" >
+                <a class="nav-link collapsed" href="#" >
                     <i class="fas fa-fw fa-eye"></i>
                     <span>Charts</span>
                 </a>
@@ -298,7 +299,6 @@ include 'api/session_checker.php';
                                     <div class="card bg-primary text-white shadow" data-toggle="modal" data-target="#looser">
                                         <div class="card-body">
                                             Looser-Pay
-                                            <div class="text-white-50 small">#4e73df</div>
                                         </div>
                                     </div>
                                 </div>
@@ -306,7 +306,6 @@ include 'api/session_checker.php';
                                     <div class="card bg-success text-white shadow" data-toggle="modal" data-target="#fair">
                                         <div class="card-body">
                                             Fair-Pay
-                                            <div class="text-white-50 small">#1cc88a</div>
                                         </div>
                                     </div>
                                 </div>
@@ -314,7 +313,6 @@ include 'api/session_checker.php';
                                     <div class="card bg-info text-white shadow" data-toggle="modal" data-target="#pay">
                                         <div class="card-body">
                                             Make Payment
-                                            <div class="text-white-50 small">#36b9cc</div>
                                         </div>
                                     </div>
                                 </div>
@@ -322,7 +320,6 @@ include 'api/session_checker.php';
                                     <div class="card bg-danger text-white shadow" data-toggle="modal" data-target="#gameweek">
                                         <div class="card-body">
                                             Create User
-                                            <div class="text-white-50 small">#e74a3b</div>
                                         </div>
                                     </div>
                                 </div>
@@ -330,7 +327,6 @@ include 'api/session_checker.php';
                                     <div class="card bg-light text-black shadow" data-toggle="modal" data-target="#debtor">
                                         <div class="card-body">
                                             Indebt
-                                            <div class="text-black-50 small">#f8f9fc</div>
                                         </div>
                                     </div>
                                 </div>
@@ -339,7 +335,6 @@ include 'api/session_checker.php';
                                     <div class="card bg-warning text-white shadow" data-toggle="modal" data-target="#gw">
                                         <div class="card-body">
                                             Create GW
-                                            <div class="text-white-50 small">#f6c23e</div>
                                         </div>
                                     </div>
                                 </div>
@@ -472,8 +467,8 @@ include 'api/session_checker.php';
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a href="api/master.php" id="logout-btn" class="btn btn-primary" type="button">Logout</a>
+                    <button class="btn btn-primary" type="button" data-dismiss="modal">Cancel</button>
+                    <a href="api/master.php" id="logout-btn" class="btn btn-danger" type="button">Logout</a>
                 </div>
             </div>
         </div>
@@ -531,7 +526,7 @@ include 'api/session_checker.php';
                       <input type="text" class="form-control" placeholder="Apply Code..." id="coup" name="coup" value="cst" required>
                   </div><!--/.form-group/-->
                   <button type="submit" id="looser-btn" class="btn btn-primary" name="recordm">Record</button>
-                  <button type="button" id="clear" class="btn btn-warning" disabled="true">Clear</button>
+                  <button type="button" id="clear-looser" class="btn btn-warning" disabled="true">Clear</button>
               </form>
             </div>
           </div>
@@ -566,8 +561,8 @@ include 'api/session_checker.php';
                       <label for="awasc">Away Score:</label>
                       <input type="number" class="form-control" placeholder="Away Player Score..." id="fasc" name="Fasc">
                   </div><!--/.form-group/-->
-                  <button type="submit" id="fair-btn" class="btn btn-secondary" name="fairrec">Record</button>
-                  <button type="button" id="fairclear" class="btn btn-warning" disabled="true">Clear</button>
+                  <button type="submit" id="fair-btn" class="btn btn-primary" name="fairrec">Record</button>
+                  <button type="button" id="clear-fair" class="btn btn-warning" disabled="true">Clear</button>
               </form>
             </div>
           </div>
@@ -609,6 +604,7 @@ include 'api/session_checker.php';
                     </div><!--form-group-->
 
                     <button type="submit" class="btn btn-info" id="f2-user"><i class="fas fa-user-plus"></i></button>
+                    
                 </form>
             </div>
           </div>
@@ -657,6 +653,7 @@ include 'api/session_checker.php';
                         <input type="text" class="form-control" id="trds" placeholder="Description..." name="maelezo">
                     </div>
                     <button type="submit" class="btn btn-info" id="pay">Submit</button>
+                    <button type="button" id="clear-transact" class="btn btn-danger" disabled="true">Clear</button>
                 </form>
             </div>
             <div id="results">
@@ -691,6 +688,7 @@ include 'api/session_checker.php';
                         <input type="number" class="form-control" placeholder="Eg 10, 50, 100...." id="damt" name="damt">
                     </div><!--/.form-group/-->
                     <button type="submit" id="txn-btn" class="btn btn-primary" name="indebt"><i class="fas fa-dollar-sign"></i></button>
+                    <button type="button" id="clear-indebt" class="btn btn-danger" disabled="true"><i class="fas fa-trash"></i></button>
                 </form>
             </div>
           </div>

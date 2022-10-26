@@ -33,7 +33,7 @@ logoutButton.addEventListener('click', (e) => {
     .then(response => response.text())
     .then((data) => {
         if (data == 'Logged Out!') {
-            alert(data);
+            Swal.fire(data, '', 'success');
             setTimeout( ()=> {
                 location.reload();
             }, 3000)
@@ -92,7 +92,6 @@ let genMatchId = () => {
         rid += myLetters[rNum];
         
     }
-    console.log(rid);
     return rid;
 }
 //generate A unique Id for transactions
@@ -168,7 +167,8 @@ let countLooser = () => {
 //Looser Form 
 looserForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
+    let clearBtn = document.getElementById('clear-looser');
+    clearBtn.removeAttribute('disabled');
     
     todaysDte();
     convertMsToTime(now);
@@ -253,8 +253,21 @@ looserForm.addEventListener('submit', (e) => {
     fetch(url, formOptions)
     .then(response => response.text())
     .then((data) => {
-        // JSON.parse(data);
-        console.log(`${data}`)
+        if (data == 'Data Recorded'){
+            Swal.fire(data, '', 'success');
+        }else{
+            Swal.fire(data, '', 'error');
+        }
+        
+    })
+       //upon click
+       clearBtn.addEventListener('click', () => {
+        //Clear Form Fields
+        looserForm.reset();
+        //set disabled attr to true
+        setInterval(() => {
+            clearBtn.setAttribute("disabled", "true");
+        }, 3000)
     })
 })
 
@@ -266,6 +279,8 @@ fairForm.addEventListener('submit', (e) => {
     todaysDte();
     convertMsToTime(now);
    let rid = genMatchId();
+   let clearFair = document.getElementById('clear-fair');
+   clearFair.removeAttribute("disabled");
     
     let formValues = {
         fft: document.getElementById('fht').value,
@@ -287,14 +302,25 @@ fairForm.addEventListener('submit', (e) => {
     fetch(url, formOptions)
     .then(response => response.text())
     .then((data) => {
-        // JSON.parse(data);
-        console.log(`${data}`)
+        if (data == 'Data Recorded'){
+            Swal.fire(data, '', 'success');
+        }else{
+            Swal.fire(data, '', 'error');
+        }
+    })
+    clearFair.addEventListener('click', () => {
+        fairForm.reset();
+        setInterval(() => {
+            clearFair.setAttribute("disabled", "true");
+        }, 3000)
     })
 })
 //Make Payments
 transactForm.addEventListener('submit', (e)=>{
     e.preventDefault();
     let rid = trMatchId();
+    let clearTransBtn = document.getElementById('clear-transact');
+    clearTransBtn.removeAttribute('disabled');
 
     let formValues = {
         transType: document.getElementById('txntyp').value,
@@ -304,22 +330,60 @@ transactForm.addEventListener('submit', (e)=>{
         transDesc: document.getElementById('trds').value
     }
 
-    let newFormData = {...formValues, transId: rid};
-    //Send data to db
-    let url = `${transactForm.getAttribute('action')}?a=pay`;
-    let formOptions = {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newFormData)
-    }
-    fetch(url, formOptions)
-    .then(response => response.text())
-    .then((data) => {
-        // JSON.parse(data);
-        console.log(`${data}`)
-    })
+    Swal.fire({
+        title: 'Are you sure?',
+        text: `Pay ${formValues.transAmt} by ${formValues.transName}?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Pay'
+      }).then((result) => {
+        if (result.isConfirmed) {
+        let newFormData = {...formValues, transId: rid};
+        //Send data to db
+        let url = `${transactForm.getAttribute('action')}?a=pay`;
+        let formOptions = {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newFormData)
+        }
+        fetch(url, formOptions)
+        .then(response => response.text())
+        .then((data) => {
+            if(data.indexOf('Successful') > 0){
+                Swal.fire(
+                    'Paid!',
+                    data,
+                    'success'
+                  )
+            }else{
+                Swal.fire(
+                    'Failed!',
+                    data,
+                    'error'
+                  )
+            }
+        })
+        }else{
+            Swal.fire(
+                'Cancelled',
+                'Transaction Has Been Cancelled :)',
+                'error'
+              )
+              transactForm.reset();
+              clearTransBtn.setAttribute("disabled", "true");
+        }
+        clearTransBtn.addEventListener('click', () => {
+            transactForm.reset();
+
+            setInterval(() => {
+                clearTransBtn.setAttribute("disabled", "true")
+            }, 3000)
+        })
+      })
 })
 //Register users
 createUserForm.addEventListener('submit', (e) => {
@@ -357,6 +421,8 @@ createUserForm.addEventListener('submit', (e) => {
 //Indebt
 indebtForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    let clearIndebt = document.getElementById('clear-indebt');
+    clearIndebt.removeAttribute('disabled');
     let debtId = trMatchId();
     let dOfIssue = todaysDte();
     let formValues = {
@@ -365,22 +431,62 @@ indebtForm.addEventListener('submit', (e) => {
         debtAmount: document.getElementById('damt').value
     }
 
-    let newFormData = {...formValues, whenIndebt: dOfIssue, debtNum: debtId};
-    //Send data to db
-    let url = `${indebtForm.getAttribute('action')}?a=indebt`;
-    let formOptions = {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newFormData)
-    }
-    fetch(url, formOptions)
-    .then(response => response.text())
-    .then((data) => {
-        // JSON.parse(data);
-        console.log(`${data}`)
-    })
+    Swal.fire({
+        title: "Indebt",
+        text: `Indebt ${formValues.debtee}, Amount ${formValues.debtAmount}?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            let newFormData = {...formValues, whenIndebt: dOfIssue, debtNum: debtId};
+            //Send data to db
+            let url = `${indebtForm.getAttribute('action')}?a=indebt`;
+            let formOptions = {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newFormData)
+            }
+            fetch(url, formOptions)
+            .then(response => response.text())
+            .then((data) => {
+                // JSON.parse(data);
+                if (data.indexOf('Recorded') > 0) {
+                    Swal.fire(
+                        'Confirmed',
+                        data,
+                        'success'
+                      )
+                }else{
+                    Swal.fire(
+                        'Error Occured',
+                        data,
+                        'error'
+                      )
+                }
+            })
+        }else{
+            Swal.fire(
+                'Cancelled',
+                'Action Has Been Cancelled :)',
+                'error'
+              )
+              indebtForm.reset();
+              clearIndebt.setAttribute("disabled", "true");
+        }
+        clearIndebt.addEventListener('click', () => {
+            indebtForm.reset();
+
+            setInterval(() => {
+                clearIndebt.setAttribute("disabled", "true")
+            }, 3000)
+        })
+      })
+
 })
 //Load Recent Looser Games
 window.addEventListener('load', () => {

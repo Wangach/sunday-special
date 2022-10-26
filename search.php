@@ -1,3 +1,6 @@
+<?
+include 'api/session_checker.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,6 +24,9 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="css/search.css" rel="stylesheet">
 
+    <!--Imported JS-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+
     <!--Own JS-->
     <script src="js/search.js" defer></script>
 
@@ -40,7 +46,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="logged.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -52,7 +58,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="logged.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -63,7 +69,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="search.html" >
+                <a class="nav-link collapsed" href="search.php" >
                     <i class="fas fa-fw fa-eye"></i>
                     <span>Search</span>
                 </a>
@@ -83,7 +89,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="charts.html" >
+                <a class="nav-link collapsed" href="#" >
                     <i class="fas fa-fw fa-eye"></i>
                     <span>Charts</span>
                 </a>
@@ -169,7 +175,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Peter Suarez</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?echo $admin;?></span>
                                 <img class="img-profile rounded-circle"
                                     src="img/undraw_profile.svg">
                             </a>
@@ -360,8 +366,8 @@
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-primary" type="button" data-dismiss="modal">Cancel</button>
+                    <a href="api/master.php" id="logout-btn" class="btn btn-danger" type="button">Logout</a>
                 </div>
             </div>
         </div>

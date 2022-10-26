@@ -76,7 +76,7 @@ function checkAdmin(){
 		$_SESSION['bhentadmin'] = $formData["username"];
 		$changeStat = "UPDATE admin SET islogged = '1' WHERE userName = '" .$_SESSION['bhentadmin']. "'";
 		$ens = mysqli_query($conn, $changeStat);
-		$res = "Login Successful! Redirectiong In A Jiff.";
+		$res = "Login Successful! Redirecting In A Jiff.";
 		echo $res;
 	}else{
 		$res = "Wrong username/password combinations. Try Again!";
@@ -465,8 +465,8 @@ function searchUser() {
 		if ($deep == 'recentms') {
 			recentIndividual($formData["user"]);
 		}
-		if ($deep == 'recenttrs') {
-			recentIndividual($formData["user"]);
+		if ($deep == 'indTrans') {
+			inRecTransactions($formData["user"]);
 		}
 	}
 
@@ -684,6 +684,7 @@ function inRecTransactions($searchName) {
 		            $total = $row['amount'];
 		            $explain = $row['trDesc'];
 		            $tmstamp = $row['trDte'];
+					$sysId = $row['id'];
 
 
 		            if ($pmode == 'mp') {
@@ -707,7 +708,7 @@ function inRecTransactions($searchName) {
 		                            <tr>
 		                                <td>
 		                                    <div>
-		                                    	<a href='#'>$transId</a>
+		                                    	<a href='#'>$sysId</a>
 		                                    </div>
 		                                </td>
 		                                <td>
@@ -719,7 +720,7 @@ function inRecTransactions($searchName) {
 		                                <td>
 		                                    <div class='text-primary'>$tmstamp</div>
 		                                </td>
-		                                <td class='text-info'><a href='./viewmatch?matchId=$mId'>$mId</a></td>
+		                                <td class='text-info'><a href='./viewmatch?matchId=$transId'>$transId</a></td>
 		                            </tr>";
 
 		            echo $showData;
