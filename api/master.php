@@ -49,6 +49,10 @@ if(isset($_GET['a'])) {
 		//login function
 		destAdmin();
 	}
+	if ($direction == 'payAll'){
+		//login function
+		payFair();
+	}
 }
 
 //function definitions
@@ -142,21 +146,48 @@ function recordLooserGame() {
 	    "uniq" => $decdata->matchId
 	);
 
-	//Insert Data to DB
-	$ins = "INSERT INTO looserdata (Hplayer, Aplayer, Hteam, Ateam, Hscore, Ascore, winner, looser,
-	 matchty, coup, cost, playdte, playtme, matchid) VALUES ('" .$formData["homePlayer"]."', '".$formData["awayPlayer"]."', '".$formData["homeTeam"]."',
-	  '".$formData["awayTeamName"]."', '".$formData["homeScore"]."', '".$formData["awayScore"]."', '".$formData["mshin"]."', '".$formData["kushin"]."', 
-	  '".$formData["matchType"]."', '".$formData["matchCoupon"]."', '".$formData["deni"]."', '".$formData["tarehe"]."', '".$formData["saa"]."', 
-	  '".$formData["uniq"]."') ";
+	if($formData["mshin"] == 'N/A' && $formData["kushin"] == 'N/A'){
+		$kushin_one = $formData["homePlayer"];
+		$kushin_two = $formData["awayPlayer"];
+		//Insert Data to DB
+		$ins_one = "INSERT INTO looserdata (Hplayer, Aplayer, Hteam, Ateam, Hscore, Ascore, winner, looser,
+		 matchty, coup, cost, playdte, playtme, matchid) VALUES ('" .$formData["homePlayer"]."', '".$formData["awayPlayer"]."', '".$formData["homeTeam"]."',
+		  '".$formData["awayTeamName"]."', '".$formData["homeScore"]."', '".$formData["awayScore"]."', 'N/A', '$kushin_one', 
+		  '".$formData["matchType"]."', '".$formData["matchCoupon"]."', '".$formData["deni"]."', '".$formData["tarehe"]."', '".$formData["saa"]."', 
+		  '".$formData["uniq"]."') ";
+		  $ins_two = "INSERT INTO looserdata (Hplayer, Aplayer, Hteam, Ateam, Hscore, Ascore, winner, looser,
+		 matchty, coup, cost, playdte, playtme, matchid) VALUES ('" .$formData["homePlayer"]."', '".$formData["awayPlayer"]."', '".$formData["homeTeam"]."',
+		  '".$formData["awayTeamName"]."', '".$formData["homeScore"]."', '".$formData["awayScore"]."', 'N/A', '$kushin_two', 
+		  '".$formData["matchType"]."', '".$formData["matchCoupon"]."', '".$formData["deni"]."', '".$formData["tarehe"]."', '".$formData["saa"]."', 
+		  '".$formData["uniq"]."') ";
 
-	$check = mysqli_query($conn, $ins);
-	if($check){
-	    $resp = "Data Recorded";
-	    echo $resp;
-	    
-	}else {
-	    $resp = "There Has Been An Error in Submitting your data ".mysqli_error($conn);
-	    echo $resp;
+		$check_one = mysqli_query($conn, $ins_one);
+		$check_two = mysqli_query($conn, $ins_two);
+		if($check_one && $check_two){
+		    $resp = "Data Recorded";
+		    echo $resp;
+		    
+		}else {
+		    $resp = "There Has Been An Error in Submitting your data ".mysqli_error($conn);
+		    echo $resp;
+		}
+	}else{
+		//Insert Data to DB
+		$ins = "INSERT INTO looserdata (Hplayer, Aplayer, Hteam, Ateam, Hscore, Ascore, winner, looser,
+		 matchty, coup, cost, playdte, playtme, matchid) VALUES ('" .$formData["homePlayer"]."', '".$formData["awayPlayer"]."', '".$formData["homeTeam"]."',
+		  '".$formData["awayTeamName"]."', '".$formData["homeScore"]."', '".$formData["awayScore"]."', '".$formData["mshin"]."', '".$formData["kushin"]."', 
+		  '".$formData["matchType"]."', '".$formData["matchCoupon"]."', '".$formData["deni"]."', '".$formData["tarehe"]."', '".$formData["saa"]."', 
+		  '".$formData["uniq"]."') ";
+
+		$check = mysqli_query($conn, $ins);
+		if($check){
+		    $resp = "Data Recorded";
+		    echo $resp;
+		    
+		}else {
+		    $resp = "There Has Been An Error in Submitting your data ".mysqli_error($conn);
+		    echo $resp;
+		}
 	}
 }
 //Record fair func
@@ -472,6 +503,23 @@ function searchUser() {
 
 	
 }
+//Pay Fair Games in general
+function payFair() {
+	$output = '';
+	include 'db.php';
+
+	$pay = "UPDATE fairdata SET is_paid = '1'";
+	$conf = mysqli_query($conn, $pay);
+	$calc = mysqli_affected_rows($conn);
+
+	if ($conf) {
+		$output = 'Updated! Matches Paid In  Total: ' . $calc;
+		echo $output;
+	}else{
+		$output = 'There Has Been An Error '.mysqli_err($conn);
+		echo $output;
+	}
+}
 //function def
 	function getMatchSummary($searchName) {
 		$output = '';
@@ -690,13 +738,18 @@ function inRecTransactions($searchName) {
 		            if ($pmode == 'mp') {
 		            	$modeOfPayment = 'Mpesa';
 		            }
-		            if ($pmode == 'cs') {
+		            else if ($pmode == 'cs') {
 		            	$modeOfPayment = 'Cash';
 		            }
-		            if ($pmode == 'bnk') {
+		            else if ($pmode == 'bnk') {
 		            	$modeOfPayment = 'Bank';
 		            }
-		            
+					else if ($pmode == 'ot') {
+		            	$modeOfPayment = 'Other';
+		            }
+		            else{
+						$modeOfPayment = 'Unknown';
+					}
 
 		            /*Display The Results Depending on thecredit or debit value
 		            //Will do this later since I am on a deadline RN

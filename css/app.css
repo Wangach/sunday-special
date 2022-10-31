@@ -79,3 +79,10 @@
     75%  { transform: translateY(25px);}
     100% { transform: translateY(50px); }
   }
+
+  .organize > h6, .organize > button{
+    display: inline;
+  }
+  .organize > button {
+    float: right;
+  }

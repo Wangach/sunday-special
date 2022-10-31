@@ -134,6 +134,51 @@ let recentLooser = () => {
 //Recent Fair Games
 let recentFair = () => {
     let display = document.getElementById('latest-fair');
+    let payAllBtn = document.getElementById('pay-all');
+    payAllBtn.addEventListener('click', () => {
+        Swal.fire({
+            title: 'Pay All Fair Games?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                let payAllUrl = './api/master.php?a=payAll';
+                fetch(payAllUrl)
+                .then(res => res.text())
+                .then((data) => {
+                    if(data.includes('Matches Paid')){
+                        Swal.fire(
+                            'Paid!',
+                            data,
+                            'success'
+                          )
+                    }else if(data.includes('An Error')){
+                        Swal.fire(
+                            'Error!',
+                            data,
+                            'error'
+                          )
+                    }else{
+                        Swal.fire(
+                            'Uknown!',
+                            'There Has Been An Uknown Error.',
+                            'error'
+                          )
+                    }
+                })
+            }else{
+                Swal.fire(
+                    'Cancelled',
+                    'Process Terminated',
+                    'error'
+                  )
+            }
+          })
+    })
     let url = './api/master.php?a=recentFair';
     fetch(url)
     .then(res => res.text())
@@ -198,7 +243,7 @@ looserForm.addEventListener('submit', (e) => {
             gamesNumber = 1;
             break;
         case 'nus':
-            payableAmt = 15;
+            payableAmt = 20;
             gamesNumber = 1;
             break;
         case 'sul':

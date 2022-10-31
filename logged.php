@@ -377,10 +377,12 @@ include 'api/session_checker.php';
 
                             <!-- Illustrations -->
                             <div class="card shadow mb-4">
-                                <div class="card-header py-3">
+                                <div class="card-header py-3 organize">
                                     <h6 class="m-0 font-weight-bold text-primary">Recent Fair Games</h6>
+                                    <button class='btn btn-primary' id='pay-all' type='button'>Pay All</button>
                                 </div>
                                 <div class="card-body">
+                                
                                     <div class="table-responsive">
                                         <table class="table table-striped">
                                             <thead>
@@ -389,6 +391,7 @@ include 'api/session_checker.php';
                                                 <th scope="col">Score Line</th>
                                                 <th scope="col">Payment Status</th>
                                                 <th scope="col">Match ID</th>
+                                                <th scope="col">Action</th>
                                               </tr>
                                             </thead>
                                             <tbody id="latest-fair">
