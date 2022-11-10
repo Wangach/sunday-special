@@ -59,7 +59,6 @@ searchUserForm.addEventListener("submit", (event) => {
       .then((data) => {
         // JSON.parse(data);
         summaryHolder.innerHTML = data;
-        console.log(`${data}`);
       });
   };
   //get the debt summary
@@ -79,7 +78,6 @@ searchUserForm.addEventListener("submit", (event) => {
       .then((data) => {
         // JSON.parse(data);
         summaryHolder.innerHTML = data;
-        console.log(`${data}`);
       });
   };
   //latest matches
@@ -119,6 +117,26 @@ searchUserForm.addEventListener("submit", (event) => {
         // console.log(data)
       });
   };
+    //
+  let recentIndebts = () => {
+    //Send data to db
+    let url = `${searchUserForm.getAttribute("action")}?a=seaUs&dets=recentIndebts`;
+    let display = document.getElementById("recent-indebt-individual");
+    let formOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formValue),
+    };
+    fetch(url, formOptions)
+      .then((res) => res.text())
+      .then((data) => {
+        display.innerHTML = data;
+      });
+  };
+
+
 
   //get the match summary
   matchesSummary();
@@ -128,4 +146,57 @@ searchUserForm.addEventListener("submit", (event) => {
   individualMatches();
   //get the latest transactions
   individualTransactions();
+  //Recent Indebts
+  recentIndebts();
+
+
+
 });
+
+
+let payUp = (id) => {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: `Pay Debt With Id ${id}?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+        let url = `./api/master.php?a=payIndebt&debId=${id}`;
+        fetch(url)
+        .then(response => response.text())
+        .then((data) => {
+            if(data.indexOf('Paid') > 0){
+                Swal.fire(
+                    'Paid!',
+                    data,
+                    'success'
+                  )
+            }else{
+                Swal.fire(
+                    'Failed!',
+                    data,
+                    'error'
+                  )
+            }
+        })
+        }else{
+            Swal.fire(
+                'Cancelled',
+                'Cancelled :)',
+                'error'
+              )
+        }
+      })
+}
+
+let doneDeal = (id, dte) => {
+  Swal.fire(
+    'Already Paid',
+    `Debt ${id} Was Paid On: ${dte}`,
+    'success'
+  )
+}

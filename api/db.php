@@ -1,3 +1,3 @@
 <?php
-$conn = mysqli_connect("localhost", "root", "", "sundb")
+$conn = mysqli_connect("localhost", "root", "", "sundb");
 ?>

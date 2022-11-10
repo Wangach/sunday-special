@@ -53,6 +53,10 @@ if(isset($_GET['a'])) {
 		//login function
 		payFair();
 	}
+	if ($direction === 'payIndebt') {
+		//pay indebt
+		payInd();
+	}
 }
 
 //function definitions
@@ -499,6 +503,9 @@ function searchUser() {
 		if ($deep == 'indTrans') {
 			inRecTransactions($formData["user"]);
 		}
+		if ($deep == 'recentIndebts') {
+			recIndebts($formData["user"]);
+		}
 	}
 
 	
@@ -583,7 +590,7 @@ function payFair() {
 		$owedOrAdvance = $cash - $playcost;
 
 		//Get data from indebted table
-		$debtsIncur = "SELECT SUM(amount) as deni FROM debts WHERE debtor = '$searchName'";
+		$debtsIncur = "SELECT SUM(amount) as deni FROM debts WHERE debtor = '$searchName' AND is_paid = '0'";
 		$serDbt = mysqli_query($conn, $debtsIncur);
 
 		if (mysqli_num_rows($serDbt) > 0) {
@@ -771,7 +778,10 @@ function inRecTransactions($searchName) {
 		                                    <div>$total</div>
 		                                </td>
 		                                <td>
-		                                    <div class='text-primary'>$tmstamp</div>
+		                                    <div class=''>$tmstamp</div>
+		                                </td>
+		                                <td>
+		                                    <div class=''>$explain</div>
 		                                </td>
 		                                <td class='text-info'><a href='./viewmatch?matchId=$transId'>$transId</a></td>
 		                            </tr>";
@@ -784,4 +794,102 @@ function inRecTransactions($searchName) {
 	    	}
 }
 
+//recent individual transactions
+function recIndebts($searchName) {
+	include 'db.php';
+			$output = '';
+			// $modeOfPayment = '';
+			$ind = "SELECT * FROM (SELECT * FROM debts WHERE debtor = '$searchName' ORDER BY id DESC LIMIT 5) as r ORDER BY id";
+		    $latestIndebts = mysqli_query($conn, $ind);
+
+		    if (mysqli_num_rows($latestIndebts) > 0) {
+		        while ($row = mysqli_fetch_assoc($latestIndebts)) {
+		            #get the rows individual data
+		            $dteIss = $row['date_of_issue'];
+		            $reason = $row['reason'];
+		            $amt = $row['amount'];
+		            $dstat = $row['is_paid'];
+					$sysId = $row['debt_id'];
+					$paidOn = $row['when_paid'];
+
+					$intoStr = strval($sysId);
+
+
+		            if($dstat == 1){
+		                $paid = '<i class="fas fa-check"></i>';
+		                $class = 'btn-success';
+
+		                $btnData = "<button type='button' value='$paidOn' id='$sysId' onclick='doneDeal(this.id, this.value)' class='btn btn-secondary'>
+		                                Paid
+		                            </button>";
+		            }else{
+		                $paid = '<i class="fas fa-window-close"></i>';
+		                $class = 'btn-danger';
+
+		                $btnData = "<button type='button' id='$sysId' onclick='payUp(this.id)' class='btn btn-primary pay-indebt'>
+		                                Pay
+		                             </button>";
+		            }
+
+		            /*Display The Results Depending on thecredit or debit value
+		            //Will do this later since I am on a deadline RN
+		            foreach ($row as $key => $value) {
+		                print_r($key . $value);
+		            }*/
+		            //html data
+		            $showData = "
+		                            <tr>
+		                                <td>
+		                                    <div>
+		                                    	<a href='#'>$sysId</a>
+		                                    </div>
+		                                </td>
+		                                <td>
+		                                    <div>$reason</div>
+		                                </td>
+		                                <td>
+		                                    <div>$amt</div>
+		                                </td>
+		                                <td>
+		                                    <div class=''>$dteIss</div>
+		                                </td>
+		                                <td>
+		                                    <button class='btn $class'>$paid</button>
+		                                </td>
+		                                <td>
+		                                	$btnData
+		                                </td>
+		                            </tr>";
+
+		            echo $showData;
+		        }
+	    	}else{
+	    		$showData = 'Not Indebts Found!';
+	    		echo $showData;
+	    	}
+}
+
+//Pay Indebts
+function payInd() {
+	if (isset($_GET['debId']) && !empty($_GET['debId'])) {
+		$idOfDebt = $_GET['debId'];
+		paySpecificDebt($idOfDebt);
+	}
+}
+//Func Definition
+	function paySpecificDebt($deb_id) {
+		include 'db.php';
+		$output = '';
+		$searchDebt = "UPDATE debts SET is_paid = '1' WHERE debt_id = '$deb_id'";
+		$exec = mysqli_query($conn, $searchDebt);
+
+		if ($exec) {
+			$output = 'Debt Paid!';
+			echo $output;
+		}else{
+			$output = 'Oops! Something went horribly wrong.'.mysqli_error($conn);
+			echo $output;
+		}
+
+	}
 ?>

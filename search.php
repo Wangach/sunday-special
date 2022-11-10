@@ -29,6 +29,14 @@ include 'api/session_checker.php';
 
     <!--Own JS-->
     <script src="js/search.js" defer></script>
+        <!-- <script defer>
+        function payUp(id) {
+            String(id);
+            // let payIndBtn = document.getElementById('pay-indebt');
+            // let id = payIndBtn.attr('name');
+            console.log(`Pay debt ${id}?`);
+        }
+    </script> -->
 
 </head>
 
@@ -302,14 +310,47 @@ include 'api/session_checker.php';
                                         <table class="table table-striped">
                                             <thead>
                                               <tr>
-                                                <th scope="col">Id</th>
+                                                <th scope="col">#</th>
                                                 <th scope="col">Payment Method</th>
                                                 <th scope="col">Amount</th>
-                                                <th scope="col">Desc</th>
                                                 <th scope="col">Date</th>
+                                                <th scope="col">Desc</th>
+                                                <th scope="col">Match Id</th>
+
                                               </tr>
                                             </thead>
                                             <tbody id="recent-transactions-individual">
+                                              
+                                            </tbody>
+                                          </table>
+                                    </div><!--table responsive-->
+                                </div>
+                            </div>
+                        </div><!--column-->
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+                        <div class="col-xl-12 col-md-12 mb-4">
+                            <div class="card mb-4 py-3 shadow h-100 ">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Indebt Transactions</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                              <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Reason</th>
+                                                <th scope="col">Amount</th>
+                                                <th scope="col">Date Of Issue</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col">Actions</th>
+
+                                              </tr>
+                                            </thead>
+                                            <tbody id="recent-indebt-individual">
                                               
                                             </tbody>
                                           </table>
@@ -390,6 +431,8 @@ include 'api/session_checker.php';
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
+
 
 </body>
 
