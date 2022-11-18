@@ -1,3 +1,5 @@
+import { viewMatch } from './reus.js';
+window.viewMatch = viewMatch;
 //Global Variables
 const looserForm = document.getElementById('looser-form');
 const fairForm = document.getElementById('fair-form');
@@ -6,6 +8,8 @@ const transactForm = document.getElementById('payments-form');
 const createUserForm = document.getElementById('user-form');
 const indebtForm = document.getElementById('indebt');
 const logoutButton = document.getElementById('logout-btn');
+
+//Modules
 
 //Custom Loaders
 //On Load

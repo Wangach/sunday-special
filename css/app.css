@@ -1,3 +1,16 @@
+/*Import Google Fonts*/
+@font-face { 
+  font-family: stylish; 
+  src: url('../vendor/google-fonts/Stylish-Regular.ttf');
+}
+@font-face { 
+  font-family: mali; 
+  src: url('../vendor/google-fonts/Mali-Regular.ttf');
+} 
+@font-face { 
+  font-family: rubik; 
+  src: url('../vendor/google-fonts/RubikMicrobe-Regular.ttf');
+} 
 /*Custom Loaders*/
 .loader {
     position: fixed;
@@ -79,10 +92,128 @@
     75%  { transform: translateY(25px);}
     100% { transform: translateY(50px); }
   }
+  body {
+    font-family: stylish, sans-serif;
+  }
 
   .organize > h6, .organize > button{
     display: inline;
   }
   .organize > button {
     float: right;
+  }
+  .match-mods {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+    margin: .5rem;
+  }
+  .match-mods > strong {
+    font-family: mali;
+    display: block;
+    text-align: center;
+    padding: .5rem;
+    background: rgba(0, 0, 0, 0.62);
+    color: rgb(249, 249, 249);
+    border-radius: 1rem;
+    border: 1px solid rgba(53, 93, 185, 0.748);
+    margin: .3rem;
+    font-size: .75rem;
+  }
+  .match-mods > span {
+    font-family: mali;
+    transform: translateX(4rem);
+    display: inline;
+    text-align: center;
+    padding: .65rem;
+    background: rgba(0, 0, 0, 0.652);
+    color: rgb(249, 249, 249);
+    border-radius: 1rem;
+    border: 1px solid rgba(53, 93, 185, 0.748);
+    margin: 0 0 0 5rem;
+    font-size: .75rem;
+  }
+  .match {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 
+    "intro"
+    "details"
+    "closure"
+    ;
+  }
+  .first-sect{
+    grid-area: intro;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: 
+    "players scores teams"
+    ;
+  }
+  #players{
+    grid-area: players;
+  }
+  #scores{
+    grid-area: scores;
+  }
+  #teams{
+    grid-area: teams;
+  }
+  .sec-sect{
+    grid-area: details;
+  }
+  .third-sect{
+    grid-area: closure;
+  }
+  .third-sect > div:nth-child(1){
+    font-family: mali;
+    text-align: center;
+    padding: .5rem;
+    background: rgba(0, 0, 0, 0.62);
+    color: rgb(249, 249, 249);
+    border-radius: 1rem;
+    border: 1px solid rgba(53, 93, 185, 0.748);
+    margin: .3rem;
+    font-size: .75rem;
+  }
+  .third-sect > div:nth-child(2){
+    font-family: mali;
+    text-align: center;
+    padding: .5rem;
+    background: rgba(0, 0, 0, 0.62);
+    color: rgb(249, 249, 249);
+    border-radius: 1rem;
+    border: 1px solid rgba(53, 93, 185, 0.748);
+    margin: .3rem;
+    font-size: .75rem;
+  }
+
+  /*Mobile View*/
+  @media (max-width: 768px) {
+    .match {
+      grid-template-areas: 
+      "details"
+      "intro"
+      "closure"
+      ;
+    }
+    .first-sect{
+      grid-template-columns: 1fr;
+      grid-template-areas: 
+      "players"
+      "scores"
+      "teams"
+      ;
+    }
+    .match-mods > span {
+      transform: translateX(0rem);
+      display: block;
+      padding: .5rem;
+      background: rgba(0, 0, 0, 0.652);
+      color: rgb(249, 249, 249);
+      border-radius: 1rem;
+      border: 1px solid rgba(53, 93, 185, 0.748);
+      margin: .5rem;
+      font-size: .75rem;
+    }
   }

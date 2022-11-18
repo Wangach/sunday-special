@@ -26,7 +26,7 @@ include 'api/session_checker.php';
     <!--Imported JS-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
     <!--Own JS-->
-    <script src="js/process.js" defer></script>
+    <script src="js/process.js" type="module" defer></script>
 
 </head>
 
@@ -721,6 +721,23 @@ include 'api/session_checker.php';
                     </div><!--/.form-group/-->
                     <button type="submit" id="f2-txn-btn" class="btn btn-primary" name="initgw"><i class="fas fa-dollar-sign"></i></button>
                 </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+       <!--ViewMatch Modal-->
+       <div class="modal fade" id="viewMatchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Match Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="in_details">
+               
             </div>
           </div>
         </div>

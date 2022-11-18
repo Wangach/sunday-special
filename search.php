@@ -23,12 +23,13 @@ include 'api/session_checker.php';
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="css/search.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
 
     <!--Imported JS-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 
     <!--Own JS-->
-    <script src="js/search.js" defer></script>
+    <script src="js/search.js" type="module" defer></script>
         <!-- <script defer>
         function payUp(id) {
             String(id);
@@ -393,6 +394,23 @@ include 'api/session_checker.php';
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+
+    <!--ViewMatch Modal-->
+    <div class="modal fade" id="viewMatchModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Match Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="in_details">
+               
+            </div>
+          </div>
+        </div>
+      </div>
 
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

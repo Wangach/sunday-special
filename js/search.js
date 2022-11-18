@@ -1,3 +1,5 @@
+import { viewMatch } from './reus.js';
+window.viewMatch = viewMatch;
 //On Load
 window.addEventListener("load", () => {
   const loader = document.querySelector(".loader");

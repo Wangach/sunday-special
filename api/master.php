@@ -57,6 +57,10 @@ if(isset($_GET['a'])) {
 		//pay indebt
 		payInd();
 	}
+	if ($direction === 'viewmatchdetails') {
+		//pay indebt
+		viewMatch();
+	}
 }
 
 //function definitions
@@ -275,7 +279,9 @@ function getRecentLooser() {
 	                                    <div class='text-danger'>$loss</div>
 	                                    <div class='text-success'>$wnr</div>
 	                                </td>
-	                                <td class='text-info'><a href='./viewmatch?matchId=$mId'>$mId</a></td>
+	                                <td class='text-info'>
+										<a id='$mId' onclick='viewMatch(this.id)' data-toggle='modal' data-target='#viewMatchModal' title='View Match Details'>$mId</a>
+									</td>
 	                            </tr>";
 
 	            echo $showData;
@@ -662,7 +668,9 @@ function payFair() {
 		                                <td>
 		                                    <div class='text-success'>$wnr</div>
 		                                </td>
-		                                <td class='text-info'><a href='./viewmatch?matchId=$mId'>$mId</a></td>
+		                                <td class='text-info'>
+										<a id='$mId' onclick='viewMatch(this.id)' data-toggle='modal' data-target='#viewMatchModal' title='View Match Details'>$mId</a>
+										</td>
 		                            </tr>";
 
 		            echo $showData;
@@ -711,7 +719,9 @@ function payFair() {
 		                                <td>
 		                                    <div class='text-danger'>$looser</div>
 		                                </td>
-		                                <td class='text-info'><a href='./viewmatch?matchId=$mId'>$mId</a></td>
+		                                <td class='text-info'>
+										<a id='$mId' onclick='viewMatch(this.id)' data-toggle='modal' data-target='#viewMatchModal' title='View Match Details'>$mId</a>
+										</td>
 		                            </tr>";
 
 		            echo $showData;
@@ -877,19 +887,98 @@ function payInd() {
 	}
 }
 //Func Definition
-	function paySpecificDebt($deb_id) {
-		include 'db.php';
-		$output = '';
-		$searchDebt = "UPDATE debts SET is_paid = '1' WHERE debt_id = '$deb_id'";
-		$exec = mysqli_query($conn, $searchDebt);
+function paySpecificDebt($deb_id) {
+	include 'db.php';
+	$output = '';
+	$searchDebt = "UPDATE debts SET is_paid = '1' WHERE debt_id = '$deb_id'";
+	$exec = mysqli_query($conn, $searchDebt);
 
-		if ($exec) {
-			$output = 'Debt Paid!';
-			echo $output;
-		}else{
-			$output = 'Oops! Something went horribly wrong.'.mysqli_error($conn);
-			echo $output;
-		}
-
+	if ($exec) {
+		$output = 'Debt Paid!';
+		echo $output;
+	}else{
+		$output = 'Oops! Something went horribly wrong.'.mysqli_error($conn);
+		echo $output;
 	}
+
+}
+//View Math Details
+function viewMatch() {
+	include 'db.php';
+	$message = '';
+	if(isset($_GET['id']) && !empty($_GET['id'])) {
+		$searchId = $_GET['id'];
+
+		$perform_act = "SELECT * FROM looserdata WHERE matchid = '$searchId'";
+		$foundMtch = mysqli_query($conn, $perform_act);
+
+		if (mysqli_num_rows($foundMtch) > 0) {
+			while($row  = mysqli_fetch_array($foundMtch)) {
+				//get the match details from table
+				$playerOne = $row['Hplayer'];
+				$playerTwo = $row['Aplayer'];
+				$teamOne = $row['Hteam'];
+				$teamTwo = $row['Ateam'];
+				$scoreOne = $row['Hscore'];
+				$scoreTwo = $row['Ascore'];
+				$win = $row['winner'];
+				$lost = $row['looser'];
+				$typeOfMatch = $row['matchty'];
+				$expenditure = $row['cost'];
+				$timeOfPlay = $row['tme'];
+				$gameId = $row['matchid'];
+				$kes = $expenditure.' Kes';
+
+				if ($typeOfMatch == 'nus') {
+					$decodedType = 'Half Half';
+				}
+				if ($typeOfMatch == 'fut') {
+					$decodedType = 'Full Game';
+				}
+				if ($typeOfMatch == 'sul') {
+					$decodedType = 'Super Looser';
+				}
+				if ($typeOfMatch == 'ssl') {
+					$decodedType = 'Super Super Looser';
+				}
+				if ($typeOfMatch == 'hut') {
+					$decodedType = 'Half Game';
+				}
+
+				$message = "
+							<div class='match'>
+								<div class='first-sect'>
+									<div class='match-mods' id='players'>
+										<strong>$playerOne</strong>
+										<strong>$playerTwo</strong>
+									</div>
+									<div class='match-mods' id='scores'>
+										<strong>$scoreOne</strong>
+										<strong>$scoreTwo</strong>
+									</div>
+									<div class='match-mods' id='teams'>
+										<strong>$teamOne</strong>
+										<strong>$teamTwo</strong>
+									</div>
+								</div>
+								<div class='sec-sect'>
+									<div class='match-mods' id='match-id'>
+										<span class='mid'>$gameId</span>
+										<span class='dectype'>$decodedType</span>
+									</div>
+								</div>
+								<div class='third-sect'>
+									<div class='match-mods' id='cost'>$kes</div>
+									<div class='match-mods' id='time'>$timeOfPlay</div>
+								</div>
+							</div>
+				";
+				echo $message;
+			}
+		}
+	}elseif (empty($_GET['id'])) {
+		$message = 'Error! No match Id provided.';
+		echo $message;
+	}
+}
 ?>
