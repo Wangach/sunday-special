@@ -225,7 +225,7 @@ include 'api/session_checker.php';
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Games Played (Looser)</div>
+                                                Games Played (Total)</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800" id="t-looser"
                                             data-start_from="0"></div>
                                         </div>
@@ -379,7 +379,9 @@ include 'api/session_checker.php';
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3 organize">
                                     <h6 class="m-0 font-weight-bold text-primary">Recent Fair Games</h6>
-                                    <button class='btn btn-primary' id='pay-all' type='button'>Pay All</button>
+                                    <button class='btn btn-primary' id='pay-all' type='button'>
+                                    Pay All <span class="badge badge-light" id="tu">6</span>
+                                </button>
                                 </div>
                                 <div class="card-body">
                                 

@@ -61,6 +61,10 @@ if(isset($_GET['a'])) {
 		//pay indebt
 		viewMatch();
 	}
+	if ($direction === 'cntFair') {
+		//pay indebt
+		calculateFair();
+	}
 }
 
 //function definitions
@@ -121,10 +125,30 @@ function destAdmin() {
 function looserGames() {
 	include 'db.php';
 
-	$calc = "SELECT * FROM looserdata";
-	$mth = mysqli_query($conn, $calc);
+	//Looser Games
+	$looserg = "SELECT * FROM looserdata";
+	$lmth = mysqli_num_rows(mysqli_query($conn, $looserg));
 
-	echo mysqli_num_rows($mth);
+
+	//Fair Games
+	$fairg = "SELECT * FROM fairdata";
+	$fmth = mysqli_num_rows(mysqli_query($conn, $fairg));
+
+
+	$tots = $lmth + $fmth;
+
+	echo $tots;
+}
+//Calculate unpaid fair games
+function calculateFair()
+{
+	include 'db.php';
+
+	//Fair Games
+	$fairg = "SELECT * FROM fairdata WHERE is_paid = '0'";
+	$fmth = mysqli_num_rows(mysqli_query($conn, $fairg));
+
+	echo $fmth;
 }
 //record looser
 function recordLooserGame() {

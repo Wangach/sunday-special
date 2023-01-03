@@ -18,14 +18,25 @@ window.addEventListener('load', () => {
     const circle = document.querySelector('.circle');
 
     // function changeOpacity(elem) {
-    //     elem.style.opacity = '0';
+    // elem.style.opacity = '0';
       let changeOpacity = (elem) => {
         elem.style.opacity = "0";
         elem.style.display = "none";
     }
+    //Update the fairplay counter
+    let countFair = () => {
+        let fairCountDisp = document.getElementById('tu');
+        let url = './api/master.php?a=cntFair';
+        fetch(url)
+        .then(res => res.text())
+        .then((data) => {
+            fairCountDisp.innerHTML = data;
+        })
+    }
 
     setInterval(changeOpacity(loader), 5000);
     setInterval(changeOpacity(circle), 3000);
+    setInterval(countFair, 60000)
     // }
    
 })
@@ -132,7 +143,6 @@ let recentLooser = () => {
     .then(res => res.text())
     .then((data) => {
         display.innerHTML = data;
-        // console.log(data)
     })
 }
 //Recent Fair Games
