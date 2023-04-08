@@ -17,13 +17,29 @@ window.addEventListener('load', () => {
     const loader = document.querySelector('.loader');
     const circle = document.querySelector('.circle');
 
+<<<<<<< HEAD
+=======
+    // function changeOpacity(elem) {
+    // elem.style.opacity = '0';
+>>>>>>> 22ebe3ec2aa6a276ac210a8c9402a04792ef4e04
       let changeOpacity = (elem) => {
         elem.style.opacity = "0";
         elem.style.display = "none";
     }
+    //Update the fairplay counter
+    let countFair = () => {
+        let fairCountDisp = document.getElementById('tu');
+        let url = './api/master.php?a=cntFair';
+        fetch(url)
+        .then(res => res.text())
+        .then((data) => {
+            fairCountDisp.innerHTML = data;
+        })
+    }
 
     setInterval(changeOpacity(loader), 5000);
     setInterval(changeOpacity(circle), 3000);
+<<<<<<< HEAD
     //check for theme
       (() => {
         let inheritedTheme = localStorage.getItem('theme');
@@ -31,6 +47,11 @@ window.addEventListener('load', () => {
           themeSwitcher();
         }
       })();
+=======
+    setInterval(countFair, 60000)
+    // }
+   
+>>>>>>> 22ebe3ec2aa6a276ac210a8c9402a04792ef4e04
 })
 
 
@@ -204,7 +225,6 @@ let recentLooser = () => {
     .then(res => res.text())
     .then((data) => {
         display.innerHTML = data;
-        // console.log(data)
     })
 }
 //Recent Fair Games

@@ -29,3 +29,10 @@ CREATE TABLE `sundb`.`admin` ( `id` INT NOT NULL AUTO_INCREMENT , `userName` VAR
 
 /*Foreign Key*/
 ALTER TABLE `admin` ADD CONSTRAINT `fk_user_category` FOREIGN KEY (`role`) REFERENCES `roles`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+/*coup and timestamp on looser pay table*/
+ALTER TABLE `looserdata` ADD `coup` VARCHAR(100) NOT NULL AFTER `matchty`;
+ALTER TABLE `looserdata` ADD `tme` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `matchid`;
+
+/*is_paid  on fair pay table*/
+ALTER TABLE `fairdata` ADD `is_paid` INT NOT NULL DEFAULT '0' AFTER `matchid`;
