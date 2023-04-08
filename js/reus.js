@@ -56,4 +56,6 @@ let doneDeal = (id, dte) => {
   )
 }
 
+
+
 export { viewMatch, payUp, doneDeal };

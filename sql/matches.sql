@@ -1,6 +1,8 @@
 /*Looser Games DB*/
 CREATE TABLE `sundb`.`looserdata` ( `id` INT NOT NULL AUTO_INCREMENT , `Hplayer` VARCHAR(100) NOT NULL , `Aplayer` VARCHAR(100) NOT NULL , `Hteam` VARCHAR(100) NOT NULL , `Ateam` VARCHAR(100) NOT NULL , `Hscore` INT NOT NULL , `Ascore` INT NOT NULL , `winner` VARCHAR(100) NOT NULL , `looser` VARCHAR(100) NOT NULL , `matchty` VARCHAR(100) NOT NULL , `cost` INT NOT NULL , `playdte` VARCHAR(100) NOT NULL , `playtme` VARCHAR(100) NOT NULL , `matchid` VARCHAR(100) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
 
+/*Alter The looser table*/
+ALTER TABLE `looserdata` ADD `coup` VARCHAR(100) NOT NULL AFTER `matchty`;
 
 /*Fair Games DB*/
 CREATE TABLE `sundb`.`fairdata` ( `id` INT NOT NULL AUTO_INCREMENT , `Hteam` VARCHAR(100) NOT NULL , `Ateam` VARCHAR(100) NOT NULL , `Hscore` INT NOT NULL , `Ascore` INT NOT NULL , `playdte` VARCHAR(100) NOT NULL , `playtme` VARCHAR(100) NOT NULL , `matchid` VARCHAR(100) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;

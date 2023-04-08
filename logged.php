@@ -102,6 +102,13 @@ include 'api/session_checker.php';
                 </a>
             </li>
 
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" >
+                    <div id="theme-btn" class="fas fa-moon"></div>
+                </a>
+            </li>
+
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -178,7 +185,7 @@ include 'api/session_checker.php';
                                     src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" id="dropdown-menu"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -220,7 +227,7 @@ include 'api/session_checker.php';
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card border-left-primary shadow h-100 py-2" id="main-cards">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -239,7 +246,7 @@ include 'api/session_checker.php';
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-6 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card border-left-success shadow h-100 py-2" id="main-cards">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
@@ -262,7 +269,7 @@ include 'api/session_checker.php';
 
                         <!-- Area Chart -->
                         <div class="col-xl-8 col-lg-7">
-                            <div class="card shadow mb-4">
+                            <div class="card shadow mb-4" id="main-cards">
                                 <!-- Card Header - Dropdown -->
                                 <div
                                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -296,35 +303,35 @@ include 'api/session_checker.php';
 
                             <div class="row">
                                 <div class="col-lg-6 mb-4">
-                                    <div class="card bg-primary text-white shadow" data-toggle="modal" data-target="#looser">
+                                    <div class="card bg-primary text-white shadow" id="mini-cards" data-toggle="modal" data-target="#looser">
                                         <div class="card-body">
                                             Looser-Pay
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mb-4">
-                                    <div class="card bg-success text-white shadow" data-toggle="modal" data-target="#fair">
+                                    <div class="card bg-success text-white shadow" id="mini-cards" data-toggle="modal" data-target="#fair">
                                         <div class="card-body">
                                             Fair-Pay
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 mb-4">
-                                    <div class="card bg-info text-white shadow" data-toggle="modal" data-target="#pay">
+                                    <div class="card bg-info text-white shadow" id="mini-cards" data-toggle="modal" data-target="#pay">
                                         <div class="card-body">
                                             Make Payment
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-8 mb-4">
-                                    <div class="card bg-danger text-white shadow" data-toggle="modal" data-target="#gameweek">
+                                    <div class="card bg-danger text-white shadow" id="mini-cards" data-toggle="modal" data-target="#gameweek">
                                         <div class="card-body">
                                             Create User
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-4 mb-4">
-                                    <div class="card bg-light text-black shadow" data-toggle="modal" data-target="#debtor">
+                                    <div class="card bg-light text-black shadow" id="mini-cards" data-toggle="modal" data-target="#debtor">
                                         <div class="card-body">
                                             Indebt
                                         </div>
@@ -332,7 +339,7 @@ include 'api/session_checker.php';
                                 </div>
                                 
                                 <div class="col-lg-6 mb-4">
-                                    <div class="card bg-warning text-white shadow" data-toggle="modal" data-target="#gw">
+                                    <div class="card bg-warning text-white shadow" id="mini-cards" data-toggle="modal" data-target="#gw">
                                         <div class="card-body">
                                             Create GW
                                         </div>
@@ -349,7 +356,7 @@ include 'api/session_checker.php';
                         <div class="col-lg-12 mb-4">
 
                             <!-- Project Card Example -->
-                            <div class="card shadow mb-4">
+                            <div class="card shadow mb-4" id="main-cards">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Recent Looser Games</h6>
                                 </div>
@@ -376,7 +383,7 @@ include 'api/session_checker.php';
                         <div class="col-lg-12 mb-4">
 
                             <!-- Illustrations -->
-                            <div class="card shadow mb-4">
+                            <div class="card shadow mb-4" id="main-cards">
                                 <div class="card-header py-3 organize">
                                     <h6 class="m-0 font-weight-bold text-primary">Recent Fair Games</h6>
                                     <button class='btn btn-primary' id='pay-all' type='button'>Pay All</button>

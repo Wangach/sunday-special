@@ -113,6 +113,13 @@ include 'api/session_checker.php';
                 </a>
             </li>
 
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" >
+                    <div id="theme-btn" class="fas fa-moon"></div>
+                </a>
+            </li>
+
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -189,7 +196,7 @@ include 'api/session_checker.php';
                                     src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" id="dropdown-menu"
                                 aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -231,7 +238,7 @@ include 'api/session_checker.php';
 
                         <!-- Earnings (Monthly) Card Example -->
                         <div class="col-xl-12 col-md-12 mb-4">
-                            <div class="card mb-4 py-3 border-left-primary shadow h-100 ">
+                            <div class="card mb-4 py-3 border-left-primary shadow h-100 " id="main-cards">
                                 <div class="card-body">
                                     <form action="api/master.php" id="searchUser" method="POST">
                                         <div class="form-group">
@@ -248,7 +255,7 @@ include 'api/session_checker.php';
                     <!-- Content Row -->
                     <div class="row">
                         <div class="col-xl-6 col-md-12 mb-4">
-                            <div class="card mb-4 py-3 shadow h-100 ">
+                            <div class="card mb-4 py-3 shadow h-100 " id="main-cards">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Match Summary</h6>
                                 </div>
@@ -259,7 +266,7 @@ include 'api/session_checker.php';
                         </div>
 
                         <div class="col-xl-6 col-md-12 mb-4">
-                            <div class="card mb-4 py-3 shadow h-100 ">
+                            <div class="card mb-4 py-3 shadow h-100 " id="main-cards">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Debt Summary</h6>
                                 </div>
@@ -273,7 +280,7 @@ include 'api/session_checker.php';
                      <!-- Content Row -->
                     <div class="row">
                         <div class="col-xl-12 col-md-12 mb-4">
-                            <div class="card mb-4 py-3 shadow h-100 ">
+                            <div class="card mb-4 py-3 shadow h-100 " id="main-cards">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">latest Matches</h6>
                                 </div>
@@ -302,7 +309,7 @@ include 'api/session_checker.php';
                     <!-- Content Row -->
                     <div class="row">
                         <div class="col-xl-12 col-md-12 mb-4">
-                            <div class="card mb-4 py-3 shadow h-100 ">
+                            <div class="card mb-4 py-3 shadow h-100 " id="main-cards">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">latest Transactions</h6>
                                 </div>
@@ -333,7 +340,7 @@ include 'api/session_checker.php';
                     <!-- Content Row -->
                     <div class="row">
                         <div class="col-xl-12 col-md-12 mb-4">
-                            <div class="card mb-4 py-3 shadow h-100 ">
+                            <div class="card mb-4 py-3 shadow h-100 " id="main-cards">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Indebt Transactions</h6>
                                 </div>

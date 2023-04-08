@@ -8,8 +8,8 @@ const transactForm = document.getElementById('payments-form');
 const createUserForm = document.getElementById('user-form');
 const indebtForm = document.getElementById('indebt');
 const logoutButton = document.getElementById('logout-btn');
-
-//Modules
+const themeChangeBtn = document.getElementById("theme-btn");
+let defTheme;
 
 //Custom Loaders
 //On Load
@@ -17,8 +17,6 @@ window.addEventListener('load', () => {
     const loader = document.querySelector('.loader');
     const circle = document.querySelector('.circle');
 
-    // function changeOpacity(elem) {
-    //     elem.style.opacity = '0';
       let changeOpacity = (elem) => {
         elem.style.opacity = "0";
         elem.style.display = "none";
@@ -26,9 +24,83 @@ window.addEventListener('load', () => {
 
     setInterval(changeOpacity(loader), 5000);
     setInterval(changeOpacity(circle), 3000);
-    // }
-   
+    //check for theme
+      (() => {
+        let inheritedTheme = localStorage.getItem('theme');
+        if(inheritedTheme == 'dark'){
+          themeSwitcher();
+        }
+      })();
 })
+
+
+//Dark Theme button
+const themeBtn = document.getElementById("theme-btn");
+const themeSwitcher = () => {
+    //get the items being changed
+  const navigate = document.querySelector('nav');
+  const changee = document.getElementById('content');
+  const cards = document.querySelectorAll('#main-cards');
+  const miniCards = document.querySelectorAll('#mini-cards');
+  const cardHeaders = document.querySelectorAll('.card-header');
+  const sidebar = document.getElementById('accordionSidebar');
+  const myFooter = document.querySelector('footer');
+  const dmenu = document.getElementById('dropdown-menu');
+  const allModals = document.querySelectorAll('.modal-content');
+  themeBtn.classList.toggle("fa-sun");
+
+  if (themeBtn.classList.contains("fa-sun")) {
+    navigate.classList.add("change-nav-theme");
+    navigate.classList.remove("bg-white");
+    sidebar.classList.add('bg-gradient-dark')
+    sidebar.classList.remove('bg-gradient-primary')
+    myFooter.classList.remove('bg-white');
+    myFooter.classList.add('change-theme');
+    changee.classList.add("change-theme");
+    dmenu.classList.add("minicards-theme");
+    allModals.forEach(modal => {
+        modal.classList.add('modal-theme')
+    })
+ 
+    cards.forEach((card) => {
+        card.classList.add('change-card-theme')
+    })
+    miniCards.forEach((minicard) => {
+        minicard.classList.add('minicards-theme')
+    })
+    cardHeaders.forEach((cardHeader) => {
+        cardHeader.classList.add('change-theme')
+    })
+
+    return localStorage.setItem('theme', 'dark');
+  } else {
+    navigate.classList.remove("change-nav-theme");
+    changee.classList.remove("change-theme");
+    navigate.classList.add("bg-white");
+    sidebar.classList.remove('bg-gradient-dark')
+    sidebar.classList.add('bg-gradient-primary')
+    myFooter.classList.add('bg-white');
+    myFooter.classList.remove('change-theme');
+    dmenu.classList.remove('minicards-theme')
+
+   allModals.forEach(modal => {
+        modal.classList.remove('modal-theme')
+    })
+    cards.forEach((card) => {
+        card.classList.remove('change-card-theme')
+    })
+    miniCards.forEach((minicard) => {
+        minicard.classList.remove('minicards-theme')
+    })
+    cardHeaders.forEach((cardHeader) => {
+        cardHeader.classList.remove('change-theme')
+    })
+
+    return localStorage.setItem('theme', 'light');
+  }
+}
+
+themeBtn.addEventListener('click', themeSwitcher);
 //logout function
 logoutButton.addEventListener('click', (e) => {
     e.preventDefault();
@@ -213,6 +285,7 @@ let countLooser = () => {
         window.requestAnimationFrame(step);
       }
 }
+
 //Looser Form 
 looserForm.addEventListener('submit', (e) => {
     e.preventDefault();
