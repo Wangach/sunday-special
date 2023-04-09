@@ -61,6 +61,11 @@ if(isset($_GET['a'])) {
 		//pay indebt
 		viewMatch();
 	}
+	if ($direction === 'viewfairmatchdetails') {
+		//pay indebt
+		viewFairMatch();
+	}
+
 	if ($direction === 'cntFair') {
 		//pay indebt
 		calculateFair();
@@ -358,7 +363,7 @@ function getRecentFair() {
 	                                <td>
 	                                    <button class='btn btn-sm $class'>$paid</button>
 	                                </td>
-	                                <td class='text-info'><a href='./viewmatch?matchId=$mId'>$mId</a></td>
+	                                <td class='text-info'><a id='$mId' onclick='viewFairDets(this.id)' data-toggle='modal' data-target='#viewMatchModal'>$mId</a></td>
 	                            </tr>";
 
 	            echo $showData;
@@ -993,6 +998,60 @@ function viewMatch() {
 								</div>
 								<div class='third-sect'>
 									<div class='match-mods' id='cost'>$kes</div>
+									<div class='match-mods' id='time'>$timeOfPlay</div>
+								</div>
+							</div>
+				";
+				echo $message;
+			}
+		}
+	}elseif (empty($_GET['id'])) {
+		$message = 'Error! No match Id provided.';
+		echo $message;
+	}
+}
+
+//View Math Details
+function viewFairMatch() {
+	include 'db.php';
+	$message = '';
+	if(isset($_GET['id']) && !empty($_GET['id'])) {
+		$searchId = $_GET['id'];
+
+		$perform_act = "SELECT * FROM fairdata WHERE matchid = '$searchId'";
+		$foundMtch = mysqli_query($conn, $perform_act);
+
+		if (mysqli_num_rows($foundMtch) > 0) {
+			while($row  = mysqli_fetch_array($foundMtch)) {
+				//get the match details from table
+				$teamOne = $row['Hteam'];
+				$teamTwo = $row['Ateam'];
+				$scoreOne = $row['Hscore'];
+				$scoreTwo = $row['Ascore'];
+				$dateOfPlay = $row['playdte'];
+				$timeOfPlay = $row['playtme'];
+				$gameId = $row['matchid'];
+
+
+				$message = "
+							<div class='match'>
+								<div class='first-sect'>
+									<div class='match-mods' id='teams'>
+										<strong>$teamOne</strong>
+										<strong>$teamTwo</strong>
+									</div>
+									<div class='match-mods' id='scores'>
+										<strong>$scoreOne</strong>
+										<strong>$scoreTwo</strong>
+									</div>
+								</div>
+								<div class='sec-sect'>
+									<div class='match-mods' id='match-id'>
+										<span class='mid'>$gameId</span>
+									</div>
+								</div>
+								<div class='third-sect'>
+									<div class='match-mods' id='dateplayed'>$dateOfPlay</div>
 									<div class='match-mods' id='time'>$timeOfPlay</div>
 								</div>
 							</div>

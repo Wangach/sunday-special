@@ -9,6 +9,17 @@ let viewMatch = (id) => {
     })
 }
 
+//view fair matches
+let viewFairDets = (id) => {
+    let url = `./api/master.php?a=viewfairmatchdetails&id=${id}`;
+    let myDisplay = document.getElementById('in_details')
+    fetch(url)
+    .then((response) => response.text())
+    .then((data) => {
+        myDisplay.innerHTML = data;
+    })
+}
+
 let payUp = (id) => {
       Swal.fire({
         title: 'Are you sure?',
@@ -58,4 +69,4 @@ let doneDeal = (id, dte) => {
 
 
 
-export { viewMatch, payUp, doneDeal };
+export { viewMatch, viewFairDets, payUp, doneDeal };

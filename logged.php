@@ -102,13 +102,6 @@ include 'api/session_checker.php';
                 </a>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" >
-                    <div id="theme-btn" class="fas fa-moon"></div>
-                </a>
-            </li>
-
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -457,6 +450,10 @@ include 'api/session_checker.php';
     </div>
     <!-- End of Page Wrapper -->
 
+    <!-- Change theme Button-->
+    <a>
+        <div class="fas fa-moon" id="theme-btn"></div>
+    </a>
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>

@@ -1,5 +1,6 @@
-import { viewMatch } from './reus.js';
+import { viewMatch, viewFairDets } from './reus.js';
 window.viewMatch = viewMatch;
+window.viewFairDets = viewFairDets;
 //Global Variables
 const looserForm = document.getElementById('looser-form');
 const fairForm = document.getElementById('fair-form');
@@ -37,6 +38,7 @@ window.addEventListener('load', () => {
 
     setInterval(changeOpacity(loader), 5000);
     setInterval(changeOpacity(circle), 3000);
+    setInterval(countFair, 60000);
 
     //check for theme
       (() => {
@@ -45,11 +47,6 @@ window.addEventListener('load', () => {
           themeSwitcher();
         }
       })();
-
-    setInterval(countFair, 60000)
-    // }
-   
-
 })
 
 

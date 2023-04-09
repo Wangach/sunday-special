@@ -396,6 +396,11 @@ include 'api/session_checker.php';
 
     </div>
     <!-- End of Page Wrapper -->
+    
+     <!-- Change theme Button-->
+     <a>
+        <div class="fas fa-moon" id="theme-btn"></div>
+    </a>
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
