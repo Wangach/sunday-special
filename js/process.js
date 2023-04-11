@@ -9,8 +9,42 @@ const transactForm = document.getElementById('payments-form');
 const createUserForm = document.getElementById('user-form');
 const indebtForm = document.getElementById('indebt');
 const logoutButton = document.getElementById('logout-btn');
-const themeChangeBtn = document.getElementById("theme-btn");
-let defTheme;
+let clearBtn = document.getElementById('clear-looser');
+let clearFair = document.getElementById('clear-fair');
+let clearTransBtn = document.getElementById('clear-transact');
+let clearIndebt = document.getElementById('clear-indebt');
+
+
+//Handling the looser clear button
+clearBtn.addEventListener('click', () => {
+    looserForm.reset();
+    setTimeout(() => {
+        clearBtn.setAttribute("disabled", "true");
+    }, 3000)
+})
+//Handling the fair clear button
+clearFair.addEventListener('click', () => {
+    fairForm.reset();
+    setTimeout(() => {
+        clearFair.setAttribute("disabled", "true");
+    }, 3000)
+})
+//Handling the transact clear button
+clearTransBtn.addEventListener('click', () => {
+    transactForm.reset();
+
+    setTimeout(() => {
+        clearTransBtn.setAttribute("disabled", "true")
+    }, 3000)
+})
+//Handling the transact clear button
+clearIndebt.addEventListener('click', () => {
+    indebtForm.reset();
+
+    setTimeout(() => {
+        clearIndebt.setAttribute("disabled", "true")
+    }, 3000)
+})
 
 //Custom Loaders
 //On Load
@@ -305,7 +339,6 @@ let countLooser = () => {
 //Looser Form 
 looserForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    let clearBtn = document.getElementById('clear-looser');
     clearBtn.removeAttribute('disabled');
     
     todaysDte();
@@ -398,14 +431,8 @@ looserForm.addEventListener('submit', (e) => {
         }
         
     })
-       //upon click
-       clearBtn.addEventListener('click', () => {
-        //Clear Form Fields
-        looserForm.reset();
-        //set disabled attr to true
-        setInterval(() => {
-            clearBtn.setAttribute("disabled", "true");
-        }, 3000)
+    .catch(e => {
+        Swal.fire(data, '', e);
     })
 })
 
@@ -417,7 +444,6 @@ fairForm.addEventListener('submit', (e) => {
     todaysDte();
     convertMsToTime(now);
    let rid = genMatchId();
-   let clearFair = document.getElementById('clear-fair');
    clearFair.removeAttribute("disabled");
     
     let formValues = {
@@ -446,18 +472,12 @@ fairForm.addEventListener('submit', (e) => {
             Swal.fire(data, '', 'error');
         }
     })
-    clearFair.addEventListener('click', () => {
-        fairForm.reset();
-        setInterval(() => {
-            clearFair.setAttribute("disabled", "true");
-        }, 3000)
-    })
+    
 })
 //Make Payments
 transactForm.addEventListener('submit', (e)=>{
     e.preventDefault();
     let rid = trMatchId();
-    let clearTransBtn = document.getElementById('clear-transact');
     clearTransBtn.removeAttribute('disabled');
 
     let formValues = {
@@ -514,13 +534,6 @@ transactForm.addEventListener('submit', (e)=>{
               transactForm.reset();
               clearTransBtn.setAttribute("disabled", "true");
         }
-        clearTransBtn.addEventListener('click', () => {
-            transactForm.reset();
-
-            setInterval(() => {
-                clearTransBtn.setAttribute("disabled", "true")
-            }, 3000)
-        })
       })
 })
 //Register users
@@ -559,7 +572,7 @@ createUserForm.addEventListener('submit', (e) => {
 //Indebt
 indebtForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    let clearIndebt = document.getElementById('clear-indebt');
+   
     clearIndebt.removeAttribute('disabled');
     let debtId = trMatchId();
     let dOfIssue = todaysDte();
@@ -616,13 +629,6 @@ indebtForm.addEventListener('submit', (e) => {
               indebtForm.reset();
               clearIndebt.setAttribute("disabled", "true");
         }
-        clearIndebt.addEventListener('click', () => {
-            indebtForm.reset();
-
-            setInterval(() => {
-                clearIndebt.setAttribute("disabled", "true")
-            }, 3000)
-        })
       })
 
 })
