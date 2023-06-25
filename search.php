@@ -254,7 +254,7 @@ include 'api/session_checker.php';
 
                     <!-- Content Row -->
                     <div class="row">
-                        <div class="col-xl-6 col-md-12 mb-4">
+                        <div class="col-xl-12 col-md-12 mb-4">
                             <div class="card mb-4 py-3 shadow h-100 " id="main-cards">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Match Summary</h6>
@@ -264,8 +264,9 @@ include 'api/session_checker.php';
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-xl-6 col-md-12 mb-4">
+                    </div>
+                    <div class="row">
+                    <div class="col-xl-12 col-md-12 mb-4">
                             <div class="card mb-4 py-3 shadow h-100 " id="main-cards">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Debt Summary</h6>
