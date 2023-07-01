@@ -579,6 +579,10 @@ function payFair() {
 		//Totals
 		$totals = $calcWon + $calcLost;
 
+		//Win Probability
+		$wp = ($calcWon/$totals*100);
+		//Loose Probability
+		$lp = ($calcLost/$totals*100);
 		//Data Representation
 		$output = "<div class='summary-holder'>
 						<div class='won'>
@@ -593,6 +597,16 @@ function payFair() {
 							<h4>Total</h4>
 							<span class='text-bold'>$totals</span>
 						</div>
+						<div class='win-prob'>
+							<h4 class='text-success'>WP (%)</h4>
+							<span class='text-bold text-success'>$wp</span>
+						</div>
+						<div class='loose-prob'>
+							<h4  class='text-danger'>LP (%)</h4>
+							<span class='text-bold text-danger'>$lp</span>
+						</div>
+						
+						
 					</div>";
 
 		echo $output;
