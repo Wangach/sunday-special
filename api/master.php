@@ -37,13 +37,13 @@ if(isset($_GET['a'])) {
 		//call the fair function
 		indebtUser();
 	}
-	if ($direction == 'seaUs') {
-		//call the fair function
-		searchUser();
-	}
 	if ($direction == 'loginAdmin'){
 		//login function
 		checkAdmin();
+	}
+	if ($direction == 'seaUs') {
+		//call the fair function
+		searchUser();
 	}
 	if ($direction == 'logoutAdmin'){
 		//login function
@@ -529,6 +529,9 @@ function searchUser() {
 		if ($deep == 'msummary') {
 			getMatchSummary($formData["user"]);
 		}
+		if ($deep === 'cntodaystats'){
+			getTodayStats($formData["user"]);
+		}
 		if ($deep == 'dtsummary') {
 			getDebtSummary($formData["user"]);
 		}
@@ -580,9 +583,13 @@ function payFair() {
 		$totals = $calcWon + $calcLost;
 
 		//Win Probability
-		$wp = ($calcWon/$totals*100);
+		$wp = round(($calcWon/$totals*100), 2);
+		
 		//Loose Probability
-		$lp = ($calcLost/$totals*100);
+		$lp = round(($calcLost/$totals*100), 2);
+
+		
+		
 		//Data Representation
 		$output = "<div class='summary-holder'>
 						<div class='won'>
@@ -611,7 +618,40 @@ function payFair() {
 
 		echo $output;
 	}
+	//get today's individual player statistics
+	function getTodayStats($searchName) {
+		include 'db.php';
+		$output = '';
+		$dateToday = date('Y-m-d');
+		//todays lost matches
+		$tlm ="SELECT * FROM looserdata WHERE looser = '$searchName' AND tme LIKE '$dateToday%'";
+		$exl = mysqli_query($conn, $tlm);
+		$qrl = mysqli_num_rows($exl);
+		//todays won matches
+		$twm ="SELECT * FROM looserdata WHERE winner = '$searchName' AND tme LIKE '$dateToday%'";
+		$exw = mysqli_query($conn, $twm);
+		$qrw = mysqli_num_rows($exw);
+		//todays total matches
+		$tots_played = $qrl + $qrw;
 
+		// echo $tots_played
+		// Data Representation
+		$output = "<div class='daily-stats-holder'>
+						<div class='won-today'>
+							<h4>Won Today</h4>
+							<span class='text-bold'>$qrw</span>
+							<a href='#'>View Won</a>
+						</div>
+						<div class='lost-today'>
+							<h4>Lost Today</h4>
+							<span class='text-bold'>$qrl</span>
+							<a href='#'>View Lost</a>
+						</div>
+					</div>";
+
+		echo $output;
+
+	}
 	function getDebtSummary($searchName) {
 		$output = '';
 		include 'db.php';
@@ -687,12 +727,6 @@ function payFair() {
 		            $wnr = $row['winner'];
 		            $matchCost = $row['cost'];
 		            $mId = $row['matchid'];
-
-		            /*Display The Results Depending on thecredit or debit value
-		            //Will do this later since I am on a deadline RN
-		            foreach ($row as $key => $value) {
-		                print_r($key . $value);
-		            }*/
 		            //html data
 		            $showData = "
 		                            <tr>

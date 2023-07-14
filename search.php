@@ -266,13 +266,26 @@ include 'api/session_checker.php';
                         </div>
                     </div>
                     <div class="row">
-                    <div class="col-xl-12 col-md-12 mb-4">
+                        <div class="col-xl-12 col-md-12 mb-4">
                             <div class="card mb-4 py-3 shadow h-100 " id="main-cards">
                                 <div class="card-header py-3">
                                     <h6 class="m-0 font-weight-bold text-primary">Debt Summary</h6>
                                 </div>
                                 <div class="card-body">
                                     <div id="debt-calculate"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-12 col-md-12 mb-4">
+                            <div class="card mb-4 py-3 shadow h-100 " id="main-cards">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Daily Stats</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div id="daily-stats-calculate"></div>
                                 </div>
                             </div>
                         </div>

@@ -22,6 +22,18 @@
 	text-align: center;
 	padding: 1rem;
 }
+.daily-stats-holder > div{
+	display: inline-block;
+	line-height: 1rem;
+	margin-right: 5rem;
+	padding: .5rem;
+}
+.daily-stats-holder > div > span {
+	font-weight: bold;
+	font-size: 1.9rem;
+	text-align: center;
+	padding: 10px;
+}
 
 /*Custom Loaders*/
 .loader {

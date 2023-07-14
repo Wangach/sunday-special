@@ -151,6 +151,25 @@ searchUserForm.addEventListener("submit", (event) => {
         summaryHolder.innerHTML = data;
       });
   };
+   //get todays match statistics for individual player
+   let todaysStats = () => {
+    //Send data to db
+    let url = `${searchUserForm.getAttribute("action")}?a=seaUs&dets=cntodaystats`;
+    let todayStatsHolder = document.getElementById("daily-stats-calculate");
+    let formOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formValue),
+    };
+    fetch(url, formOptions)
+      .then((response) => response.text())
+      .then((data) => {
+        // JSON.parse(data);
+        todayStatsHolder.innerHTML = data;
+      });
+  };
   //latest matches
   let individualMatches = () => {
     //Send data to db
@@ -219,6 +238,8 @@ searchUserForm.addEventListener("submit", (event) => {
   individualTransactions();
   //Recent Indebts
   recentIndebts();
+  //Todays Stats
+  todaysStats();
 
 
 
