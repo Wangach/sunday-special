@@ -1169,7 +1169,9 @@ function viewWonToday() {
 					echo $showData;
 			}
 		}else{
-			echo "The system Has encountered an Error ".mysqli_error($conn);
+			echo "There is no data associated with this user.";
+		}else{
+			echo "The system has been an error".mysqli_error($conn);
 		}
 	}
 
@@ -1228,8 +1230,10 @@ function viewLostToday() {
 					echo $showData;
 			}
 		}else{
-			echo "The system Has encountered an Error ".mysqli_error($conn);
+			echo "There is no data associated with this user.";
 		}
+	}else{
+		echo "The system has been an error".mysqli_error($conn);
 	}
 }
 ?>
