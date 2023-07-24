@@ -1,3 +1,13 @@
+/*Utility Classes*/
+.pointer {
+  cursor: pointer;
+}
+.pointer:hover {
+  transform: scale(1.2);
+  transition: 1s;
+  border-radius: 100%;
+}
+/********************************************/
 .summary-holder > div{
 	display: inline-block;
 	line-height: 1rem;
@@ -28,7 +38,7 @@
 	margin-right: 5rem;
 	padding: .5rem;
 }
-.daily-stats-holder > div > span {
+.daily-stats-holder > div > span, .daily-stats-holder > div > div {
 	font-weight: bold;
 	font-size: 1.9rem;
 	text-align: center;

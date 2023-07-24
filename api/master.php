@@ -65,6 +65,12 @@ if(isset($_GET['a'])) {
 		//pay indebt
 		viewFairMatch();
 	}
+	if ($direction === 'viewwontodaydets'){
+		viewWonToday();
+	}
+	if ($direction === 'viewlosttodaydets'){
+		viewLostToday();
+	}
 
 	if ($direction === 'cntFair') {
 		//pay indebt
@@ -639,13 +645,15 @@ function payFair() {
 		$output = "<div class='daily-stats-holder'>
 						<div class='won-today'>
 							<h4>Won Today</h4>
-							<span class='text-bold'>$qrw</span>
-							<a href='#'>View Won</a>
+							<span id='$searchName' class='badge badge-dark text-bold pointer' onclick='viewWonToday(this.id)' data-toggle='modal' data-target='#won'>
+								$qrw
+							</span>
 						</div>
 						<div class='lost-today'>
 							<h4>Lost Today</h4>
-							<span class='text-bold'>$qrl</span>
-							<a href='#'>View Lost</a>
+							<div id='$searchName' class='badge badge-secondary text-bold pointer' onclick='viewLostToday(this.id)' data-toggle='modal' data-target='#lost'>
+								$qrl
+							</div>
 						</div>
 					</div>";
 
@@ -756,7 +764,7 @@ function payFair() {
 		}
 		function recentLost($searchName){
 			include 'db.php';
-			$output = '';
+			$showData = '';
 			$lostMatches = "SELECT * FROM (SELECT * FROM looserdata WHERE looser = '$searchName' ORDER BY id DESC LIMIT 3) as r ORDER BY id";
 		    $latestLostMatches = mysqli_query($conn, $lostMatches);
 
@@ -773,11 +781,6 @@ function payFair() {
 		            $matchCost = $row['cost'];
 		            $mId = $row['matchid'];
 
-		            /*Display The Results Depending on thecredit or debit value
-		            //Will do this later since I am on a deadline RN
-		            foreach ($row as $key => $value) {
-		                print_r($key . $value);
-		            }*/
 		            //html data
 		            $showData = "
 		                            <tr>
@@ -1110,6 +1113,123 @@ function viewFairMatch() {
 	}elseif (empty($_GET['id'])) {
 		$message = 'Error! No match Id provided.';
 		echo $message;
+	}
+}
+//View Individual Won Matches
+function viewWonToday() {
+	include 'db.php';
+	$userToSearch = '';
+	$dateToday = date('Y-m-d');
+	if(isset($_GET['user']) && !empty($_GET['user'])){
+		
+		$userToSearch = $_GET['user'];
+
+		$twm ="SELECT * FROM looserdata WHERE winner = '$userToSearch' AND tme LIKE '$dateToday%'";
+		$exw = mysqli_query($conn, $twm);
+		$qrw = mysqli_num_rows($exw);
+
+		if($qrw > 0){
+			while($row = mysqli_fetch_array($exw)){
+				$hmPl = $row['Hplayer'];
+				$awPl = $row['Aplayer'];
+				$hmTm = $row['Hteam'];
+				$awTm = $row['Ateam'];
+				$hmSc = $row['Hscore'];
+				$awSc = $row['Ascore'];
+				$winner = $row['winner'];
+				$mId = $row['matchid'];
+
+					//html data
+					$showData = "
+						<div class='table-responsive'>
+							<table class='table table-striped'>
+								<tr>
+									<td>
+										<div>$hmPl</div>
+										<div>$awPl</div>
+									</td>
+									<td>
+										<div>$hmTm</div>
+										<div>$awTm</div>
+									</td>
+									<td>
+										<div>$hmSc</div>
+										<div>$awSc</div>
+									</td>
+									<td>
+										<div class='text-success'>$winner</div>
+									</td>
+									<td class='text-info'>
+									<button type='button' class='btn btn-secondary'>$mId</button>
+									</td>
+								</tr>
+							</table>
+						</div>";
+
+					echo $showData;
+			}
+		}else{
+			echo "The system Has encountered an Error ".mysqli_error($conn);
+		}
+	}
+
+}
+//View Individual Lost Matches
+function viewLostToday() {
+	include 'db.php';
+	$userToSearch = '';
+	$dateToday = date('Y-m-d');
+	if(isset($_GET['user']) && !empty($_GET['user'])){
+		
+		$userToSearch = $_GET['user'];
+
+		$twm ="SELECT * FROM looserdata WHERE looser = '$userToSearch' AND tme LIKE '$dateToday%'";
+		$exw = mysqli_query($conn, $twm);
+		$qrw = mysqli_num_rows($exw);
+
+		if($qrw > 0){
+			while($row = mysqli_fetch_array($exw)){
+				$hmPl = $row['Hplayer'];
+				$awPl = $row['Aplayer'];
+				$hmTm = $row['Hteam'];
+				$awTm = $row['Ateam'];
+				$hmSc = $row['Hscore'];
+				$awSc = $row['Ascore'];
+				$looser = $row['looser'];
+				$mId = $row['matchid'];
+
+					//html data
+					$showData = "
+						<div class='table-responsive'>
+							<table class='table table-striped'>
+								<tr>
+									<td>
+										<div>$hmPl</div>
+										<div>$awPl</div>
+									</td>
+									<td>
+										<div>$hmTm</div>
+										<div>$awTm</div>
+									</td>
+									<td>
+										<div>$hmSc</div>
+										<div>$awSc</div>
+									</td>
+									<td>
+										<div class='text-danger'>$looser</div>
+									</td>
+									<td class='text-info'>
+									<button type='button' class='btn btn-secondary'>$mId</button>
+									</td>
+								</tr>
+							</table>
+						</div>";
+
+					echo $showData;
+			}
+		}else{
+			echo "The system Has encountered an Error ".mysqli_error($conn);
+		}
 	}
 }
 ?>

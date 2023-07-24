@@ -1,7 +1,9 @@
-import { viewMatch, payUp, doneDeal } from './reus.js';
+import { viewMatch, payUp, doneDeal, viewWonToday, viewLostToday } from './reus.js';
 window.viewMatch = viewMatch;
 window.payUp = payUp;
 window.doneDeal =doneDeal;
+window.viewLostToday = viewLostToday;
+window.viewWonToday = viewWonToday;
 //On Load
 window.addEventListener("load", () => {
   const loader = document.querySelector(".loader");

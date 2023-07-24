@@ -8,7 +8,6 @@ let viewMatch = (id) => {
         myDisplay.innerHTML = data;
     })
 }
-
 //view fair matches
 let viewFairDets = (id) => {
     let url = `./api/master.php?a=viewfairmatchdetails&id=${id}`;
@@ -18,6 +17,26 @@ let viewFairDets = (id) => {
     .then((data) => {
         myDisplay.innerHTML = data;
     })
+}
+//View Won Matches Details modal
+let viewWonToday = (user) => {
+  let url = `./api/master.php?a=viewwontodaydets&user=${user}`;
+  let myDisplay = document.getElementById('wonMatchesDetails')
+  fetch(url)
+  .then((response) => response.text())
+  .then((data) => {
+      myDisplay.innerHTML = data;
+  })
+}
+//View Lost Matches Details modal
+let viewLostToday = (user) => {
+  let url = `./api/master.php?a=viewlosttodaydets&user=${user}`;
+  let myDisplay = document.getElementById('lostMatchesDetails')
+  fetch(url)
+  .then((response) => response.text())
+  .then((data) => {
+      myDisplay.innerHTML = data;
+  })
 }
 
 let payUp = (id) => {
@@ -69,4 +88,4 @@ let doneDeal = (id, dte) => {
 
 
 
-export { viewMatch, viewFairDets, payUp, doneDeal };
+export { viewMatch, viewFairDets, payUp, doneDeal, viewLostToday, viewWonToday };
