@@ -1170,9 +1170,9 @@ function viewWonToday() {
 			}
 		}else{
 			echo "There is no data associated with this user.";
-		}else{
-			echo "The system has been an error".mysqli_error($conn);
 		}
+	}else{
+		echo "The system has been an error".mysqli_error($conn);
 	}
 
 }
