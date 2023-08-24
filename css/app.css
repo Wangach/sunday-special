@@ -95,6 +95,28 @@
   body {
     font-family: stylish, sans-serif;
   }
+  #nes {
+    margin-top: 5rem;
+  }
+
+  .j-alert {
+    position: fixed;
+    z-index: 999;
+    padding: 1rem;
+    width: 12%;
+    right: 1%;
+    top: 1%;
+    text-align: center;
+    border-radius: .5rem;
+  }
+  .j-alert-success {
+    background: #0e5f22e1;
+    color:#eee;
+  }
+  .j-alert-danger {
+    background: #910000de;
+    color:#eee;
+  }
 
   .organize > h6, .organize > button{
     display: inline;

@@ -37,8 +37,8 @@ loginForm.addEventListener('submit', (e) => {
     }
     //clear the feedback
         let clearFeed = (clr) => {
-            fromdb.classList.remove('alert');
-            fromdb.classList.remove(`alert-${clr}`);
+            fromdb.classList.remove('j-alert');
+            fromdb.classList.remove(`j-alert-${clr}`);
             fromdb.innerHTML = '';
         }
     fetch(url, formOptions)
@@ -46,8 +46,8 @@ loginForm.addEventListener('submit', (e) => {
     .then((data) => {
         if(data.indexOf('Successful') > 0){
             fromdb.innerHTML = data;
-            fromdb.classList.add('alert');
-            fromdb.classList.add('alert-success');
+            fromdb.classList.add('j-alert');
+            fromdb.classList.add('j-alert-success');
 
             //clear after 5 secs
             setTimeout(() => {
@@ -58,8 +58,8 @@ loginForm.addEventListener('submit', (e) => {
         }
         if(data.indexOf('Try') > 0){
             fromdb.innerHTML = data;
-            fromdb.classList.add('alert');
-            fromdb.classList.add('alert-danger');
+            fromdb.classList.add('j-alert');
+            fromdb.classList.add('j-alert-danger');
 
             //clear after 5 secs
             setTimeout(() => {clearFeed('danger')}, 5000);

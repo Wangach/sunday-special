@@ -26,7 +26,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-custom">
      <!--Custom Loaders-->
      <div class="loader">
         <div class="circle"></div>
@@ -37,7 +37,7 @@
     <div class="container">
         <div id="feedback"></div>
         <!-- Outer Row -->
-        <div class="row justify-content-center">
+        <div class="row justify-content-center"  id="nes">
 
             <div class="col-xl-10 col-lg-12 col-md-9">
 
