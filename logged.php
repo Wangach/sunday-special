@@ -261,11 +261,10 @@ include 'api/session_checker.php';
                     <div class="row">
 
                         <!-- Area Chart -->
-                        <div class="col-xl-8 col-lg-7">
+                        <div class="col-xl-5 col-lg-7">
                             <div class="card shadow mb-4" id="main-cards">
                                 <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                     <h6 class="m-0 font-weight-bold text-primary">Games Played Overview</h6>
                                     <!-- <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
@@ -292,49 +291,73 @@ include 'api/session_checker.php';
                         </div>
 
                         <!-- Pie Chart -->
-                        <div class="col-xl-4 col-lg-5">
-
-                            <div class="row">
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-primary text-white shadow" id="mini-cards" data-toggle="modal" data-target="#looser">
-                                        <div class="card-body">
-                                            Looser-Pay
+                        <div class="col-xl-7 col-lg-5">
+                            <div class="card shadow mb-4" id="main-cards">
+                                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary">Select Action</h6>
+                                        <!-- <div class="dropdown no-arrow">
+                                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                aria-labelledby="dropdownMenuLink">
+                                                <div class="dropdown-header">Dropdown Header:</div>
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                <div class="row">
+                                    <div class="col-lg-5 m-2">
+                                        <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#looser">
+                                            <div class="card-body text-center inline">
+                                                Looser
+                                                <i class="fas fa-poll fa-2x text-gray-300 ml-4"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-success text-white shadow" id="mini-cards" data-toggle="modal" data-target="#fair">
-                                        <div class="card-body">
-                                            Fair-Pay
+                                    <div class="col-lg-5 m-2">
+                                        <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#fair">
+                                            <div class="card-body text-center">
+                                                Fair
+                                                <i class="fas fa-hourglass-half fa-2x text-gray-300 ml-4"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-12 mb-4">
-                                    <div class="card bg-info text-white shadow" id="mini-cards" data-toggle="modal" data-target="#pay">
-                                        <div class="card-body">
-                                            Make Payment
+                                    <div class="col-lg-10 m-2">
+                                        <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#pay">
+                                            <div class="card-body text-center">
+                                                Make Payment
+                                                <i class="fas fa-money-check-alt fa-2x text-gray-300 ml-4"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-8 mb-4">
-                                    <div class="card bg-danger text-white shadow" id="mini-cards" data-toggle="modal" data-target="#gameweek">
-                                        <div class="card-body">
-                                            Create User
+                                    <div class="col-lg-6 m-2">
+                                        <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#gameweek">
+                                            <div class="card-body text-center">
+                                                Create User
+                                                <i class="fas fa-user-plus fa-2x text-gray-300 ml-4"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-4 mb-4">
-                                    <div class="card bg-light text-black shadow" id="mini-cards" data-toggle="modal" data-target="#debtor">
-                                        <div class="card-body">
-                                            Indebt
+                                    <div class="col-lg-4 m-2">
+                                        <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#debtor">
+                                            <div class="card-body text-center">
+                                                Indebt
+                                                <i class="fas fa-exchange-alt fa-2x text-gray-300 ml-4"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-warning text-white shadow" id="mini-cards" data-toggle="modal" data-target="#gw">
-                                        <div class="card-body">
-                                            Create GW
+                                    
+                                    <div class="col-lg-6 m-2">
+                                        <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#gw">
+                                            <div class="card-body text-center">
+                                                Create GW
+                                                <i class="fas fa-calendar-plus fa-2x text-gray-300 ml-4"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
