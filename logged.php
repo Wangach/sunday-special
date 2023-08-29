@@ -244,8 +244,8 @@ include 'api/session_checker.php';
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Earnings (Today)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Kes2,150</div>
+                                                Games Played (Today)</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">150</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -310,53 +310,44 @@ include 'api/session_checker.php';
                                             </div>
                                         </div> -->
                                     </div>
-                                <div class="row">
-                                    <div class="col-lg-5 m-2">
+                                <div class="row p-5">
+                                    <div class="col-lg-6 mt-2">
                                         <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#looser">
                                             <div class="card-body text-center inline">
                                                 Looser
-                                                <i class="fas fa-poll fa-2x text-gray-300 ml-4"></i>
+                                                <i class="fas fa-poll fa-1x text-danger ml-4"></i>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-5 m-2">
+                                    <div class="col-lg-6 mt-2">
                                         <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#fair">
                                             <div class="card-body text-center">
                                                 Fair
-                                                <i class="fas fa-hourglass-half fa-2x text-gray-300 ml-4"></i>
+                                                <i class="fas fa-hourglass-half fa-1x text-info ml-4"></i>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-10 m-2">
+                                    <div class="col-lg-12 mt-4">
                                         <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#pay">
                                             <div class="card-body text-center">
                                                 Make Payment
-                                                <i class="fas fa-money-check-alt fa-2x text-gray-300 ml-4"></i>
+                                                <i class="fas fa-money-check-alt fa-1x text-warning ml-4"></i>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 m-2">
+                                    <div class="col-lg-7 mt-4">
                                         <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#gameweek">
                                             <div class="card-body text-center">
                                                 Create User
-                                                <i class="fas fa-user-plus fa-2x text-gray-300 ml-4"></i>
+                                                <i class="fas fa-user-plus fa-1x text-primary ml-4"></i>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 m-2">
+                                    <div class="col-lg-5 mt-4">
                                         <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#debtor">
                                             <div class="card-body text-center">
                                                 Indebt
-                                                <i class="fas fa-exchange-alt fa-2x text-gray-300 ml-4"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-lg-6 m-2">
-                                        <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#gw">
-                                            <div class="card-body text-center">
-                                                Create GW
-                                                <i class="fas fa-calendar-plus fa-2x text-gray-300 ml-4"></i>
+                                                <i class="fas fa-exchange-alt fa-1x text-dark ml-4"></i>
                                             </div>
                                         </div>
                                     </div>
