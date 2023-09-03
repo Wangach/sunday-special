@@ -1,3 +1,5 @@
+"use strict"
+
 import { viewMatch, payUp, doneDeal, viewWonToday, viewLostToday } from './reus.js';
 window.viewMatch = viewMatch;
 window.payUp = payUp;

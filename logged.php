@@ -12,7 +12,7 @@ include 'api/session_checker.php';
     <meta name="description" content="">
     <meta name="author" content="John Wangaruro Kimani">
 
-    <title>Sunday Special Admin</title>
+    <title>EAFC 24 | Admin</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -376,6 +376,7 @@ include 'api/session_checker.php';
                                             <th scope="col">Score Line</th>
                                             <th scope="col">Outcome</th>
                                             <th scope="col">Match ID</th>
+                                            <th scope="col">Actions</th>
                                           </tr>
                                         </thead>
                                         <tbody id="latest-lost">
@@ -392,10 +393,12 @@ include 'api/session_checker.php';
                             <!-- Illustrations -->
                             <div class="card shadow mb-4" id="main-cards">
                                 <div class="card-header py-3 organize">
-                                    <h6 class="m-0 font-weight-bold text-primary">Recent Fair Games</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Recent Fair Games 
+                                        <span class="badge badge-light" id="tu">6</span>
+                                    </h6>
                                     <button class='btn btn-primary' id='pay-all' type='button'>
-                                    Pay All <span class="badge badge-light" id="tu">6</span>
-                                </button>
+                                        Pay All <i class="fas fa-hourglass-half fa-1x text-light ml-4"></i>
+                                    </button>
                                 </div>
                                 <div class="card-body">
                                 
@@ -417,20 +420,6 @@ include 'api/session_checker.php';
                                     </div><!--responsive-->
                                 </div>
                             </div>
-
-                            <!-- Approach -->
-                            <!-- <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                                        CSS bloat and poor page performance. Custom CSS classes are used to create
-                                        custom components and custom utility classes.</p>
-                                    <p class="mb-0">Before working with this theme, you should become familiar with the
-                                        Bootstrap framework, especially the utility classes.</p>
-                                </div>
-                            </div> -->
 
                         </div>
                     </div>

@@ -1,3 +1,5 @@
+"use strict"
+
 //View Match Details modal
 let viewMatch = (id) => {
     let url = `./api/master.php?a=viewmatchdetails&id=${id}`;

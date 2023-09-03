@@ -1,3 +1,4 @@
+"use strict";
 //Custom Loaders
 //On Load
 window.addEventListener('load', () => {

@@ -1,3 +1,5 @@
+"use strict";
+
 import { viewMatch, viewFairDets } from './reus.js';
 window.viewMatch = viewMatch;
 window.viewFairDets = viewFairDets;
