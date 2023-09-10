@@ -14,7 +14,7 @@
 /*Custom Loaders*/
 .loader {
     position: fixed;
-    background-color: rgb(224, 225, 242, 1.0);
+    background-color: rgb(7, 7, 7);
     left: 0;
     top: 0;
     right: 0;
@@ -22,10 +22,10 @@
     z-index: 99;
   }
   .circle {
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
     border-radius: 100%;
-    background: #F17233;
+    background: #e2c9bd;
     position: fixed;
     top: 0px;
     bottom: 0px;
@@ -38,10 +38,10 @@
     animation-iteration-count: infinite;
   }
   .circle:nth-child(2) {
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
     border-radius: 100%;
-    background: #33E5F1;
+    background: #afe0e4;
     position: fixed;
     top: 0px;
     bottom: 0px;
@@ -54,10 +54,10 @@
     animation-iteration-count: infinite;
   }
   .circle:nth-child(3) {
-    height: 30px;
-    width: 30px;
+    height: 20px;
+    width: 20px;
     border-radius: 100%;
-    background: #C313D1;
+    background: #e1a5e6;
     position: fixed;
     top: 0px;
     bottom: 0px;

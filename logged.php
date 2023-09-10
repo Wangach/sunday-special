@@ -45,10 +45,10 @@ include 'api/session_checker.php';
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="logged.php">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                <div class="sidebar-brand-icon ">
+                    <i class="fas fa-trophy"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Sun Special Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">EAFC <sup>24</sup></div>
             </a>
 
             <!-- Divider -->
@@ -79,26 +79,6 @@ include 'api/session_checker.php';
                 <a class="nav-link collapsed" href="#" >
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Transactions</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" >
-                    <i class="fas fa-fw fa-eye"></i>
-                    <span>Charts</span>
-                </a>
-                
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" >
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
                 </a>
             </li>
 
