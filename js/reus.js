@@ -2,7 +2,7 @@
 
 //View Match Details modal
 let viewMatch = (id) => {
-    let url = `./api/master.php?a=viewmatchdetails&id=${id}`;
+    let url = `./api/master_v2.php?a=viewmatchdetails&id=${id}`;
     let myDisplay = document.getElementById('in_details')
     fetch(url)
     .then((response) => response.text())
@@ -12,7 +12,7 @@ let viewMatch = (id) => {
 }
 //view fair matches
 let viewFairDets = (id) => {
-    let url = `./api/master.php?a=viewfairmatchdetails&id=${id}`;
+    let url = `./api/master_v2.php?a=viewfairmatchdetails&id=${id}`;
     let myDisplay = document.getElementById('in_details')
     fetch(url)
     .then((response) => response.text())
@@ -22,7 +22,7 @@ let viewFairDets = (id) => {
 }
 //View Won Matches Details modal
 let viewWonToday = (user) => {
-  let url = `./api/master.php?a=viewwontodaydets&user=${user}`;
+  let url = `./api/master_v2.php?a=viewwontodaydets&user=${user}`;
   let myDisplay = document.getElementById('wonMatchesDetails')
   fetch(url)
   .then((response) => response.text())
@@ -32,7 +32,7 @@ let viewWonToday = (user) => {
 }
 //View Lost Matches Details modal
 let viewLostToday = (user) => {
-  let url = `./api/master.php?a=viewlosttodaydets&user=${user}`;
+  let url = `./api/master_v2.php?a=viewlosttodaydets&user=${user}`;
   let myDisplay = document.getElementById('lostMatchesDetails')
   fetch(url)
   .then((response) => response.text())

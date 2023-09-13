@@ -245,7 +245,7 @@ include 'api/session_checker.php';
                             <div class="card shadow mb-4" id="main-cards">
                                 <!-- Card Header - Dropdown -->
                                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Games Played Overview</h6>
+                                    <h6 class="m-0 font-weight-bold">Games Played Overview</h6>
                                     <!-- <div class="dropdown no-arrow">
                                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -274,7 +274,7 @@ include 'api/session_checker.php';
                         <div class="col-xl-7 col-lg-5">
                             <div class="card shadow mb-4" id="main-cards">
                                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Select Action</h6>
+                                        <h6 class="m-0 font-weight-bold">Select Action</h6>
                                         <!-- <div class="dropdown no-arrow">
                                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -295,7 +295,7 @@ include 'api/session_checker.php';
                                         <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#looser">
                                             <div class="card-body text-center inline">
                                                 Looser
-                                                <i class="fas fa-poll fa-1x text-danger ml-4"></i>
+                                                <i class="fas fa-poll fa-1x ml-4"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -303,7 +303,7 @@ include 'api/session_checker.php';
                                         <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#fair">
                                             <div class="card-body text-center">
                                                 Fair
-                                                <i class="fas fa-hourglass-half fa-1x text-info ml-4"></i>
+                                                <i class="fas fa-hourglass-half fa-1x ml-4"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -311,7 +311,7 @@ include 'api/session_checker.php';
                                         <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#pay">
                                             <div class="card-body text-center">
                                                 Make Payment
-                                                <i class="fas fa-money-check-alt fa-1x text-warning ml-4"></i>
+                                                <i class="fas fa-money-check-alt fa-1x ml-4"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -319,7 +319,7 @@ include 'api/session_checker.php';
                                         <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#gameweek">
                                             <div class="card-body text-center">
                                                 Create User
-                                                <i class="fas fa-user-plus fa-1x text-primary ml-4"></i>
+                                                <i class="fas fa-user-plus fa-1x ml-4"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -327,7 +327,7 @@ include 'api/session_checker.php';
                                         <div class="card shadow" id="mini-cards" data-toggle="modal" data-target="#debtor">
                                             <div class="card-body text-center">
                                                 Indebt
-                                                <i class="fas fa-exchange-alt fa-1x text-dark ml-4"></i>
+                                                <i class="fas fa-exchange-alt fa-1x ml-4"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -345,7 +345,7 @@ include 'api/session_checker.php';
                             <!-- Project Card Example -->
                             <div class="card shadow mb-4" id="main-cards">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Recent Looser Games</h6>
+                                    <h6 class="m-0 font-weight-bold">Recent Looser Games</h6>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table table-striped">
@@ -373,11 +373,11 @@ include 'api/session_checker.php';
                             <!-- Illustrations -->
                             <div class="card shadow mb-4" id="main-cards">
                                 <div class="card-header py-3 organize">
-                                    <h6 class="m-0 font-weight-bold text-primary">Recent Fair Games 
+                                    <h6 class="m-0 font-weight-bold">Recent Fair Games 
                                         <span class="badge badge-light" id="tu">6</span>
                                     </h6>
-                                    <button class='btn btn-primary' id='pay-all' type='button'>
-                                        Pay All <i class="fas fa-hourglass-half fa-1x text-light ml-4"></i>
+                                    <button class='btn btn-sm font-weight-bold' id='pay-all' type='button'>
+                                        Pay All <i class="fas fa-hourglass-half fa-1x ml-4"></i>
                                     </button>
                                 </div>
                                 <div class="card-body">
@@ -390,7 +390,7 @@ include 'api/session_checker.php';
                                                 <th scope="col">Score Line</th>
                                                 <th scope="col">Payment Status</th>
                                                 <th scope="col">Match ID</th>
-                                                <th scope="col">Action</th>
+                                                <th scope="col">Actions</th>
                                               </tr>
                                             </thead>
                                             <tbody id="latest-fair">
@@ -477,7 +477,7 @@ include 'api/session_checker.php';
               </button>
             </div>
             <div class="modal-body">
-              <form action="api/master.php" id="looser-form" method="POST">
+              <form action="api/master_v2.php" id="looser-form" method="POST">
                   <div class="form-group">
                       <label for="homp">Home Player:</label>
                       <input type="text" class="form-control" placeholder="Enter Home Player Name..." id="hp" name="hp" required>
@@ -536,7 +536,7 @@ include 'api/session_checker.php';
               </button>
             </div>
             <div class="modal-body">
-              <form action="api/master.php" id="fair-form" method="POST">
+              <form action="api/master_v2.php" id="fair-form" method="POST">
                   <div class="form-group">
                       <label for="homet">Team 1:</label>
                       <input type="text" class="form-control" placeholder="Enter Home Team..." id="fht" name="ht">
@@ -573,7 +573,7 @@ include 'api/session_checker.php';
               </button>
             </div>
             <div class="modal-body">
-                <form action="api/master.php" id="user-form" method="POST">
+                <form action="api/master_v2.php" id="user-form" method="POST">
                     <div class="form-group">
                         <label for="name">UserName: </label>
                         <input type="text" placeholder="User's Name..." class="form-control" id="jina" name="jina">
@@ -614,7 +614,7 @@ include 'api/session_checker.php';
               </button>
             </div>
             <div class="modal-body">
-                <form action="api/master.php" id="payments-form" method="POST">
+                <form action="api/master_v2.php" id="payments-form" method="POST">
                     <div class="form-group">
                         <select name="txnType" id="txntyp" class="form-control">
                             <option value=""></option>
@@ -666,7 +666,7 @@ include 'api/session_checker.php';
               </button>
             </div>
             <div class="modal-body">
-                <form action="api/master.php" id="indebt" method="POST">
+                <form action="api/master_v2.php" id="indebt" method="POST">
                     <div class="form-group">
                         <label for="trname">Enter Name:</label>
                         <input type="text" class="form-control" placeholder="Name..." id="dn" name="dn">
@@ -699,7 +699,7 @@ include 'api/session_checker.php';
               </button>
             </div>
             <div class="modal-body">
-                <form action="api/master.php" id="debt-search" method="POST">
+                <form action="api/master_v2.php" id="debt-search" method="POST">
                     <div class="form-group">
                         <label for="start">Start Date:</label>
                         <input type="date" class="form-control" id="strt" name="strt" placeholder="Start Date">

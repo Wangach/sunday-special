@@ -220,7 +220,7 @@ include 'api/session_checker.php';
                         <div class="col-xl-12 col-md-12 mb-4">
                             <div class="card mb-4 py-3 border-left-primary shadow h-100 " id="main-cards">
                                 <div class="card-body">
-                                    <form action="api/master.php" id="searchUser" method="POST">
+                                    <form action="api/master_v2.php" id="searchUser" method="POST">
                                         <div class="form-group">
                                             <label for="term"></label>
                                             <input type="text" class="form-control" placeholder="Search.." id="un" name="un">

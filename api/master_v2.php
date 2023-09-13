@@ -1,11 +1,12 @@
 <?php
-include 'db.php';
+//The new and improved BHENT api
+include 'db_v2.php';
 // $_SESSION['bhentadmin'] = '';
 
 if(isset($_GET['a'])) {
 	$direction = $_GET['a'];
 
-	if ($direction == 'totLooser') {
+	if ($direction == 'totPlayedGames') {
 		//call the record looser func
 		looserGames();
 	}
@@ -81,7 +82,7 @@ if(isset($_GET['a'])) {
 //function definitions
 //Login function
 function checkAdmin(){
-	include 'db.php';
+	include 'db_v2.php';
 	session_start();
 	$res = '';
 
@@ -113,7 +114,7 @@ function checkAdmin(){
 }
 //Logout Admin
 function destAdmin() {
-	include 'db.php';
+	include 'db_v2.php';
 	session_start();
 	$ad = $_SESSION["bhentadmin"];
 	$res = '';
@@ -134,15 +135,15 @@ function destAdmin() {
 }
 //looser Games Total
 function looserGames() {
-	include 'db.php';
+	include 'db_v2.php';
 
 	//Looser Games
-	$looserg = "SELECT * FROM looserdata";
+	$looserg = "SELECT * FROM looserpay_data";
 	$lmth = mysqli_num_rows(mysqli_query($conn, $looserg));
 
 
 	//Fair Games
-	$fairg = "SELECT * FROM fairdata";
+	$fairg = "SELECT * FROM fairpay_data";
 	$fmth = mysqli_num_rows(mysqli_query($conn, $fairg));
 
 
@@ -153,7 +154,7 @@ function looserGames() {
 //Calculate unpaid fair games
 function calculateFair()
 {
-	include 'db.php';
+	include 'db_v2.php';
 
 	//Fair Games
 	$fairg = "SELECT * FROM fairdata WHERE is_paid = '0'";
@@ -163,7 +164,7 @@ function calculateFair()
 }
 //record looser
 function recordLooserGame() {
-	include 'db.php';
+	include 'db_v2.php';
 	$res = '';
 
 	$plaer = file_get_contents('php://input');
@@ -184,8 +185,6 @@ function recordLooserGame() {
 	    "deni" => $decdata->debt,
 	    "mshin" => $decdata->winner,
 	    "kushin" => $decdata->looser,
-	    "tarehe" => $decdata->subDte,
-	    "saa" => $decdata->subTme,
 	    "uniq" => $decdata->matchId
 	);
 
@@ -193,16 +192,14 @@ function recordLooserGame() {
 		$kushin_one = $formData["homePlayer"];
 		$kushin_two = $formData["awayPlayer"];
 		//Insert Data to DB
-		$ins_one = "INSERT INTO looserdata (Hplayer, Aplayer, Hteam, Ateam, Hscore, Ascore, winner, looser,
-		 matchty, coup, cost, playdte, playtme, matchid) VALUES ('" .$formData["homePlayer"]."', '".$formData["awayPlayer"]."', '".$formData["homeTeam"]."',
+		$ins_one = "INSERT INTO looserpay_data (Hplayer, Aplayer, Hteam, Ateam, Hscore, Ascore, winner, looser,
+		 matchty, coup, cost, matchid) VALUES ('" .$formData["homePlayer"]."', '".$formData["awayPlayer"]."', '".$formData["homeTeam"]."',
 		  '".$formData["awayTeamName"]."', '".$formData["homeScore"]."', '".$formData["awayScore"]."', 'N/A', '$kushin_one', 
-		  '".$formData["matchType"]."', '".$formData["matchCoupon"]."', '".$formData["deni"]."', '".$formData["tarehe"]."', '".$formData["saa"]."', 
-		  '".$formData["uniq"]."') ";
-		  $ins_two = "INSERT INTO looserdata (Hplayer, Aplayer, Hteam, Ateam, Hscore, Ascore, winner, looser,
+		  '".$formData["matchType"]."', '".$formData["matchCoupon"]."', '".$formData["deni"]."', '".$formData["uniq"]."') ";
+		  $ins_two = "INSERT INTO looserpay_data (Hplayer, Aplayer, Hteam, Ateam, Hscore, Ascore, winner, looser,
 		 matchty, coup, cost, playdte, playtme, matchid) VALUES ('" .$formData["homePlayer"]."', '".$formData["awayPlayer"]."', '".$formData["homeTeam"]."',
 		  '".$formData["awayTeamName"]."', '".$formData["homeScore"]."', '".$formData["awayScore"]."', 'N/A', '$kushin_two', 
-		  '".$formData["matchType"]."', '".$formData["matchCoupon"]."', '".$formData["deni"]."', '".$formData["tarehe"]."', '".$formData["saa"]."', 
-		  '".$formData["uniq"]."') ";
+		  '".$formData["matchType"]."', '".$formData["matchCoupon"]."', '".$formData["deni"]."', '".$formData["uniq"]."') ";
 
 		$check_one = mysqli_query($conn, $ins_one);
 		$check_two = mysqli_query($conn, $ins_two);
@@ -216,11 +213,10 @@ function recordLooserGame() {
 		}
 	}else{
 		//Insert Data to DB
-		$ins = "INSERT INTO looserdata (Hplayer, Aplayer, Hteam, Ateam, Hscore, Ascore, winner, looser,
-		 matchty, coup, cost, playdte, playtme, matchid) VALUES ('" .$formData["homePlayer"]."', '".$formData["awayPlayer"]."', '".$formData["homeTeam"]."',
+		$ins = "INSERT INTO looserpay_data (Hplayer, Aplayer, Hteam, Ateam, Hscore, Ascore, winner, looser,
+		 matchty, coup, cost, matchid) VALUES ('" .$formData["homePlayer"]."', '".$formData["awayPlayer"]."', '".$formData["homeTeam"]."',
 		  '".$formData["awayTeamName"]."', '".$formData["homeScore"]."', '".$formData["awayScore"]."', '".$formData["mshin"]."', '".$formData["kushin"]."', 
-		  '".$formData["matchType"]."', '".$formData["matchCoupon"]."', '".$formData["deni"]."', '".$formData["tarehe"]."', '".$formData["saa"]."', 
-		  '".$formData["uniq"]."') ";
+		  '".$formData["matchType"]."', '".$formData["matchCoupon"]."', '".$formData["deni"]."',  '".$formData["uniq"]."') ";
 
 		$check = mysqli_query($conn, $ins);
 		if($check){
@@ -235,7 +231,7 @@ function recordLooserGame() {
 }
 //Record fair func
 function recordFairGame() {
-	include 'db.php';
+	include 'db_v2.php';
 	$res = '';
 
 	$plaer = file_get_contents('php://input');
@@ -249,15 +245,12 @@ function recordFairGame() {
 	    "awayTeamName" => $decdata->fst,
 	    "homeScore" => $decdata->ffsc,
 	    "awayScore" => $decdata->fssc,
-	    "tarehe" => $decdata->subDte,
-	    "saa" => $decdata->subTme,
 	    "uniq" => $decdata->matchId
 	);
 
 	//Insert Data to DB
-	$ins = "INSERT INTO fairdata (Hteam, Ateam, Hscore, Ascore, playdte, playtme, matchid) VALUES ('".$formData["homeTeam"]."',
-	  '".$formData["awayTeamName"]."', '".$formData["homeScore"]."', '".$formData["awayScore"]."',  '".$formData["tarehe"]."', '".$formData["saa"]."', 
-	  '".$formData["uniq"]."') ";
+	$ins = "INSERT INTO fairpay_data (Hteam, Ateam, Hscore, Ascore, matchid) VALUES ('".$formData["homeTeam"]."',
+	  '".$formData["awayTeamName"]."', '".$formData["homeScore"]."', '".$formData["awayScore"]."', '".$formData["uniq"]."') ";
 
 	$check = mysqli_query($conn, $ins);
 	if($check){
@@ -271,7 +264,7 @@ function recordFairGame() {
 }
 //recent looser func
 function getRecentLooser() {
-	include 'db.php';
+	include 'db_v2.php';
 
 	$matchGetter = "SELECT * FROM (SELECT * FROM looserpay_data ORDER BY id DESC LIMIT 5) as r ORDER BY id";
 	    $latestMatches = mysqli_query($conn, $matchGetter);
@@ -315,7 +308,17 @@ function getRecentLooser() {
 	                                    <div class='text-success'>$wnr</div>
 	                                </td>
 	                                <td class='text-info'>
-										<a id='$mId' onclick='viewMatch(this.id)' data-toggle='modal' data-target='#viewMatchModal' title='View Match Details'>$mId</a>
+										$mId
+									</td>
+									<td>
+										<div class='match-actions'>
+											<button class='btn' title='Cancel Match'>
+												<i class='fas fa-hand-paper'></i>
+											</button>
+											<button class='btn' id='$mId' onclick='viewMatch(this.id)' data-toggle='modal' data-target='#viewMatchModal' title='View Match Details'>
+												<i class='fas fa-eye'></i>
+											</button>
+										</div>
 									</td>
 	                            </tr>";
 
@@ -326,11 +329,11 @@ function getRecentLooser() {
 
 // recent fair func
 function getRecentFair() {
-	include 'db.php';
+	include 'db_v2.php';
 	$paid = '';
 	$class = '';
 
-	$matchGetter = "SELECT * FROM (SELECT * FROM fairdata ORDER BY id DESC LIMIT 5) as r ORDER BY id";
+	$matchGetter = "SELECT * FROM (SELECT * FROM fairpay_data ORDER BY id DESC LIMIT 5) as r ORDER BY id";
 	    $latestMatches = mysqli_query($conn, $matchGetter);
 
 	    if (mysqli_num_rows($latestMatches) > 0) {
@@ -344,10 +347,10 @@ function getRecentFair() {
 	            $mId = $row['matchid'];
 
 	            if($paymentStatus == 1){
-	                $paid = '<i class="fas fa-check"></i>';
+	                $paid = '<i class="fas fa-thumbs-up"></i>';
 	                $class = 'btn-success';
 	            }else{
-	                $paid = '<i class="fas fa-window-close"></i>';
+	                $paid = '<i class="fas fa-thumbs-down"></i>';
 	                $class = 'btn-danger';
 	            }
 	            /*Display The Results Depending on thecredit or debit value
@@ -367,9 +370,21 @@ function getRecentFair() {
 	                                    <div>$awSc</div>
 	                                </td>
 	                                <td>
-	                                    <button class='btn btn-sm $class'>$paid</button>
+	                                    <button class='btn text-center'>$paid</button>
 	                                </td>
-	                                <td class='text-info'><a id='$mId' onclick='viewFairDets(this.id)' data-toggle='modal' data-target='#viewMatchModal'>$mId</a></td>
+	                                <td class='text-info'>
+										<a id='$mId' onclick='viewFairDets(this.id)' data-toggle='modal' data-target='#viewMatchModal'>$mId</a>
+									</td>
+									<td>
+										<div class='match-actions'>
+											<button class='btn' title='Cancel Match'>
+												<i class='fas fa-hand-paper'></i>
+											</button>
+											<button class='btn' id='$mId' onclick='viewFairDets(this.id)' data-toggle='modal' data-target='#viewMatchModal' title='View Match Details'>
+												<i class='fas fa-eye'></i>
+											</button>
+										</div>
+									</td>
 	                            </tr>";
 
 	            echo $showData;
@@ -379,7 +394,7 @@ function getRecentFair() {
 
 //Make Customer Payment
 function makePayment(){
-	include 'db.php';
+	include 'db_v2.php';
 	$res = '';
 
 	$plaer = file_get_contents('php://input');
@@ -397,7 +412,7 @@ function makePayment(){
 	    "uniq" => $decdata->transId
 	);
 
-	//Thiscan either be cr for credit or db for debit
+	//Thiscan either be cr for credit or db_v2 for debit
 	switch ($formData["txnType"]) {
 		case 'cr':
 			#This Is money coming into our account
@@ -419,7 +434,7 @@ function makePayment(){
 			}
 			break;
 
-		case 'db':
+		case 'db_v2':
 			#This Is money getting out of our account
 			//Since in this case we are earning, the credit value should be +
 			$moneyIn = 0;
@@ -447,7 +462,7 @@ function makePayment(){
 
 //Customer Registration
 function registerUser() {
-	include 'db.php';
+	include 'db_v2.php';
 	$res = '';
 
 	$plaer = file_get_contents('php://input');
@@ -479,7 +494,7 @@ function registerUser() {
 
 //Indebt
 function indebtUser() {
-	include 'db.php';
+	include 'db_v2.php';
 	$res = '';
 
 	$plaer = file_get_contents('php://input');
@@ -515,7 +530,7 @@ function indebtUser() {
 //Search User
 function searchUser() {
 
-	include 'db.php';
+	include 'db_v2.php';
 	$res = '';
 
 	$plaer = file_get_contents('php://input');
@@ -557,7 +572,7 @@ function searchUser() {
 //Pay Fair Games in general
 function payFair() {
 	$output = '';
-	include 'db.php';
+	include 'db_v2.php';
 
 	$pay = "UPDATE fairdata SET is_paid = '1'";
 	$conf = mysqli_query($conn, $pay);
@@ -574,14 +589,14 @@ function payFair() {
 //function def
 	function getMatchSummary($searchName) {
 		$output = '';
-		include 'db.php';
+		include 'db_v2.php';
 		//lost matches
-		$getlost = "SELECT * FROM looserdata WHERE looser = '$searchName'";
+		$getlost = "SELECT * FROM looserpay_data WHERE looser = '$searchName'";
 		$foundLost = mysqli_query($conn, $getlost);
 
 		$calcLost = mysqli_num_rows($foundLost);
 		//won matches
-		$getwon = "SELECT * FROM looserdata WHERE winner = '$searchName'";
+		$getwon = "SELECT * FROM looserpay_data WHERE winner = '$searchName'";
 		$foundWon= mysqli_query($conn, $getwon);
 
 		$calcWon = mysqli_num_rows($foundWon);
@@ -593,6 +608,12 @@ function payFair() {
 		
 		//Loose Probability
 		$lp = round(($calcLost/$totals*100), 2);
+		
+		if($wp == NAN){
+			$wp = 0;
+		}elseif($lp == NAN){
+			$lp = 0;
+		}
 
 		
 		
@@ -626,15 +647,15 @@ function payFair() {
 	}
 	//get today's individual player statistics
 	function getTodayStats($searchName) {
-		include 'db.php';
+		include 'db_v2.php';
 		$output = '';
 		$dateToday = date('Y-m-d');
 		//todays lost matches
-		$tlm ="SELECT * FROM looserdata WHERE looser = '$searchName' AND tme LIKE '$dateToday%'";
+		$tlm ="SELECT * FROM looserpay_data WHERE looser = '$searchName' AND tme LIKE '$dateToday%'";
 		$exl = mysqli_query($conn, $tlm);
 		$qrl = mysqli_num_rows($exl);
 		//todays won matches
-		$twm ="SELECT * FROM looserdata WHERE winner = '$searchName' AND tme LIKE '$dateToday%'";
+		$twm ="SELECT * FROM looserpay_data WHERE winner = '$searchName' AND tme LIKE '$dateToday%'";
 		$exw = mysqli_query($conn, $twm);
 		$qrw = mysqli_num_rows($exw);
 		//todays total matches
@@ -662,9 +683,9 @@ function payFair() {
 	}
 	function getDebtSummary($searchName) {
 		$output = '';
-		include 'db.php';
+		include 'db_v2.php';
 		//get the total cost of matches
-		$lostm = "SELECT SUM(cost) as mechi FROM looserdata WHERE looser = '$searchName'";
+		$lostm = "SELECT SUM(cost) as mechi FROM looserpay_data WHERE looser = '$searchName'";
 		$foundlost = mysqli_query($conn, $lostm);
 
 		if (mysqli_num_rows($foundlost) > 0) {
@@ -718,9 +739,9 @@ function payFair() {
 	function recentIndividual($searchName) {
 
 		function recentWon($searchName){
-			include 'db.php';
+			include 'db_v2.php';
 			$output = '';
-			$wonMatches = "SELECT * FROM (SELECT * FROM looserdata WHERE winner = '$searchName' ORDER BY id DESC LIMIT 3) as r ORDER BY id";
+			$wonMatches = "SELECT * FROM (SELECT * FROM looserpay_data WHERE winner = '$searchName' ORDER BY id DESC LIMIT 3) as r ORDER BY id";
 		    $latestWonMatches = mysqli_query($conn, $wonMatches);
 
 		    if (mysqli_num_rows($latestWonMatches) > 0) {
@@ -763,9 +784,9 @@ function payFair() {
 	    	}
 		}
 		function recentLost($searchName){
-			include 'db.php';
+			include 'db_v2.php';
 			$showData = '';
-			$lostMatches = "SELECT * FROM (SELECT * FROM looserdata WHERE looser = '$searchName' ORDER BY id DESC LIMIT 3) as r ORDER BY id";
+			$lostMatches = "SELECT * FROM (SELECT * FROM looserpay_data WHERE looser = '$searchName' ORDER BY id DESC LIMIT 3) as r ORDER BY id";
 		    $latestLostMatches = mysqli_query($conn, $lostMatches);
 
 		    if (mysqli_num_rows($latestLostMatches) > 0) {
@@ -815,7 +836,7 @@ function payFair() {
 
 //recent individual transactions
 function inRecTransactions($searchName) {
-	include 'db.php';
+	include 'db_v2.php';
 			$output = '';
 			$modeOfPayment = '';
 			$indTr = "SELECT * FROM (SELECT * FROM transactions WHERE trName = '$searchName' ORDER BY id DESC LIMIT 5) as r ORDER BY id";
@@ -886,7 +907,7 @@ function inRecTransactions($searchName) {
 
 //recent individual transactions
 function recIndebts($searchName) {
-	include 'db.php';
+	include 'db_v2.php';
 			$output = '';
 			// $modeOfPayment = '';
 			$ind = "SELECT * FROM (SELECT * FROM debts WHERE debtor = '$searchName' ORDER BY id DESC LIMIT 5) as r ORDER BY id";
@@ -968,7 +989,7 @@ function payInd() {
 }
 //Func Definition
 function paySpecificDebt($deb_id) {
-	include 'db.php';
+	include 'db_v2.php';
 	$output = '';
 	$searchDebt = "UPDATE debts SET is_paid = '1' WHERE debt_id = '$deb_id'";
 	$exec = mysqli_query($conn, $searchDebt);
@@ -984,12 +1005,12 @@ function paySpecificDebt($deb_id) {
 }
 //View Math Details
 function viewMatch() {
-	include 'db.php';
+	include 'db_v2.php';
 	$message = '';
 	if(isset($_GET['id']) && !empty($_GET['id'])) {
 		$searchId = $_GET['id'];
 
-		$perform_act = "SELECT * FROM looserdata WHERE matchid = '$searchId'";
+		$perform_act = "SELECT * FROM looserpay_data WHERE matchid = '$searchId'";
 		$foundMtch = mysqli_query($conn, $perform_act);
 
 		if (mysqli_num_rows($foundMtch) > 0) {
@@ -1064,12 +1085,12 @@ function viewMatch() {
 
 //View Math Details
 function viewFairMatch() {
-	include 'db.php';
+	include 'db_v2.php';
 	$message = '';
 	if(isset($_GET['id']) && !empty($_GET['id'])) {
 		$searchId = $_GET['id'];
 
-		$perform_act = "SELECT * FROM fairdata WHERE matchid = '$searchId'";
+		$perform_act = "SELECT * FROM fairpay_data WHERE matchid = '$searchId'";
 		$foundMtch = mysqli_query($conn, $perform_act);
 
 		if (mysqli_num_rows($foundMtch) > 0) {
@@ -1079,8 +1100,7 @@ function viewFairMatch() {
 				$teamTwo = $row['Ateam'];
 				$scoreOne = $row['Hscore'];
 				$scoreTwo = $row['Ascore'];
-				$dateOfPlay = $row['playdte'];
-				$timeOfPlay = $row['playtme'];
+				$timeOfPlay = $row['tme'];
 				$gameId = $row['matchid'];
 
 
@@ -1102,7 +1122,6 @@ function viewFairMatch() {
 									</div>
 								</div>
 								<div class='third-sect'>
-									<div class='match-mods' id='dateplayed'>$dateOfPlay</div>
 									<div class='match-mods' id='time'>$timeOfPlay</div>
 								</div>
 							</div>
@@ -1117,14 +1136,14 @@ function viewFairMatch() {
 }
 //View Individual Won Matches
 function viewWonToday() {
-	include 'db.php';
+	include 'db_v2.php';
 	$userToSearch = '';
 	$dateToday = date('Y-m-d');
 	if(isset($_GET['user']) && !empty($_GET['user'])){
 		
 		$userToSearch = $_GET['user'];
 
-		$twm ="SELECT * FROM looserdata WHERE winner = '$userToSearch' AND tme LIKE '$dateToday%'";
+		$twm ="SELECT * FROM looserpay_data WHERE winner = '$userToSearch' AND tme LIKE '$dateToday%'";
 		$exw = mysqli_query($conn, $twm);
 		$qrw = mysqli_num_rows($exw);
 
@@ -1178,14 +1197,14 @@ function viewWonToday() {
 }
 //View Individual Lost Matches
 function viewLostToday() {
-	include 'db.php';
+	include 'db_v2.php';
 	$userToSearch = '';
 	$dateToday = date('Y-m-d');
 	if(isset($_GET['user']) && !empty($_GET['user'])){
 		
 		$userToSearch = $_GET['user'];
 
-		$twm ="SELECT * FROM looserdata WHERE looser = '$userToSearch' AND tme LIKE '$dateToday%'";
+		$twm ="SELECT * FROM looserpay_data WHERE looser = '$userToSearch' AND tme LIKE '$dateToday%'";
 		$exw = mysqli_query($conn, $twm);
 		$qrw = mysqli_num_rows($exw);
 

@@ -64,7 +64,7 @@ window.addEventListener('load', () => {
     //Update the fairplay counter
     let countFair = () => {
         let fairCountDisp = document.getElementById('tu');
-        let url = './api/master.php?a=cntFair';
+        let url = './api/master_v2.php?a=cntFair';
         fetch(url)
         .then(res => res.text())
         .then((data) => {
@@ -252,7 +252,7 @@ let genId = () => {
 //Recent Looser Games
 let recentLooser = () => {
     let display = document.getElementById('latest-lost');
-    let url = './api/master.php?a=recentLost';
+    let url = './api/master_v2.php?a=recentLost';
     fetch(url)
     .then(res => res.text())
     .then((data) => {
@@ -307,7 +307,7 @@ let recentFair = () => {
             }
           })
     })
-    let url = './api/master.php?a=recentFair';
+    let url = './api/master_v2.php?a=recentFair';
     fetch(url)
     .then(res => res.text())
     .then((data) => {
@@ -316,9 +316,9 @@ let recentFair = () => {
     })
 }
 //count Looser Games 
-let countLooser = () => {
+let countGamesPlayed = () => {
     let display = document.getElementById('t-looser');
-    let url = './api/master.php?a=totLooser';
+    let url = './api/master_v2.php?a=totPlayedGames';
     fetch(url)
     .then(res => res.text())
     .then((data) => {
@@ -343,8 +343,6 @@ looserForm.addEventListener('submit', (e) => {
     e.preventDefault();
     clearBtn.removeAttribute('disabled');
     
-    todaysDte();
-    convertMsToTime(now);
     let rid = genMatchId();
     
     let formValues = {
@@ -371,7 +369,7 @@ looserForm.addEventListener('submit', (e) => {
             gamesNumber = 1;
             break;
         case 'nus':
-            payableAmt = 20;
+            payableAmt = 15;
             gamesNumber = 1;
             break;
         case 'sul':
@@ -388,7 +386,7 @@ looserForm.addEventListener('submit', (e) => {
     //Check Coupon Value
     switch (formValues.coupon) {
         case 'cst':
-            couponVal = 5
+            couponVal = 0
             netPay = payableAmt - (couponVal*gamesNumber);
             break;
     
@@ -412,8 +410,7 @@ looserForm.addEventListener('submit', (e) => {
     }
     // alert(`Payable amount is ${netPay}`)
 
-    let newFormData = {...formValues, debt: netPay, winner: winner, looser: looser, subDte: wholeDay, subTme: currentTime, 
-    matchId: rid};
+    let newFormData = {...formValues, debt: netPay, winner: winner, looser: looser, matchId: rid};
     //Send data to db
     let url = `${looserForm.getAttribute('action')}?a=recordLooser`;
     let formOptions = {
@@ -638,5 +635,5 @@ indebtForm.addEventListener('submit', (e) => {
 window.addEventListener('load', () => {
     recentLooser();
     recentFair();
-    countLooser();
+    countGamesPlayed();
 })
