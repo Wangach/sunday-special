@@ -30,14 +30,6 @@ include 'api/session_checker.php';
 
     <!--Own JS-->
     <script src="js/search.js" type="module" defer></script>
-        <!-- <script defer>
-        function payUp(id) {
-            String(id);
-            // let payIndBtn = document.getElementById('pay-indebt');
-            // let id = payIndBtn.attr('name');
-            console.log(`Pay debt ${id}?`);
-        }
-    </script> -->
 
 </head>
 

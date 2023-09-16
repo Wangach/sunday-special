@@ -82,7 +82,7 @@ if(isset($_GET['a'])) {
 //function definitions
 //Login function
 function checkAdmin(){
-	include 'db_v2.php';
+	include 'db.php';
 	session_start();
 	$res = '';
 
@@ -114,7 +114,7 @@ function checkAdmin(){
 }
 //Logout Admin
 function destAdmin() {
-	include 'db_v2.php';
+	include 'db.php';
 	session_start();
 	$ad = $_SESSION["bhentadmin"];
 	$res = '';
@@ -157,7 +157,7 @@ function calculateFair()
 	include 'db_v2.php';
 
 	//Fair Games
-	$fairg = "SELECT * FROM fairdata WHERE is_paid = '0'";
+	$fairg = "SELECT * FROM fairpay_data WHERE is_paid = '0'";
 	$fmth = mysqli_num_rows(mysqli_query($conn, $fairg));
 
 	echo $fmth;
@@ -550,7 +550,7 @@ function searchUser() {
 		if ($deep == 'msummary') {
 			getMatchSummary($formData["user"]);
 		}
-		if ($deep === 'cntodaystats'){
+		if ($deep == 'cntodaystats'){
 			getTodayStats($formData["user"]);
 		}
 		if ($deep == 'dtsummary') {
