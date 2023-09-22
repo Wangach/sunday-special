@@ -2,8 +2,7 @@
 //The new and improved BHENT api
 include 'db_v2.php';
 // $_SESSION['bhentadmin'] = '';
-
-if(isset($_GET['a'])) {
+if(isset($_GET['a'])){
 	$direction = $_GET['a'];
 
 	if ($direction == 'totPlayedGames') {
@@ -72,10 +71,12 @@ if(isset($_GET['a'])) {
 	if ($direction === 'viewlosttodaydets'){
 		viewLostToday();
 	}
-
 	if ($direction === 'cntFair') {
 		//pay indebt
 		calculateFair();
+	}
+	if($direction === 'reMatch'){
+		cancelMatch();
 	}
 }
 
@@ -197,7 +198,7 @@ function recordLooserGame() {
 		  '".$formData["awayTeamName"]."', '".$formData["homeScore"]."', '".$formData["awayScore"]."', 'N/A', '$kushin_one', 
 		  '".$formData["matchType"]."', '".$formData["matchCoupon"]."', '".$formData["deni"]."', '".$formData["uniq"]."') ";
 		  $ins_two = "INSERT INTO looserpay_data (Hplayer, Aplayer, Hteam, Ateam, Hscore, Ascore, winner, looser,
-		 matchty, coup, cost, playdte, playtme, matchid) VALUES ('" .$formData["homePlayer"]."', '".$formData["awayPlayer"]."', '".$formData["homeTeam"]."',
+		 matchty, coup, cost, matchid) VALUES ('" .$formData["homePlayer"]."', '".$formData["awayPlayer"]."', '".$formData["homeTeam"]."',
 		  '".$formData["awayTeamName"]."', '".$formData["homeScore"]."', '".$formData["awayScore"]."', 'N/A', '$kushin_two', 
 		  '".$formData["matchType"]."', '".$formData["matchCoupon"]."', '".$formData["deni"]."', '".$formData["uniq"]."') ";
 
@@ -266,7 +267,7 @@ function recordFairGame() {
 function getRecentLooser() {
 	include 'db_v2.php';
 
-	$matchGetter = "SELECT * FROM (SELECT * FROM looserpay_data ORDER BY id DESC LIMIT 5) as r ORDER BY id";
+	$matchGetter = "SELECT * FROM (SELECT * FROM looserpay_data WHERE match_statud = '1' ORDER BY id DESC LIMIT 5) as r ORDER BY id";
 	    $latestMatches = mysqli_query($conn, $matchGetter);
 
 	    if (mysqli_num_rows($latestMatches) > 0) {
@@ -282,6 +283,8 @@ function getRecentLooser() {
 	            $wnr = $row['winner'];
 	            $matchCost = $row['cost'];
 	            $mId = $row['matchid'];
+				$clb = 'recentLooser';
+				
 
 	            /*Display The Results Depending on thecredit or debit value
 	            //Will do this later since I am on a deadline RN
@@ -312,7 +315,7 @@ function getRecentLooser() {
 									</td>
 									<td>
 										<div class='match-actions'>
-											<button class='btn' title='Cancel Match'>
+											<button class='btn' name='$mId' id='$clb' onclick='cancelMatch(this.name,this.id)' title='Cancel Match'>
 												<i class='fas fa-hand-paper'></i>
 											</button>
 											<button class='btn' id='$mId' onclick='viewMatch(this.id)' data-toggle='modal' data-target='#viewMatchModal' title='View Match Details'>
@@ -333,7 +336,7 @@ function getRecentFair() {
 	$paid = '';
 	$class = '';
 
-	$matchGetter = "SELECT * FROM (SELECT * FROM fairpay_data ORDER BY id DESC LIMIT 5) as r ORDER BY id";
+	$matchGetter = "SELECT * FROM (SELECT * FROM fairpay_data WHERE is_active = '1' ORDER BY id DESC LIMIT 5) as r ORDER BY id";
 	    $latestMatches = mysqli_query($conn, $matchGetter);
 
 	    if (mysqli_num_rows($latestMatches) > 0) {
@@ -1002,6 +1005,26 @@ function paySpecificDebt($deb_id) {
 		echo $output;
 	}
 
+}
+function cancelMatch() {
+	if(isset($_GET['matchId']) && !empty($_GET['matchId'])){
+		$matchid = $_GET['matchId'];
+		cancelSpecificMatch($matchid);
+	}
+}
+function cancelSpecificMatch($id) {
+	include 'db_v2.php';
+	$output = '';
+	$searchMatch = "UPDATE looserpay_data SET match_statud = '0' WHERE matchid = '$id'";
+	$cancel = mysqli_query($conn, $searchMatch);
+
+	if($cancel){
+		$output = 'Match Cancelled';
+		echo $output;
+	}else{
+		$output = 'There has been an error'.mysqli_error($conn);
+		echo $output;
+	}
 }
 //View Math Details
 function viewMatch() {

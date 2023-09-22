@@ -1,8 +1,9 @@
 "use strict";
 
-import { viewMatch, viewFairDets } from './reus.js';
+import { viewMatch, viewFairDets, cancelMatch } from './reus.js';
 window.viewMatch = viewMatch;
 window.viewFairDets = viewFairDets;
+window.cancelMatch = cancelMatch;
 //Global Variables
 const looserForm = document.getElementById('looser-form');
 const fairForm = document.getElementById('fair-form');
