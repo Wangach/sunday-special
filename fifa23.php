@@ -12,7 +12,7 @@ include 'api/session_checker.php';
     <meta name="description" content="">
     <meta name="author" content="John Wangaruro Kimani">
 
-    <title>EAFC 24 | Search Page</title>
+    <title>EAFC 24 | FIFA 23 DATA</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

@@ -13,3 +13,9 @@ ALTER TABLE `transactions` ADD `tr_status` INT NOT NULL DEFAULT '1' AFTER `trDte
 CREATE TABLE `outset`.`debts` ( `id` INT NOT NULL , `debtor` VARCHAR(100) NOT NULL , `reason` VARCHAR(100) NOT NULL , `date_of_issue` VARCHAR(100) NOT NULL , `debt_id` VARCHAR(100) NOT NULL , `is_paid` INT NOT NULL , `when_paid` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ) ENGINE = InnoDB;
 /*Debts Table edit*/
 ALTER TABLE `debts` ADD `amount` INT NOT NULL AFTER `reason`;
+
+/*Roles table*/
+CREATE TABLE `outset`.`roles` ( `id` INT NOT NULL AUTO_INCREMENT , `rolename` VARCHAR(100) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+
+/*Users Table*/
+CREATE TABLE `outset`.`users` ( `id` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(100) NOT NULL , `password` VARCHAR(100) NOT NULL , `phone` INT NOT NULL , `alias` VARCHAR(100) NOT NULL , `fanfav` VARCHAR(100) NOT NULL , `uno` INT NOT NULL , `dte_registered` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `last_login` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `is_logged` INT NOT NULL DEFAULT '0' , `is_deleted` INT NOT NULL DEFAULT '0' , `role` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;

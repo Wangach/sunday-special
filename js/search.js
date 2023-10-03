@@ -22,83 +22,80 @@ window.addEventListener("load", () => {
   setInterval(changeOpacity(circle), 3000);
 
   //check for theme
-  // (() => {
-  //   let inheritedTheme = localStorage.getItem('theme');
-  //   if(inheritedTheme == 'dark'){
-  //     themeSwitcher();
-  //   }
-  // })();
+  (() => {
+    let inheritedTheme = localStorage.getItem('theme');
+    if(inheritedTheme == 'dark'){
+      themeSwitcher();
+    }
+  })();
 });
 //Dark Theme button
 const themeBtn = document.getElementById("theme-btn");
-// const themeSwitcher = () => {
-//     //get the items being changed
-//   const navigate = document.querySelector('nav');
-//   const changee = document.getElementById('content');
-//   const cards = document.querySelectorAll('#main-cards');
-//   const miniCards = document.querySelectorAll('#mini-cards');
-//   const cardHeaders = document.querySelectorAll('.card-header');
-//   const sidebar = document.getElementById('accordionSidebar');
-//   const myFooter = document.querySelector('footer');
-//   const dmenu = document.getElementById('dropdown-menu');
-//   const allModals = document.querySelectorAll('.modal-content');
-//   themeBtn.classList.toggle("fa-sun");
+const themeSwitcher = () => {
+    //get the items being changed
+  const navigate = document.querySelector('nav');
+  const changee = document.getElementById('content');
+  const cards = document.querySelectorAll('#main-cards');
+  const miniCards = document.querySelectorAll('#mini-cards');
+  const cardHeaders = document.querySelectorAll('.card-header');
+  const sidebar = document.getElementById('accordionSidebar');
+  const myFooter = document.querySelector('footer');
+  const dmenu = document.getElementById('dropdown-menu');
+  const allModals = document.querySelectorAll('.modal-content');
+  themeBtn.classList.toggle("fa-sun");
 
-//   if (themeBtn.classList.contains("fa-sun")) {
-//     navigate.classList.add("change-nav-theme");
-//     navigate.classList.remove("bg-white");
-//     sidebar.classList.add('bg-gradient-dark')
-//     sidebar.classList.remove('bg-gradient-primary')
-//     myFooter.classList.remove('bg-white');
-//     myFooter.classList.add('change-theme');
-//     changee.classList.add("change-theme");
-//     dmenu.classList.add("minicards-theme");
-//     allModals.forEach(modal => {
-//         modal.classList.add('modal-theme')
-//     })
+  if (themeBtn.classList.contains("fa-sun")) {
+    navigate.classList.add("change-nav-theme");
+    navigate.classList.remove("bg-white");
+    sidebar.classList.add('bg-gradient-dark')
+    sidebar.classList.remove('bg-gradient-primary')
+    myFooter.classList.remove('bg-white');
+    myFooter.classList.add('change-theme');
+    changee.classList.add("change-theme");
+    dmenu.classList.add("minicards-theme");
+    allModals.forEach(modal => {
+        modal.classList.add('modal-theme')
+    })
  
-//     cards.forEach((card) => {
-//         card.classList.add('change-card-theme')
-//     })
-//     miniCards.forEach((minicard) => {
-//         minicard.classList.add('minicards-theme')
-//     })
-//     cardHeaders.forEach((cardHeader) => {
-//         cardHeader.classList.add('change-theme')
-//     })
+    cards.forEach((card) => {
+        card.classList.add('change-card-theme')
+    })
+    miniCards.forEach((minicard) => {
+        minicard.classList.add('minicards-theme')
+    })
+    cardHeaders.forEach((cardHeader) => {
+        cardHeader.classList.add('change-theme')
+    })
 
-//     return localStorage.setItem('theme', 'dark');
-//   } else {
-//     navigate.classList.remove("change-nav-theme");
-//     changee.classList.remove("change-theme");
-//     navigate.classList.add("bg-white");
-//     sidebar.classList.remove('bg-gradient-dark')
-//     sidebar.classList.add('bg-gradient-primary')
-//     myFooter.classList.add('bg-white');
-//     myFooter.classList.remove('change-theme');
-//     dmenu.classList.remove('minicards-theme')
+    return localStorage.setItem('theme', 'dark');
+  } else {
+    navigate.classList.remove("change-nav-theme");
+    changee.classList.remove("change-theme");
+    navigate.classList.add("bg-white");
+    sidebar.classList.remove('bg-gradient-dark')
+    sidebar.classList.add('bg-gradient-primary')
+    myFooter.classList.add('bg-white');
+    myFooter.classList.remove('change-theme');
+    dmenu.classList.remove('minicards-theme')
 
-//    allModals.forEach(modal => {
-//         modal.classList.remove('modal-theme')
-//     })
-//     cards.forEach((card) => {
-//         card.classList.remove('change-card-theme')
-//     })
-//     miniCards.forEach((minicard) => {
-//         minicard.classList.remove('minicards-theme')
-//     })
-//     cardHeaders.forEach((cardHeader) => {
-//         cardHeader.classList.remove('change-theme')
-//     })
+   allModals.forEach(modal => {
+        modal.classList.remove('modal-theme')
+    })
+    cards.forEach((card) => {
+        card.classList.remove('change-card-theme')
+    })
+    miniCards.forEach((minicard) => {
+        minicard.classList.remove('minicards-theme')
+    })
+    cardHeaders.forEach((cardHeader) => {
+        cardHeader.classList.remove('change-theme')
+    })
 
-//     return localStorage.setItem('theme', 'light');
-//   }
-// }
+    return localStorage.setItem('theme', 'light');
+  }
+}
 
-// themeBtn.addEventListener('click', themeSwitcher);
-themeBtn.addEventListener('click', () => {
-  alert(`Haroo`)
-});
+themeBtn.addEventListener('click', themeSwitcher);
 const logoutButton = document.getElementById('logout-btn');
 //logout function
 logoutButton.addEventListener('click', (e) => {

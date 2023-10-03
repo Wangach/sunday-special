@@ -82,6 +82,13 @@ include 'api/session_checker.php';
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="fifa23.php" target="_blank" >
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>FIFA 23 Data</span>
+                </a>
+            </li>
+
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
