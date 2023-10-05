@@ -437,7 +437,7 @@ function makePayment(){
 			}
 			break;
 
-		case 'db_v2':
+		case 'db':
 			#This Is money getting out of our account
 			//Since in this case we are earning, the credit value should be +
 			$moneyIn = 0;
@@ -594,12 +594,12 @@ function payFair() {
 		$output = '';
 		include 'db_v2.php';
 		//lost matches
-		$getlost = "SELECT * FROM looserpay_data WHERE looser = '$searchName'";
+		$getlost = "SELECT * FROM looserpay_data WHERE looser = '$searchName' AND match_statud = '1'";
 		$foundLost = mysqli_query($conn, $getlost);
 
 		$calcLost = mysqli_num_rows($foundLost);
 		//won matches
-		$getwon = "SELECT * FROM looserpay_data WHERE winner = '$searchName'";
+		$getwon = "SELECT * FROM looserpay_data WHERE winner = '$searchName' AND match_statud = '1'";
 		$foundWon= mysqli_query($conn, $getwon);
 
 		$calcWon = mysqli_num_rows($foundWon);
@@ -688,7 +688,7 @@ function payFair() {
 		$output = '';
 		include 'db_v2.php';
 		//get the total cost of matches
-		$lostm = "SELECT SUM(cost) as mechi FROM looserpay_data WHERE looser = '$searchName'";
+		$lostm = "SELECT SUM(cost) as mechi FROM looserpay_data WHERE looser = '$searchName' AND match_statud = '1'";
 		$foundlost = mysqli_query($conn, $lostm);
 
 		if (mysqli_num_rows($foundlost) > 0) {
