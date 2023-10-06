@@ -139,7 +139,7 @@ function looserGames() {
 	include 'db_v2.php';
 
 	//Looser Games
-	$looserg = "SELECT * FROM looserpay_data";
+	$looserg = "SELECT * FROM looserpay_data WHERE match_statud = '1'";
 	$lmth = mysqli_num_rows(mysqli_query($conn, $looserg));
 
 
