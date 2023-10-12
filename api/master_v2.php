@@ -698,7 +698,7 @@ function payFair() {
 			}
 		}
 		//get the total transactions made
-		$trMade = "SELECT SUM(amount) as malipo FROM transactions WHERE trName = '$searchName'";
+		$trMade = "SELECT SUM(amount) as malipo FROM transactions WHERE trName = '$searchName' AND tr_status = '1'";
 		$foundtr = mysqli_query($conn, $trMade);
 
 		if (mysqli_num_rows($foundtr) > 0) {
