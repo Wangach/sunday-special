@@ -275,7 +275,7 @@ let recentFair = () => {
             confirmButtonText: 'Yes'
           }).then((result) => {
             if (result.isConfirmed) {
-                let payAllUrl = './api/master.php?a=payAll';
+                let payAllUrl = './api/master_v2.php?a=payAll';
                 fetch(payAllUrl)
                 .then(res => res.text())
                 .then((data) => {

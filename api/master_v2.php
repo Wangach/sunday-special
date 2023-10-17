@@ -517,7 +517,7 @@ function indebtUser() {
 	//Insert Data to DB
 	$ins = "INSERT INTO debts (debtor, reason, amount, date_of_issue, debt_id) 
 	VALUES ('".$formData["person"]."', '".$formData["reason"]."', '".$formData["amount"]."',  
-	'".$formData["issueDte"]."',  '".$formData["uniq"]."') ";
+	'".$formData["issueDte"]."',  '".$formData["uniq"]."')";
 
 	$check = mysqli_query($conn, $ins);
 	if($check){
@@ -577,7 +577,7 @@ function payFair() {
 	$output = '';
 	include 'db_v2.php';
 
-	$pay = "UPDATE fairdata SET is_paid = '1'";
+	$pay = "UPDATE fairpay_data SET is_paid = '1'";
 	$conf = mysqli_query($conn, $pay);
 	$calc = mysqli_affected_rows($conn);
 
@@ -1015,11 +1015,18 @@ function cancelMatch() {
 function cancelSpecificMatch($id) {
 	include 'db_v2.php';
 	$output = '';
-	$searchMatch = "UPDATE looserpay_data SET match_statud = '0' WHERE matchid = '$id'";
-	$cancel = mysqli_query($conn, $searchMatch);
+	$searchLooserMatch = "UPDATE looserpay_data SET match_statud = '0' WHERE matchid = '$id'";
+	$cancelLooserMatch = mysqli_query($conn, $searchLooserMatch);
 
-	if($cancel){
-		$output = 'Match Cancelled';
+	/*Fair Match */
+	$searchFairMatch = "UPDATE fairpay_data SET is_active = '0' WHERE matchid = '$id'";
+	$cancelFairMatch = mysqli_query($conn, $searchFairMatch);
+
+	if($cancelLooserMatch){
+		$output = 'Looser Match Cancelled';
+		echo $output;
+	}else if($cancelFairMatch){
+		$output = 'Fair Match Cancelled';
 		echo $output;
 	}else{
 		$output = 'There has been an error'.mysqli_error($conn);

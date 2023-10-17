@@ -40,7 +40,7 @@ let viewLostToday = (user) => {
       myDisplay.innerHTML = data;
   })
 }
-let cancelMatch = (id,clbFunc) => {
+let cancelMatch = (id) => {
   Swal.fire({
     title: 'Are you sure?',
     text: `Cancel Match ${id}?`,
