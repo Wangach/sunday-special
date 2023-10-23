@@ -163,10 +163,46 @@ function calculateFair()
 
 	echo $fmth;
 }
+//Uno counter
+function unoCounter($looser){
+	include 'db_v2.php';
+	//get the total cost of matches
+	$lostm = "SELECT SUM(cost) as mechi FROM looserpay_data WHERE looser = '$looser' AND match_statud = '1'";
+	$foundlost = mysqli_query($conn, $lostm);
+
+	if (mysqli_num_rows($foundlost) > 0) {
+		while ($data = mysqli_fetch_assoc($foundlost)) {
+			//get the sum of values from the column cost
+			$playcost = $data['mechi'];
+		}
+	}
+	//get the total transactions made
+	$trMade = "SELECT SUM(amount) as malipo FROM transactions WHERE trName = '$looser' AND tr_status = '1'";
+	$foundtr = mysqli_query($conn, $trMade);
+
+	if (mysqli_num_rows($foundtr) > 0) {
+		while ($row = mysqli_fetch_assoc($foundtr)) {
+			//get the sum of values from the column cost
+			$cash = $row['malipo'];
+		}
+	}
+	//calculate the debt
+	$owedOrAdvance = $cash - $playcost;
+	if ($owedOrAdvance <= -200){
+		$excess = $owedOrAdvance + 200;
+		$resp = 'Data Recorded! Uno : '.$excess;
+	}else if ($owedOrAdvance > -200){
+		$resp = 'Data Has Been Recorded';
+	}else {
+		$resp = "There Has Been An Error ".mysqli_error($conn);
+	}
+
+	echo $resp;
+}
 //record looser
 function recordLooserGame() {
 	include 'db_v2.php';
-	$res = '';
+	$resp = '';
 
 	$plaer = file_get_contents('php://input');
 
@@ -205,8 +241,8 @@ function recordLooserGame() {
 		$check_one = mysqli_query($conn, $ins_one);
 		$check_two = mysqli_query($conn, $ins_two);
 		if($check_one && $check_two){
-		    $resp = "Data Recorded";
-		    echo $resp;
+		    unoCounter($kushin_one);
+			unoCounter($kushin_two);
 		    
 		}else {
 		    $resp = "There Has Been An Error in Submitting your data ".mysqli_error($conn);
@@ -221,8 +257,7 @@ function recordLooserGame() {
 
 		$check = mysqli_query($conn, $ins);
 		if($check){
-		    $resp = "Data Recorded";
-		    echo $resp;
+		    unoCounter($formData["kushin"]);
 		    
 		}else {
 		    $resp = "There Has Been An Error in Submitting your data ".mysqli_error($conn);
@@ -283,7 +318,6 @@ function getRecentLooser() {
 	            $wnr = $row['winner'];
 	            $matchCost = $row['cost'];
 	            $mId = $row['matchid'];
-				$clb = 'recentLooser';
 				
 
 	            /*Display The Results Depending on thecredit or debit value
@@ -315,7 +349,7 @@ function getRecentLooser() {
 									</td>
 									<td>
 										<div class='match-actions'>
-											<button class='btn' name='$mId' id='$clb' onclick='cancelMatch(this.name,this.id)' title='Cancel Match'>
+											<button class='btn' name='$mId' onclick='cancelMatch(this.name)' title='Cancel Match'>
 												<i class='fas fa-hand-paper'></i>
 											</button>
 											<button class='btn' id='$mId' onclick='viewMatch(this.id)' data-toggle='modal' data-target='#viewMatchModal' title='View Match Details'>
@@ -380,7 +414,7 @@ function getRecentFair() {
 									</td>
 									<td>
 										<div class='match-actions'>
-											<button class='btn' title='Cancel Match'>
+											<button class='btn' name='$mId' onclick='cancelMatch(this.name)' title='Cancel Match'>
 												<i class='fas fa-hand-paper'></i>
 											</button>
 											<button class='btn' id='$mId' onclick='viewFairDets(this.id)' data-toggle='modal' data-target='#viewMatchModal' title='View Match Details'>
@@ -1017,6 +1051,7 @@ function cancelSpecificMatch($id) {
 	$output = '';
 	$searchLooserMatch = "UPDATE looserpay_data SET match_statud = '0' WHERE matchid = '$id'";
 	$cancelLooserMatch = mysqli_query($conn, $searchLooserMatch);
+	
 
 	/*Fair Match */
 	$searchFairMatch = "UPDATE fairpay_data SET is_active = '0' WHERE matchid = '$id'";
@@ -1025,9 +1060,11 @@ function cancelSpecificMatch($id) {
 	if($cancelLooserMatch){
 		$output = 'Looser Match Cancelled';
 		echo $output;
+		return;
 	}else if($cancelFairMatch){
-		$output = 'Fair Match Cancelled';
+		$output .= 'Fair Match Cancelled';
 		echo $output;
+		return;
 	}else{
 		$output = 'There has been an error'.mysqli_error($conn);
 		echo $output;

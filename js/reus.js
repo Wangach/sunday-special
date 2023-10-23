@@ -61,8 +61,6 @@ let cancelMatch = (id) => {
                 data,
                 'success'
               )
-              console.log(typeof(clbFunc()))
-              console.log(typeof(id))
         }else{
             Swal.fire(
                 'Failed!',

@@ -424,7 +424,7 @@ looserForm.addEventListener('submit', (e) => {
     fetch(url, formOptions)
     .then(response => response.text())
     .then((data) => {
-        if (data == 'Data Recorded'){
+        if (data.indexOf('Recorded') > 0){
             Swal.fire(data, '', 'success');
         }else{
             Swal.fire(data, '', 'error');
