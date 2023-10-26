@@ -53,11 +53,22 @@
                                     </div>
                                     <form class="user" id="login-form" method="POST" action='api/master.php'>
                                         <div class="form-group">
+                                           <label for="role">Login as: </label>
+                                           <select name="role" id="role" class="form-control">
+                                            <option value=""></option>
+                                            <option value="1">Admin</option>
+                                            <option value="2">Co-Admin</option>
+                                            <option value="3">User</option>
+                                           </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="role">Username: </label>
                                             <input type="text" class="form-control form-control-user"
                                                 id="un" aria-describedby="usernameHelp"
                                                 placeholder="Enter Your Username...">
                                         </div>
                                         <div class="form-group">
+                                            <label for="role">Password: </label>
                                             <input type="password" class="form-control form-control-user"
                                                 id="pwd" placeholder="Password">
                                         </div>

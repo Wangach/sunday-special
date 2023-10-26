@@ -24,6 +24,7 @@ loginForm.addEventListener('submit', (e) => {
     e.preventDefault();
     let fromdb = document.getElementById('feedback');
     let formValues = {
+        dest: document.getElementById('role').value,
         uname: document.getElementById('un').value,
         pass:document.getElementById('pwd').value
     }
