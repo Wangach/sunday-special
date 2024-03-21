@@ -90,7 +90,7 @@ let payUp = (id) => {
         confirmButtonText: 'Yes!'
       }).then((result) => {
         if (result.isConfirmed) {
-        let url = `./api/master.php?a=payIndebt&debId=${id}`;
+        let url = `./api/master_v2.php?a=payIndebt&debId=${id}`;
         fetch(url)
         .then(response => response.text())
         .then((data) => {

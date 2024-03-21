@@ -1032,7 +1032,7 @@ function paySpecificDebt($deb_id) {
 	$exec = mysqli_query($conn, $searchDebt);
 
 	if ($exec) {
-		$output = 'Debt Paid!';
+		$output = 'Debt '.$deb_id.' Paid!';
 		echo $output;
 	}else{
 		$output = 'Oops! Something went horribly wrong.'.mysqli_error($conn);
