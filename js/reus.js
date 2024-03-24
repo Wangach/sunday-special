@@ -111,8 +111,14 @@ let payUp = (id) => {
                     'success'
                   )
                   setTimeout(() => {
-                    
-                  })
+                    let newDataUrl = `./api/master_v2.php?a=seaUs&dets=recentIndebts`;
+                    let display = document.getElementById("recent-indebt-individual");
+                    fetch(newDataUrl)
+                    .then(response => response.text())
+                    .then((data) => {
+                      display.innerHTML = data;
+                    })
+                  }, 3000)
             }else{
                 Swal.fire(
                     'Failed!',
