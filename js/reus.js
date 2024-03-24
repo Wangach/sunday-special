@@ -20,6 +20,16 @@ let viewFairDets = (id) => {
         myDisplay.innerHTML = data;
     })
 }
+//view specific transactions
+let viewTrans = (id) => {
+  let url = `./api/master_v2.php?a=viewransactiondetails&id=${id}`;
+  let myDisplay = document.getElementById('trDetailsShow')
+  fetch(url)
+  .then((response) => response.text())
+  .then((data) => {
+      myDisplay.innerHTML = data;
+  })
+}
 //View Won Matches Details modal
 let viewWonToday = (user) => {
   let url = `./api/master_v2.php?a=viewwontodaydets&user=${user}`;
@@ -100,6 +110,9 @@ let payUp = (id) => {
                     data,
                     'success'
                   )
+                  setTimeout(() => {
+                    
+                  })
             }else{
                 Swal.fire(
                     'Failed!',
@@ -128,4 +141,4 @@ let doneDeal = (id, dte) => {
 
 
 
-export { viewMatch, viewFairDets, payUp, doneDeal, viewLostToday, viewWonToday, cancelMatch };
+export { viewMatch, viewTrans, viewFairDets, payUp, doneDeal, viewLostToday, viewWonToday, cancelMatch };

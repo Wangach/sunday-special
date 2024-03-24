@@ -78,6 +78,9 @@ if(isset($_GET['a'])){
 	if($direction === 'reMatch'){
 		cancelMatch();
 	}
+	if($direction === 'viewransactiondetails'){
+        ViewTr();
+    }
 }
 
 //function definitions
@@ -916,7 +919,9 @@ function inRecTransactions($searchName) {
 		                            <tr>
 		                                <td>
 		                                    <div>
-		                                    	<a href='#'>$sysId</a>
+		                                    	<p class='text text-info text-sm'>
+													$sysId
+												</p>
 		                                    </div>
 		                                </td>
 		                                <td>
@@ -931,7 +936,11 @@ function inRecTransactions($searchName) {
 		                                <td>
 		                                    <div class=''>$explain</div>
 		                                </td>
-		                                <td class='text-info'><a href='./viewmatch?matchId=$transId'>$transId</a></td>
+		                                <td class='text-info'>
+											<a id='$transId' onclick='viewTrans(this.id)' data-toggle='modal' data-target='#transactionModal' title='View Transaction Details'>
+											$transId
+											</a>
+										</td>
 		                            </tr>";
 
 		            echo $showData;
@@ -1070,7 +1079,7 @@ function cancelSpecificMatch($id) {
 		echo $output;
 	}
 }
-//View Math Details
+//View Match Details
 function viewMatch() {
 	include 'db_v2.php';
 	$message = '';
@@ -1147,6 +1156,92 @@ function viewMatch() {
 	}elseif (empty($_GET['id'])) {
 		$message = 'Error! No match Id provided.';
 		echo $message;
+	}
+}
+
+//View Transaction Details
+function ViewTr() {
+	include 'db_v2.php';
+	$message = '';
+	$paymentStatusIcon = '';
+	$paymentStatusClass = '';
+	$paymentStatusText = '';
+	if(isset($_GET['id']) &&!empty($_GET['id'])) {
+		$transactionId = $_GET['id'];
+
+		$searchFrTr = "SELECT * FROM transactions WHERE trId = '$transactionId'";
+		$foundTr = mysqli_query($conn, $searchFrTr);
+
+		if (mysqli_num_rows($foundTr) > 0) {
+			while($row = mysqli_fetch_array($foundTr)) {
+				$transactor = $row['trName'];
+				$transactId = $row['trId'];
+				$modeOfPayment = $row['pmeth'];
+				$descr = $row['trDesc'];
+				$timeAndDate = $row['trDte'];
+				$transactionStatus = $row['tr_status'];
+
+				if($transactionStatus == '1'){
+					$paymentStatusText = 'Active';
+					$paymentStatusClass = 'btn-info';
+					$paymentStatusIcon = 'fa-check';
+				}
+				if($transactionStatus == '0'){
+					$paymentStatusText = 'Cancelled';
+					$paymentStatusClass = 'btn-danger';
+					$paymentStatusIcon = 'fa-times';
+				}
+
+				//payment method decode
+				if ($modeOfPayment == 'mp') {
+					$pmode = 'Mpesa';
+				}
+				else if ($modeOfPayment == 'cs') {
+					$pmode  = 'Cash';
+				}
+				else if ($modeOfPayment == 'bnk') {
+					$pmode  = 'Bank';
+				}
+				else if ($modeOfPayment == 'ot') {
+					$pmode  = 'Other';
+				}
+				else{
+					$pmode  = 'Unknown';
+				}
+
+				$message = "
+								<tr>
+									<td>
+										<div class='text text-primary font-weight-bold'>$transactId</div>
+									</td>
+									<td>
+										<div>$transactor</div>
+									</td>
+									<td>
+										<div>$pmode</div>
+									</td>
+									<td>
+										<div>$descr</div>
+									</td>
+									<td>
+										<div>$timeAndDate</div>
+									</td>
+									<td class='text-info'>
+									<button type='button' class='btn btn-circle btn-sm $paymentStatusClass'>
+										<i class='fas $paymentStatusIcon'></i>
+									</button>
+									</td>
+								</tr>";
+
+				echo $message;
+			}
+		}else{
+			$message = 'There is no such transaction in our Database!';
+			echo $message;
+		}
+	}elseif(empty($_GET['id'])){
+		$message = 'Please provide transaction ID!';
+		echo  $message;
 	}
 }
 

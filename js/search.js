@@ -1,7 +1,8 @@
 "use strict"
 
-import { viewMatch, payUp, doneDeal, viewWonToday, viewLostToday } from './reus.js';
+import { viewMatch, viewTrans, payUp, doneDeal, viewWonToday, viewLostToday } from './reus.js';
 window.viewMatch = viewMatch;
+window.viewTrans = viewTrans;
 window.payUp = payUp;
 window.doneDeal =doneDeal;
 window.viewLostToday = viewLostToday;
