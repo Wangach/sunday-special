@@ -81,6 +81,10 @@ if(isset($_GET['a'])){
 	if($direction === 'viewransactiondetails'){
         ViewTr();
     }
+	//side function to refresh the indebts after payment
+	if($direction === 'refreshdata'){
+		genNewData();
+	}
 }
 
 //function definitions
@@ -1415,6 +1419,85 @@ function viewLostToday() {
 		}
 	}else{
 		echo "The system has been an error".mysqli_error($conn);
+	}
+}
+
+function genNewData(){
+	include 'db_v2.php';
+
+	if(isset($_GET['u']) && !empty($_GET['u'])){
+		$search = $_GET['u'];
+
+	}
+	$output = '';
+	// $modeOfPayment = '';
+	$ind = "SELECT * FROM (SELECT * FROM debts WHERE debtor = '$search' ORDER BY id DESC LIMIT 5) as r ORDER BY id";
+	$latestIndebts = mysqli_query($conn, $ind);
+
+	if (mysqli_num_rows($latestIndebts) > 0) {
+		while ($row = mysqli_fetch_assoc($latestIndebts)) {
+			#get the rows individual data
+			$dteIss = $row['date_of_issue'];
+			$reason = $row['reason'];
+			$amt = $row['amount'];
+			$dstat = $row['is_paid'];
+			$sysId = $row['debt_id'];
+			$paidOn = $row['when_paid'];
+
+			$intoStr = strval($sysId);
+
+
+			if($dstat == 1){
+				$paid = '<i class="fas fa-check"></i>';
+				$class = 'btn-success';
+
+				$btnData = "<button type='button' value='$paidOn' id='$sysId' onclick='doneDeal(this.id, this.value)' class='btn btn-secondary'>
+								Paid
+							</button>";
+			}else{
+				$paid = '<i class="fas fa-window-close"></i>';
+				$class = 'btn-danger';
+
+				$btnData = "<button type='button' id='$sysId' onclick='payUp(this.id)' class='btn btn-primary pay-indebt'>
+								Pay
+							 </button>";
+			}
+
+			/*Display The Results Depending on thecredit or debit value
+			//Will do this later since I am on a deadline RN
+			foreach ($row as $key => $value) {
+				print_r($key . $value);
+			}*/
+			//html data
+			$showData = "
+							<tr>
+								<td>
+									<div>
+										<a href='#'>$sysId</a>
+									</div>
+								</td>
+								<td>
+									<div>$reason</div>
+								</td>
+								<td>
+									<div>$amt</div>
+								</td>
+								<td>
+									<div class=''>$dteIss</div>
+								</td>
+								<td>
+									<button class='btn $class'>$paid</button>
+								</td>
+								<td>
+									$btnData
+								</td>
+							</tr>";
+
+			echo $showData;
+		}
+	}else{
+		$showData = 'Not Indebts Found!';
+		echo $showData;
 	}
 }
 ?>

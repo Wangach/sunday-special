@@ -124,7 +124,8 @@ searchUserForm.addEventListener("submit", (event) => {
   let formValue = {
     username: document.getElementById("un").value,
   };
-
+//save the search term in session storage
+let data = sessionStorage.setItem(`username`, `${document.getElementById("un").value}`)
   //get the match summary
   let matchesSummary = () => {
     //Send data to db
@@ -253,8 +254,19 @@ searchUserForm.addEventListener("submit", (event) => {
   //Todays Stats
   todaysStats();
 
-
+return data
 
 });
+let refresher = () => {
+  let term = sessionStorage.getItem(`username`);
+  let newDataUrl = `./api/master_v2.php?a=refreshdata&u=${term}`;
+  let display = document.getElementById("recent-indebt-individual");
+  fetch(newDataUrl)
+  .then(response => response.text())
+  .then((data) => {
+    display.innerHTML = data;
+  })
+}
 
 
+export {refresher};

@@ -1,14 +1,17 @@
 "use strict"
 
+import { refresher } from './search.js';
+
+
 //View Match Details modal
-let viewMatch = (id) => {
-    let url = `./api/master_v2.php?a=viewmatchdetails&id=${id}`;
-    let myDisplay = document.getElementById('in_details')
-    fetch(url)
+function viewMatch(id) {
+  let url = `./api/master_v2.php?a=viewmatchdetails&id=${id}`;
+  let myDisplay = document.getElementById('in_details');
+  fetch(url)
     .then((response) => response.text())
     .then((data) => {
-        myDisplay.innerHTML = data;
-    })
+      myDisplay.innerHTML = data;
+    });
 }
 //view fair matches
 let viewFairDets = (id) => {
@@ -110,15 +113,7 @@ let payUp = (id) => {
                     data,
                     'success'
                   )
-                  setTimeout(() => {
-                    let newDataUrl = `./api/master_v2.php?a=seaUs&dets=recentIndebts`;
-                    let display = document.getElementById("recent-indebt-individual");
-                    fetch(newDataUrl)
-                    .then(response => response.text())
-                    .then((data) => {
-                      display.innerHTML = data;
-                    })
-                  }, 3000)
+                  setTimeout(refresher, 3000);
             }else{
                 Swal.fire(
                     'Failed!',
