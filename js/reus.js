@@ -1,7 +1,5 @@
 "use strict"
 
-import { refresher } from './search.js';
-
 
 //View Match Details modal
 function viewMatch(id) {
@@ -113,7 +111,18 @@ let payUp = (id) => {
                     data,
                     'success'
                   )
-                  setTimeout(refresher, 3000);
+                  setTimeout(() => {
+                    let term = sessionStorage.getItem(`username`);
+                    if(term !== null || term !== null){
+                      let newDataUrl = `./api/master_v2.php?a=refreshdata&u=${term}`;
+                      let display = document.getElementById("recent-indebt-individual");
+                      fetch(newDataUrl)
+                      .then(response => response.text())
+                      .then((data) => {
+                        display.innerHTML = data;
+                      })
+                      }
+                  }, 3000);
             }else{
                 Swal.fire(
                     'Failed!',

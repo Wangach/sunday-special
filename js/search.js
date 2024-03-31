@@ -254,19 +254,4 @@ let data = sessionStorage.setItem(`username`, `${document.getElementById("un").v
   //Todays Stats
   todaysStats();
 
-return data
-
 });
-let refresher = () => {
-  let term = sessionStorage.getItem(`username`);
-  let newDataUrl = `./api/master_v2.php?a=refreshdata&u=${term}`;
-  let display = document.getElementById("recent-indebt-individual");
-  fetch(newDataUrl)
-  .then(response => response.text())
-  .then((data) => {
-    display.innerHTML = data;
-  })
-}
-
-
-export {refresher};
