@@ -18,3 +18,5 @@ CREATE TABLE `outset`.`roles` ( `id` INT NOT NULL AUTO_INCREMENT , `rolename` VA
 
 /*Users Table*/
 CREATE TABLE `outset`.`users` ( `id` INT NOT NULL AUTO_INCREMENT , `username` VARCHAR(100) NOT NULL , `password` VARCHAR(100) NOT NULL , `phone` INT NOT NULL , `alias` VARCHAR(100) NOT NULL , `fanfav` VARCHAR(100) NOT NULL , `uno` INT NOT NULL , `dte_registered` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `last_login` TIMESTAMP on update CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `is_logged` INT NOT NULL DEFAULT '0' , `is_deleted` INT NOT NULL DEFAULT '0' , `role` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+/*Users table mods*/
+ALTER TABLE `users` ADD `reg_no` VARCHAR(100) NOT NULL AFTER `uno`; 

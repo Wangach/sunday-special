@@ -68,5 +68,11 @@ loginForm.addEventListener('submit', (e) => {
         }
         
     })
+    .catch((err) => {
+        console.log(err);
+        fromdb.innerHTML = err;
+        fromdb.classList.add('j-alert');
+        fromdb.classList.add('j-alert-danger');
+    })
 })
 

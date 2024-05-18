@@ -51,7 +51,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user" id="login-form" method="POST" action='api/master.php'>
+                                    <form class="user" id="login-form" method="POST" action='api/master_v2.php'>
                                         <div class="form-group">
                                            <label for="role">Login as: </label>
                                            <select name="role" id="role" class="form-control">

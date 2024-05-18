@@ -71,6 +71,9 @@ window.addEventListener('load', () => {
         .then((data) => {
             fairCountDisp.innerHTML = data;
         })
+        .catch((err) => {
+            console.log(err);
+        })
     }
 
     setInterval(changeOpacity(loader), 5000);
@@ -171,6 +174,9 @@ logoutButton.addEventListener('click', (e) => {
             alert('There Has Been An error!');
         }
         
+    })
+    .catch((err) => {
+        console.log(err);
     })
 })
 
@@ -313,7 +319,9 @@ let recentFair = () => {
     .then(res => res.text())
     .then((data) => {
         display.innerHTML = data;
-        // console.log(data)
+    })
+    .catch((err) => {
+        console.log(err);
     })
 }
 //count Looser Games 
@@ -472,6 +480,9 @@ fairForm.addEventListener('submit', (e) => {
             Swal.fire(data, '', 'error');
         }
     })
+    .catch((err) => {
+        console.log(err);
+    })
     
 })
 //Make Payments
@@ -525,6 +536,9 @@ transactForm.addEventListener('submit', (e)=>{
                   )
             }
         })
+        .catch((err) => {
+            console.log(err);
+        })
         }else{
             Swal.fire(
                 'Cancelled',
@@ -565,6 +579,9 @@ createUserForm.addEventListener('submit', (e) => {
     .then((data) => {
         // JSON.parse(data);
         console.log(`${data}`)
+    })
+    .catch((err) => {
+        console.log(err);
     })
 
 })
@@ -619,6 +636,9 @@ indebtForm.addEventListener('submit', (e) => {
                         'error'
                       )
                 }
+            })
+            .catch((err) => {
+                console.log(err);
             })
         }else{
             Swal.fire(

@@ -80,6 +80,13 @@ let cancelMatch = (id) => {
               )
         }
     })
+    .catch((err) => {
+      Swal.fire(
+        'Error!',
+        err,
+        'error'
+      )
+    })
     }else{
         Swal.fire(
             'Cancelled',

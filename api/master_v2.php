@@ -90,7 +90,7 @@ if(isset($_GET['a'])){
 //function definitions
 //Login function
 function checkAdmin(){
-	include 'db.php';
+	include 'db_v2.php';
 	session_start();
 	$res = '';
 
@@ -104,7 +104,8 @@ function checkAdmin(){
 	    "password" => $decdata->pass
 	);
 	//Check The Records
-	$chk = "SELECT * FROM admin WHERE userName = '" .$formData["username"]. "' AND userPass = '" .$formData["password"]. "'";
+	$chk = "SELECT * FROM users WHERE username = '" .$formData["username"]. "' AND password = '" .$formData["password"]. "' 
+	AND role = '1'";
 	$fnd = mysqli_query($conn, $chk);
 
 	//If There is such a user
@@ -520,10 +521,10 @@ function registerUser() {
 	);
 
 	//Insert Data to DB
-	$ins = "INSERT INTO users (username, password, phone, alias, favteam, uno, dte_registered, reg_no) 
+	$ins = "INSERT INTO users (username, password, phone, alias, fanfav, uno, reg_no) 
 	VALUES ('".$formData["userName"]."', '".$formData["userName"]."', '".$formData["cusTel"]."',  
 	'".$formData["myAlias"]."',  '".$formData["cusTeam"]."', '".$formData["unoMas"]."', 
-	  '".$formData["dor"]."', '".$formData["uid"]."') ";
+	   '".$formData["uid"]."') ";
 
 	$check = mysqli_query($conn, $ins);
 	if($check){
