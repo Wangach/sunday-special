@@ -111,7 +111,7 @@ function checkAdmin(){
 	//If There is such a user
 	if(mysqli_num_rows($fnd) > 0){
 		$_SESSION['bhentadmin'] = $formData["username"];
-		$changeStat = "UPDATE admin SET islogged = '1' WHERE userName = '" .$_SESSION['bhentadmin']. "'";
+		$changeStat = "UPDATE users SET is_logged = '1' WHERE userName = '" .$_SESSION['bhentadmin']. "'";
 		$ens = mysqli_query($conn, $changeStat);
 		$res = "Login Successful! Redirecting In A Jiff.";
 		echo $res;
@@ -123,17 +123,18 @@ function checkAdmin(){
 }
 //Logout Admin
 function destAdmin() {
-	include 'db.php';
+	include 'db_v2.php';
 	session_start();
 	$ad = $_SESSION["bhentadmin"];
 	$res = '';
 
 	//Get The Admin dets from DB
-	$gtAdmin = "UPDATE admin SET islogged = '0' WHERE userName = '$ad'";
+	$gtAdmin = "UPDATE users SET is_logged = '0' WHERE username = '$ad'";
 	$hak = mysqli_query($conn, $gtAdmin);
 
 	if ($hak) {
 		unset($_SESSION['bhentadmin']);
+		session_destroy();
 		$res = "Logged Out!";
 		echo $res;
 	}else{

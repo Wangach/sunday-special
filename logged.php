@@ -1,5 +1,5 @@
 <?
-include 'api/session_checker.php';
+require 'api/session_checker.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -467,7 +467,7 @@ include 'api/session_checker.php';
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" type="button" data-dismiss="modal">Cancel</button>
-                    <a href="api/master.php" id="logout-btn" class="btn btn-danger" type="button">Logout</a>
+                    <a href="api/master_v2.php" id="logout-btn" class="btn btn-danger" type="button">Logout</a>
                 </div>
             </div>
         </div>
@@ -478,7 +478,7 @@ include 'api/session_checker.php';
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">FIFA 23 Looser Pay</h5>
+              <h5 class="modal-title text-center" id="exampleModalLabel">EA24 Looser Pay</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -537,7 +537,7 @@ include 'api/session_checker.php';
         <div class="modal-dialog modal-sm" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">FIFA 23 Fair Play</h5>
+              <h5 class="modal-title" id="exampleModalLabel">EA24 Fair Play</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>

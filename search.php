@@ -492,7 +492,7 @@ include 'api/session_checker.php';
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-primary" type="button" data-dismiss="modal">Cancel</button>
-                    <a href="api/master.php" id="logout-btn" class="btn btn-danger" type="button">Logout</a>
+                    <a href="api/master_v2.php" id="logout-btn" class="btn btn-danger" type="button">Logout</a>
                 </div>
             </div>
         </div>
